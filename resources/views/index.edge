@@ -1,0 +1,46 @@
+@layout('layouts.main')
+
+@section('title')
+  Focused Test - Work Orders
+@endsection
+
+@section('breadcrumb')
+  <li class="breadcrumb-item active">
+    Work Orders
+  </li>
+@endsection
+
+@section('content')
+  <h1>All Work Orders</h1>
+  <p class="small"><i class="pg-plus_circle"></i> <a href="/orders/add">CREATE ORDER</a></p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1842</strong></td>
+        <td>Renesas WS</td>
+        <td>Renesas Palm Bay</td>
+        <td>Aug. 15th</td>
+        <td>$42,800</td>
+        <td>Shipped</td>
+      </tr>
+      <tr>
+        <td><strong>1843</strong></td>
+        <td>Renesas FT</td>
+        <td>Renesas Palm Bay</td>
+        <td>Sep. 11th</td>
+        <td>$88,125</td>
+        <td>Confirmed Order</td>
+      </tr>
+    </tbody>
+  </table>
+@endsection
