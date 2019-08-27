@@ -32,7 +32,7 @@
         <a href="#" class="search-link d-lg-inline-block d-none" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>
       </div>
       <div class="d-flex align-items-center">
-
+        @loggedIn
         <div class="pull-left p-r-10 fs-14 font-heading d-lg-inline-block d-none text-white">
           <span class="semi-bold">Gareth</span> <span class="">Leak</span>
         </div>
@@ -48,15 +48,15 @@
             </a>
           </div>
         </div>
+        @else
+        <a href="/login">Login</a>
+        @endloggedIn
       </div>
     </div>
     <div class="bg-white">
       <div class="container">
         <div class="menu-bar header-sm-height" data-pages-init="horizontal-menu" data-hide-extra-li="4">
           <ul>
-            <li>
-              <a href="/">Home</a>
-            </li>
             <li class="active">
               <a href="/"><span class="title">Work Orders</span></a>
             </li>
