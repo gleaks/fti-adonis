@@ -6,7 +6,7 @@ const Customer = use('App/Models/Customer')
 class OrderController {
   async home({view}) {
     // Fetch orders
-    const orders = await Order.all();
+    const orders = await Order.query().with('customer').fetch();
 
     return view.render('index', {
       orders: orders.toJSON()
@@ -25,7 +25,7 @@ class OrderController {
 
         const posted = await auth.user.orders().create({
             name: order.name,
-            customer: order.customer,
+            customer_id: order.customer,
             date: order.date,
             status: order.status
         });
