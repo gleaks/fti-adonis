@@ -17,6 +17,7 @@
 const Route = use('Route')
 
 Route.get('/', 'OrderController.home');
+
 Route.on('/signup').render('auth.signup');
 Route.post('/signup', 'UserController.create').validator('CreateUser');
 Route.on('/login').render('auth.login');
@@ -25,6 +26,12 @@ Route.get('/logout', async ({ auth, response }) => {
     await auth.logout();
     return response.redirect('/');
 });
+
 Route.get('/orders/create', 'OrderController.new');
 Route.post('/orders/create', 'OrderController.create').validator('CreateOrder');
 Route.get('/orders/delete/:id', 'OrderController.delete');
+
+Route.get('/customers', 'CustomerController.home');
+Route.get('/customers/create', 'CustomerController.new');
+Route.post('/customers/create', 'CustomerController.create').validator('CreateCustomer');
+Route.get('/customers/delete/:id', 'CustomerController.delete');

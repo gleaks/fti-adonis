@@ -1,6 +1,7 @@
 'use strict'
 
 const Order = use('App/Models/Order')
+const Customer = use('App/Models/Customer')
 
 class OrderController {
   async home({view}) {
@@ -13,7 +14,10 @@ class OrderController {
   }
 
   async new({view}) {
-    return view.render('orders/new');
+    const customers = await Customer.all();
+    return view.render('orders/new', {
+      customers: customers.toJSON()
+    });
   }
 
   async create({ request, response, session, auth}) {

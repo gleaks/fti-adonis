@@ -1,0 +1,44 @@
+@layout('layouts.main')
+
+@section('title')
+  Focused Test - Customers
+@endsection
+
+@section('breadcrumb')
+  <li class="breadcrumb-item active">
+    Customers
+  </li>
+@endsection
+
+@section('content')
+  <h1>All Customers</h1>
+  @loggedIn
+  <p class="small"><i class="pg-plus_circle"></i> <a href="/customers/create">CREATE CUSTOMER</a></p>
+  @endloggedIn
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>E-mail</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(customer in customers)
+      <tr>
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.address }}</td>
+        <td>{{ customer.contact }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.phone }}</td>
+        <td><a class="btn btn-sm btn-danger" href="{{ route('CustomerController.delete', { id: customer.id }) }}">Delete</a>
+      </tr>
+      @endeach
+    </tbody>
+  </table>
+@endsection

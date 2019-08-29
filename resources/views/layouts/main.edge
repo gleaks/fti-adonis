@@ -39,7 +39,7 @@
       <div class="d-flex align-items-center">
         @loggedIn
         <div class="pull-left p-r-10 fs-14 font-heading d-lg-inline-block d-none text-white">
-          @gareth
+          {{ '@' + auth.user.username }}
         </div>
         <div class="dropdown pull-right">
           <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,12 +62,22 @@
       <div class="container">
         <div class="menu-bar header-sm-height" data-pages-init="horizontal-menu" data-hide-extra-li="4">
           <ul>
+            @if(url == '/' || url.includes('orders'))
             <li class="active">
+            @else
+            <li>
+            @endif
               <a href="/"><span class="title">Work Orders</span></a>
             </li>
+
+            @if(url.includes('customers'))
+            <li class="active">
+            @else
             <li>
+            @endif
               <a href="/customers"><span class="title">Customers</span></a>
             </li>
+
           </ul>
         </div>
       </div>

@@ -1,0 +1,99 @@
+@layout('layouts.main')
+
+@section('title')
+  Focused Test - Create Customer
+@endsection
+
+@section('extrajs')
+  {{ script('order') }}
+@endsection
+
+@section('breadcrumb')
+  <li class="breadcrumb-item">
+    <a href="/customers">Customers</a>
+  </li>
+  <li class="breadcrumb-item active">
+    Create Customer
+  </li>
+@endsection
+
+@section('content')
+  <h1>Create a Customer</h1>
+    <form action="{{ route('CustomerController.create') }}" method="POST">
+      {{ csrfField() }}
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="name">Company Name</label>
+            <input type="text" class="form-control" placeholder="The name of the customers company" name="name" value="{{ old('name', '') }}">
+            @if(hasErrorFor('name'))
+                <span>
+                    {{ getErrorFor('name') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" placeholder="123 Example St., Example, CA 95020" name="Address" value="{{ old('address', '') }}">
+            @if(hasErrorFor('address'))
+                <span>
+                    {{ getErrorFor('address') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="contact">Contact Name</label>
+            <input type="text" class="form-control" placeholder="Name of the contact in the company" name="contact" value="{{ old('contact', '') }}">
+            @if(hasErrorFor('contact'))
+                <span>
+                    {{ getErrorFor('contact') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="email">E-Mail</label>
+            <input type="email" class="form-control" placeholder="example@example.com" name="email" value="{{ old('email', '') }}">
+            @if(hasErrorFor('email'))
+                <span>
+                    {{ getErrorFor('email') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" placeholder="(408) 430-6642" name="phone" value="{{ old('phone', '') }}">
+            @if(hasErrorFor('phone'))
+                <span>
+                    {{ getErrorFor('phone') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+
+      <button class="btn btn-success" type="submit">Submit Customer</button>
+      <a href="/customers/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>
+      <a href="/customers" class="btn btn-default"><i class="pg-close">Cancel</i></a>
+    </form>
+  @endsection
