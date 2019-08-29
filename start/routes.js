@@ -25,3 +25,6 @@ Route.get('/logout', async ({ auth, response }) => {
     await auth.logout();
     return response.redirect('/');
 });
+Route.get('/orders/create', 'OrderController.new');
+Route.post('/orders/create', 'OrderController.create').validator('CreateOrder');
+Route.get('/orders/delete/:id', 'OrderController.delete');

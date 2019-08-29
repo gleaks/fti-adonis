@@ -12,7 +12,10 @@
   {{ style('plugins/select2/css/select2.min') }}
   {{ style('plugins/switchery/css/switchery.min') }}
   {{ style('pages-icons') }}
+  {{ style('plugins/bootstrap-datepicker/css/datepicker3') }}
+  {{ style('plugins/bootstrap-select2/select2') }}
   {{ style('themes/modern') }}
+  {{ style('style') }}
 
   @!section('extracss')
 
@@ -22,9 +25,11 @@
 </head>
 
 <body class="fixed-header horizontal-menu horizontal-app-menu">
+  @if(flashMessage('message'))
+    <div id="flashmessage" style="display: none;">{{ flashMessage('message') }}</div>
+  @endif
   <div class="header p-r-0 bg-primary">
     <div class="header-inner header-md-height">
-      <a href="#" class="btn-link toggle-sidebar d-lg-none pg pg-menu text-white" data-toggle="horizontal-menu"></a>
       <div class="">
         <div class="brand inline no-border d-sm-inline-block">
           <img src="{{ assetsUrl('images/FTI_LOGO.png')}}" alt="logo" height="22">
@@ -34,7 +39,7 @@
       <div class="d-flex align-items-center">
         @loggedIn
         <div class="pull-left p-r-10 fs-14 font-heading d-lg-inline-block d-none text-white">
-          <span class="semi-bold">Gareth</span> <span class="">Leak</span>
+          @gareth
         </div>
         <div class="dropdown pull-right">
           <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,6 +64,9 @@
           <ul>
             <li class="active">
               <a href="/"><span class="title">Work Orders</span></a>
+            </li>
+            <li>
+              <a href="/customers"><span class="title">Customers</span></a>
             </li>
           </ul>
         </div>
@@ -93,7 +101,11 @@
   {{ script('plugins/jquery-ios-list/jquery.ioslist.min') }}
   {{ script('plugins/jquery-actual/jquery.actual.min') }}
   {{ script('plugins/jquery-scrollbar/jquery.scrollbar.min') }}
+  {{ script('plugins/bootstrap-select2/select2.min') }}
+  {{ script('plugins/bootstrap-datepicker/js/bootstrap-datepicker')}}
   {{ script('pages.min') }}
+  {{ script('app') }}
+  @!section('extrajs')
 </body>
 
 </html>

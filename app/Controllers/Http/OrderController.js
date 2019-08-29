@@ -11,6 +11,32 @@ class OrderController {
       orders: orders.toJSON()
     })
   }
+
+  async new({view}) {
+    return view.render('orders/new');
+  }
+
+  async create({ request, response, session, auth}) {
+        const order = request.all();
+
+        const posted = await auth.user.orders().create({
+            name: order.name,
+            customer: order.customer,
+            date: order.date,
+            status: order.status
+        });
+
+        session.flash({ message: 'Your Work Order has been created!' });
+        return response.redirect('/');
+  }
+
+  async delete({ response, session, params}) {
+        const order = await Order.find(params.id);
+
+        await order.delete();
+        session.flash({ message: 'Your Work Order has been removed'});
+        return response.redirect('back');
+    }
 }
 
 module.exports = OrderController

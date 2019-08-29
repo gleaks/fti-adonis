@@ -13,7 +13,7 @@
 @section('content')
   <h1>All Work Orders</h1>
   @loggedIn
-  <p class="small"><i class="pg-plus_circle"></i> <a href="/orders/add">CREATE ORDER</a></p>
+  <p class="small"><i class="pg-plus_circle"></i> <a href="/orders/create">CREATE ORDER</a></p>
   @endloggedIn
   <table class="table table-hover">
     <thead>
@@ -22,8 +22,8 @@
         <th>Name</th>
         <th>Customer</th>
         <th>Date</th>
-        <th>Total</th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -33,8 +33,8 @@
         <td>{{ order.name }}</td>
         <td>{{ order.customer }}</td>
         <td>{{ order.date }}</td>
-        <td>{{ order.total }}</td>
         <td>{{ order.status }}</td>
+        <td><a class="btn btn-sm btn-danger" href="{{ route('OrderController.delete', { id: order.id }) }}">Delete</a>
       </tr>
       @endeach
     </tbody>
