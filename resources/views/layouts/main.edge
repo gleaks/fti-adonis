@@ -78,6 +78,14 @@
               <a href="/customers"><span class="title">Customers</span></a>
             </li>
 
+            @if(url.includes('products'))
+            <li class="active">
+            @else
+            <li>
+            @endif
+              <a href="/products"><span class="title">Products</span></a>
+            </li>
+
           </ul>
         </div>
       </div>

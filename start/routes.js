@@ -35,3 +35,8 @@ Route.get('/customers', 'CustomerController.home');
 Route.get('/customers/create', 'CustomerController.new');
 Route.post('/customers/create', 'CustomerController.create').validator('CreateCustomer');
 Route.get('/customers/delete/:id', 'CustomerController.delete');
+
+Route.get('/products', 'ProductController.home');
+Route.get('/products/create', 'ProductController.new');
+Route.post('/products/create', 'ProductController.create').validator('CreateProduct');
+Route.get('/products/delete/:id', 'ProductController.delete');

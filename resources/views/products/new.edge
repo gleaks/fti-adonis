@@ -1,0 +1,53 @@
+@layout('layouts.main')
+
+@section('title')
+  Focused Test - Create Product
+@endsection
+
+@section('breadcrumb')
+  <li class="breadcrumb-item">
+    <a href="/products">Products</a>
+  </li>
+  <li class="breadcrumb-item active">
+    Create Product
+  </li>
+@endsection
+
+@section('content')
+  <h1>Create a Product</h1>
+    <form action="{{ route('ProductController.create') }}" method="POST">
+      {{ csrfField() }}
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="name">Product Name</label>
+            <input type="text" class="form-control" placeholder="The name of the product" name="name" value="{{ old('name', '') }}">
+            @if(hasErrorFor('name'))
+                <span>
+                    {{ getErrorFor('name') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="address">Price</label>
+            <input type="text" class="form-control" placeholder="$12,500" name="price" value="{{ old('price', '') }}">
+            @if(hasErrorFor('price'))
+                <span>
+                    {{ getErrorFor('price') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-success" type="submit">Submit Product</button>
+      <a href="/products/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>
+      <a href="/products" class="btn btn-default"><i class="pg-close">Cancel</i></a>
+    </form>
+  @endsection

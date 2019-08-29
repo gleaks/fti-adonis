@@ -39,7 +39,7 @@
         <div class="col-md-8">
           <div class="form-group form-group-default">
             <label for="address">Address</label>
-            <input type="text" class="form-control" placeholder="123 Example St., Example, CA 95020" name="Address" value="{{ old('address', '') }}">
+            <input type="text" class="form-control" placeholder="123 Example St., Example, CA 95020" name="address" value="{{ old('address', '') }}">
             @if(hasErrorFor('address'))
                 <span>
                     {{ getErrorFor('address') }}
