@@ -35,6 +35,7 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-8">
           <div class="form-group form-group-default">
@@ -88,6 +89,26 @@
         </div>
       </div>
 
+      <div id="product" style="display: none;">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="products[]">Product</label>
+            <select name="products[]" class="full-width">
+              @each(customer in customers)
+                <option value="{{ customer.id }}">{{ customer.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div id="addProduct" class="row">
+        <div class="col-md-8">
+            <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add Product</button>
+        </div>
+      </div>
 
       <button class="btn btn-success" type="submit">Submit Work Order</button>
       <a href="/orders/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>

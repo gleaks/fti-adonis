@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <label for="customer">Customer</label>
+      <select name="customer" class="full-width" data-init-plugin="select2">
+        @each(customer in customers)
+          <option value="{{ customer.id }}">{{ customer.name }}</option>
+        @endeach
+      </select>
+    </div>
+  </div>
+</div>
