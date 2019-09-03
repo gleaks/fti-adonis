@@ -2,11 +2,12 @@
 
 const Order = use('App/Models/Order')
 const Customer = use('App/Models/Customer')
+const Product = use('App/Models/Product')
 
 class OrderController {
   async home({view}) {
     // Fetch orders
-    const orders = await Order.query().with('customer').fetch();
+    const orders = await Order.query().with('customer').with('products').fetch();
 
     return view.render('index', {
       orders: orders.toJSON()
@@ -15,8 +16,10 @@ class OrderController {
 
   async new({view}) {
     const customers = await Customer.all();
+    const products = await Product.all();
     return view.render('orders/new', {
-      customers: customers.toJSON()
+      customers: customers.toJSON(),
+      products: products.toJSON()
     });
   }
 
@@ -29,6 +32,7 @@ class OrderController {
             date: order.date,
             status: order.status
         });
+        const postedproducts = await posted.products().attach(order.products)
 
         session.flash({ message: 'Your Work Order has been created!' });
         return response.redirect('/');

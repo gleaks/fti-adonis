@@ -19,7 +19,7 @@
 
 @section('content')
   <h1>Create a Work Order</h1>
-    <form action="{{ route('OrderController.create') }}" method="POST">
+    <form id="workOrderForm" action="{{ route('OrderController.create') }}" method="POST">
       {{ csrfField() }}
 
       <div class="row">
@@ -40,7 +40,8 @@
         <div class="col-md-8">
           <div class="form-group form-group-default">
             <label for="customer">Customer</label>
-            <select name="customer" class="full-width" data-init-plugin="select2">
+            <select name="customer" class="full-width select2">
+              <option></option>
               @each(customer in customers)
                 <option value="{{ customer.id }}">{{ customer.name }}</option>
               @endeach
@@ -89,17 +90,21 @@
         </div>
       </div>
 
-      <div id="product" style="display: none;">
+      <div id="products0" style="display: none;">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
           <div class="form-group form-group-default">
-            <label for="products[]">Product</label>
-            <select name="products[]" class="full-width">
-              @each(customer in customers)
-                <option value="{{ customer.id }}">{{ customer.name }}</option>
+            <label>Product</label>
+            <select name="nothing" class="full-width">
+              <option></option>
+              @each(product in products)
+                <option value="{{ product.id }}">{{ product.name }}</option>
               @endeach
             </select>
           </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
         </div>
       </div>
       </div>
