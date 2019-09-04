@@ -16,6 +16,18 @@ class OrderController {
     })
   }
 
+  async show({
+    params,
+    view
+  }) {
+    // Fetch order
+    const order = await Order.query().with('user').with('customer').with('products').where('id', params.id).first();
+
+    return view.render('orders/show', {
+      order: order.toJSON()
+    })
+  }
+
   async new({
     view
   }) {
@@ -46,7 +58,7 @@ class OrderController {
     session.flash({
       message: 'Your Work Order has been created!'
     });
-    return response.redirect('/');
+    return response.redirect('/orders/' + posted.id);
   }
 
   async delete({

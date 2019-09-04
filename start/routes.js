@@ -29,6 +29,7 @@ Route.get('/logout', async ({ auth, response }) => {
 
 Route.get('/orders/create', 'OrderController.new');
 Route.post('/orders/create', 'OrderController.create').validator('CreateOrder');
+Route.get('/orders/:id', 'OrderController.show');
 Route.get('/orders/delete/:id', 'OrderController.delete');
 
 Route.get('/customers', 'CustomerController.home');

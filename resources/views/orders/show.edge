@@ -1,0 +1,31 @@
+@layout('layouts.main')
+
+@section('title')
+  Focused Test - Work Order #{{ order.id }}
+@endsection
+
+@section('breadcrumb')
+  <li class="breadcrumb-item">
+    <a href="/">Work Orders</a>
+  </li>
+  <li class="breadcrumb-item active">
+    Work Order #{{ order.id }}
+  </li>
+@endsection
+
+@section('content')
+  <h1>Work Order #{{ order.id }}</h1>
+  <small><b>Created by</b> {{ order.user.username }}</small><br /><br />
+  <b>Customer:</b> <a href="/customers/{{ order.customer.id }}">{{ order.customer.name }}</a><br />
+  {{ order.customer.contact }}<br />
+  {{ order.customer.address }}<br />
+  {{ order.customer.email }}<br />
+  {{ order.customer.phone }}<br /><br />
+  <b>Date:</b> {{ order.date }}<br />
+  <b>Status:</b> {{ order.status }}<br /><br />
+  <ul>
+    @each(product in order.products)
+      <li><a href="/products/{{ product.id }}">{{ product.name }}</a></li>
+    @endeach
+  </ul>
+@endsection

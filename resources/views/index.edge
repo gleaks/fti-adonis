@@ -30,7 +30,7 @@
       @each(order in orders)
       <tr>
         <td>{{ order.id }}</td>
-        <td>{{ order.name }}</td>
+        <td><a href="/orders/{{ order.id }}">{{ order.name }}</a></td>
         <td>{{ order.customer.name }}</td>
         <td>{{ order.date }}</td>
         <td>{{ order.status }}</td>
