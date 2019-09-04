@@ -43,7 +43,11 @@
             <select name="customer" class="full-width select2">
               <option></option>
               @each(customer in customers)
-                <option value="{{ customer.id }}">{{ customer.name }}</option>
+                <option value="{{ customer.id }}"
+                @if(old('customer', '') == customer.id)
+                  selected="selected"
+                @endif
+                >{{ customer.name }}</option>
               @endeach
             </select>
             @if(hasErrorFor('customer'))
@@ -59,7 +63,7 @@
         <div class="col-md-8">
           <div class="form-group form-group-default">
             <label for="date">Date</label>
-            <input id="newOrderDate" type="text" class="form-control date" name="date" value="{{ old('date', '') }}">
+            <input id="newOrderDate" type="text" class="form-control date" autocomplete="off" name="date" value="{{ old('date', '') }}">
             @if(hasErrorFor('date'))
                 <span>
                     {{ getErrorFor('date') }}
@@ -72,9 +76,10 @@
       <div class="row">
         <div class="col-md-8">
           <div class="form-group form-group-default">
+            <input type="hidden" class="oldstatus" data-value="{{ old('status', '') }}" />
             <label class>Status</label>
                 <!-- Using data-init-plugin='select2' automatically initializes a basic Select2 -->
-                <select name="status" class="full-width" data-init-plugin="select2">
+                <select id="statusInput" name="status" class="full-width" data-init-plugin="select2">
                   <option value="Quote">Quote</option>
                   <option value="Possible Order">Possible Order</option>
                   <option value="Likely Order">Likely Order</option>
@@ -108,7 +113,28 @@
         </div>
       </div>
       </div>
-
+      @each(old in old('products', ''))
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form-group form-group-default">
+            <label>Product</label>
+            <select name="products[{{ $loop.index }}]" class="full-width oldproduct" data-select="{{ old }}">
+              <option></option>
+              @each(product in products)
+                <option value="{{ product.id }}"
+                @if($parent.old.includes(product.id))
+                  selected="selected"
+                @endif
+                >{{ product.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
+        </div>
+      </div>
+      @endeach
       <div id="addProduct" class="row">
         <div class="col-md-8">
             <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add Product</button>
