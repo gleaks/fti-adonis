@@ -102,8 +102,11 @@
             <label>Product</label>
             <select name="nothing" class="full-width">
               <option></option>
-              @each(product in products)
-                <option value="{{ product.id }}">{{ product.name }}</option>
+              @each((products, category) in groupBy(products, 'category'))
+                <optgroup label="{{ category }}">
+                  @each(product in products)
+                    <option value="{{ product.id }}">{{ product.name }}</option>
+                  @endeach
               @endeach
             </select>
           </div>
@@ -113,6 +116,7 @@
         </div>
       </div>
       </div>
+
       @each(old in old('products', ''))
       <div class="row">
         <div class="col-md-7">
@@ -120,12 +124,15 @@
             <label>Product</label>
             <select name="products[{{ $loop.index }}]" class="full-width oldproduct" data-select="{{ old }}">
               <option></option>
-              @each(product in products)
-                <option value="{{ product.id }}"
-                @if($parent.old.includes(product.id))
-                  selected="selected"
-                @endif
-                >{{ product.name }}</option>
+              @each((products, category) in groupBy(products, 'category'))
+                <optgroup label="{{ category }}">
+                  @each(product in products)
+                    <option value="{{ product.id }}"
+                    @if($parent.$parent.old.includes(product.id))
+                      selected="selected"
+                    @endif
+                    >{{ product.name }}</option>
+                  @endeach
               @endeach
             </select>
           </div>

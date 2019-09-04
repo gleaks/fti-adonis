@@ -11,7 +11,7 @@ class Order extends Model {
     return this.belongsTo('App/Models/Customer')
   }
   products() {
-    return this.belongsToMany('App/Models/Product')
+    return this.belongsToMany('App/Models/Product').withPivot(['count'])
   }
 }
 

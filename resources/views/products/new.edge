@@ -4,6 +4,10 @@
   Focused Test - Create Product
 @endsection
 
+@section('extrajs')
+  {{ script('product') }}
+@endsection
+
 @section('breadcrumb')
   <li class="breadcrumb-item">
     <a href="/products">Products</a>
@@ -43,6 +47,29 @@
                 </span>
             @endif
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <input type="hidden" class="oldcategory" data-value="{{ old('category', '') }}" />
+            <label class>Category</label>
+                <!-- Using data-init-plugin='select2' automatically initializes a basic Select2 -->
+                <select id="categoryInput" name="category" class="full-width" data-init-plugin="select2">
+                  <option value="Base System">Base System</option>
+                  <option value="DC Instrument">DC Instrument</option>
+                  <option value="AC Instrument">AC Instrument</option>
+                  <option value="IC Instrument">IC Instrument</option>
+                  <option value="Accesory">Accessory</option>
+                  <option value="Option">Option</option>
+                </select>
+            </div>
+            @if(hasErrorFor('category'))
+                <span>
+                    {{ getErrorFor('category') }}
+                </span>
+            @endif
         </div>
       </div>
 
