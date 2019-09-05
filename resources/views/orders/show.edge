@@ -14,18 +14,113 @@
 @endsection
 
 @section('content')
-  <h1>Work Order #{{ order.id }}</h1>
-  <small><b>Created by</b> {{ order.user.username }}</small><br /><br />
-  <b>Customer:</b> <a href="/customers/{{ order.customer.id }}">{{ order.customer.name }}</a><br />
-  {{ order.customer.contact }}<br />
-  {{ order.customer.address }}<br />
-  {{ order.customer.email }}<br />
-  {{ order.customer.phone }}<br /><br />
-  <b>Date:</b> {{ order.date }}<br />
-  <b>Status:</b> {{ order.status }}<br /><br />
-  <ul>
-    @each(product in order.products)
-      <li><a href="/products/{{ product.id }}">{{ product.name }}</a></li>
-    @endeach
-  </ul>
+  <div class="card card-default">
+    <div class="card-body">
+      <div class="invoice padding-50">
+        <div class="row">
+          <div class="col-md-3">
+            <img src="{{ assetsUrl('images/FTI_LOGO.png')}}" alt="logo" height="47">
+            <address class="m-5-10 font-montserrat all-caps">
+              1965 N. 57th Court, Suite 106,<br />
+              Boulder, CO 80301, USA
+            </address>
+          </div>
+          <div class="col-md-9">
+            <div class="pull-right">
+              <h2 class="font-montserrat all-caps hint-text">Work Order</h2>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-3 right">
+            <address>
+              Renesas,<br />
+              Intersil International,<br />
+              Suite A-13-1,<br />
+              157 Hampshire,<br />
+              1 Jalan Mayang Sari,<br />
+              50450 Kuala Lumpur,<br />
+              Malaysia<br />
+            </address>
+          </div>
+          <div class="col-md-9" align="center">
+            <div class="row">
+              <div class="col-md-9 right">
+                Warranty: 12 months parts and labor
+              </div>
+              <div class="col-md-3">
+                <strong>Quotation Number</strong><br />
+                REN01180830
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-md-3 right">
+                <strong>Delivery</strong><br />
+              </div>
+              <div class="col-md-3 right">
+                <strong>Shipping Terms</strong><br />
+                Ex works Boulder, CO USA
+              </div>
+              <div class="col-md-3 right">
+                <strong>Date</strong><br />
+                August 30, 2018
+              </div>
+              <div class="col-md-3">
+                <strong>Payment Terms</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table table-responsive table-invoice">
+          <table class="m-t-50">
+            <thead>
+              <tr>
+                <th style="width: 7.5%" class="text-left">
+                  Item #
+                </th>
+                <th style="width: 7.5%" class="text-center">
+                  Qty
+                </th>
+                <th style="width: 15%" class="text-center">
+                  Part #
+                </th>
+                <th style="width: 42%" class="text-center">
+                  Description
+                </th>
+                <th style="width: 14%" class="text-center">
+                  Unit Price
+                </th>
+                <th style="width: 14%" class="text-right">
+                  Extended Price
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6">
+                  <p class="text-black">
+                    FTI 1000 test system configured for Quad Die Mosfet Wafer Sort with Adjacent Die. Performs x4 DC leakage and breakdown tests in parallel and x4 UIS tests serially. Maximum voltage: 1,000V. Maximum Current: DC-30A, UIS-100A. Optional Rg and Qg test.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>FTI 1000-02-10</td>
+                <td><p class="text-black">FTI 1000 Power Device Tester</p>
+                  <p class="small hint-text">
+                    Includes 1 Test Head for 2 channel boards. PC, External Power Supplies and FTI Studio Software.Installation and operation training.
+                  </p></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
 @endsection
