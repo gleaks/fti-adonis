@@ -50,6 +50,7 @@ class OrderController {
     const posted = await auth.user.orders().create({
       name: order.name,
       customer_id: order.customer,
+      description: order.description,
       date: order.date,
       status: order.status
     });

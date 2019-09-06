@@ -62,6 +62,20 @@
       <div class="row">
         <div class="col-md-8">
           <div class="form-group form-group-default">
+            <label for="description">Order Description</label>
+            <input type="text" class="form-control" placeholder="Include some details about the order" name="description" value="{{ old('description', '') }}">
+            @if(hasErrorFor('description'))
+                <span>
+                    {{ getErrorFor('description') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
             <label for="date">Date</label>
             <input id="newOrderDate" type="text" class="form-control date" autocomplete="off" name="date" value="{{ old('date', '') }}">
             @if(hasErrorFor('date'))

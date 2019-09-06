@@ -39,6 +39,34 @@
       <div class="row">
         <div class="col-md-8">
           <div class="form-group form-group-default">
+            <label for="description">Product Description</label>
+            <input type="text" class="form-control" placeholder="Include some details about the product" name="description" value="{{ old('description', '') }}">
+            @if(hasErrorFor('description'))
+                <span>
+                    {{ getErrorFor('description') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
+            <label for="partnum">Part Number</label>
+            <input type="text" class="form-control" placeholder="ex FTI 1000-02-610" name="partnum" value="{{ old('partnum', '') }}">
+            @if(hasErrorFor('partnum'))
+                <span>
+                    {{ getErrorFor('partnum') }}
+                </span>
+            @endif
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group form-group-default">
             <label for="address">Price</label>
             <input type="text" class="form-control" placeholder="$12,500" name="price" value="{{ old('price', '') }}">
             @if(hasErrorFor('price'))

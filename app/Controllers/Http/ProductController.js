@@ -21,7 +21,9 @@ class ProductController {
 
         const posted = await Product.create({
             name: product.name,
+            description: product.description,
             price: product.price,
+            partnum: product.partnum,
             category: product.category
         });
 
