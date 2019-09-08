@@ -1,0 +1,160 @@
+{{ csrfField() }}
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'name', text: 'Order Name', placeholder: 'A unique name to identify different orders', value: old('name', order.name || ''), error: getErrorFor('name') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <label for="customer">Customer</label>
+      <select name="customer" class="full-width select2">
+        <option></option>
+        @each(customer in customers)
+          <option value="{{ customer.id }}"
+          @if(old('customer', '') == customer.id || order.customer.id == customer.id)
+            selected="selected"
+          @endif
+          >{{ customer.name }}</option>
+        @endeach
+      </select>
+      @if(hasErrorFor('customer'))
+          <span>
+              {{ getErrorFor('customer') }}
+          </span>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <label for="description">Order Description</label>
+      <textarea placeholder="Include some details about the order" name="description" cols="85" rows="3">{{ old('description', order.description || '') }}</textarea>
+      @if(hasErrorFor('description'))
+          <span>
+              {{ getErrorFor('description') }}
+          </span>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <label for="date">Date</label>
+      <input id="newOrderDate" type="text" class="form-control date" autocomplete="off" name="date" value="{{ old('date', date) }}">
+      @if(hasErrorFor('date'))
+          <span>
+              {{ getErrorFor('date') }}
+          </span>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'payment', text: 'Payment Terms', placeholder: 'Terms of payment', value: old('payment', order.payment || ''), error: getErrorFor('payment') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'delivery', text: 'Delivery', placeholder: 'ex: Ex-Works Boulder, CO', value: old('delivery', order.delivery || ''), error: getErrorFor('delivery') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'shipping', text: 'Shipping Terms', placeholder: 'Terms of shipping', value: old('shipping', order.shipping || ''), error: getErrorFor('shipping') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <input type="hidden" class="oldstatus" data-value="{{ old('status', order.status || '') }}" />
+      <label class>Status</label>
+          <select id="statusInput" name="status" class="full-width" data-init-plugin="select2">
+            <option value="Quote">Quote</option>
+            <option value="Possible Order">Possible Order</option>
+            <option value="Likely Order">Likely Order</option>
+            <option value="Confirmed Order">Confirmed Order</option>
+            <option value="Shipped">Shipped</option>
+          </select>
+      </div>
+      @if(hasErrorFor('status'))
+          <span>
+              {{ getErrorFor('status') }}
+          </span>
+      @endif
+  </div>
+</div>
+
+<div id="products0" style="display: none;">
+<div class="row">
+  <div class="col-md-7">
+    <div class="form-group form-group-default">
+      <label>Product</label>
+      <select name="nothing" class="full-width">
+        <option></option>
+        @each((products, category) in groupBy(products, 'category'))
+          <optgroup label="{{ category }}">
+            @each(product in products)
+              <option value="{{ product.id }}">{{ product.name }}</option>
+            @endeach
+        @endeach
+      </select>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
+  </div>
+</div>
+</div>
+@set('loop', old('products') || order.products)
+@each(old in loop)
+<div class="row">
+  <div class="col-md-7">
+    <div class="form-group form-group-default">
+      <label>Product {{ old.id }}</label>
+      <select name="products[{{ $loop.index }}]" class="full-width oldproduct">
+        <option></option>
+        @each((products, category) in groupBy(products, 'category'))
+          <optgroup label="{{ category }}">
+            @each(product in products)
+              <option value="{{ product.id }}"
+              @if($parent.$parent.old == product.id || $parent.$parent.old.id == product.id)
+                selected="selected"
+              @endif
+              >{{ product.name }}</option>
+            @endeach
+        @endeach
+      </select>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
+  </div>
+</div>
+@endeach
+<div id="addProduct" class="row">
+  <div class="col-md-8">
+      <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add Product</button>
+  </div>
+</div>
+
+<button class="btn btn-success" type="submit">Submit</button>
+@unless(order.id)
+  <a href="/orders/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>
+@endunless
+<a href="/
+@if(order.id)
+orders/{{ order.id }}
+@endif
+" class="btn btn-default"><i class="pg-close">Cancel</i></a>

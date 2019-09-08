@@ -1,0 +1,17 @@
+<div class="form-group form-group-default">
+  <label for="{{ name }}">{{ text }}</label>
+  <input class="form-control" name="{{ name }}" type="{{ type ? type : 'text' }}"
+  @if(placeholder)
+    placeholder="{{ placeholder }}"
+  @endif
+  @if(value)
+    value="{{ value }}"
+  @endif
+  {{ required ? 'required' : null }}
+  >
+  @if(error)
+      <span>
+          {{ error }}
+      </span>
+  @endif
+</div>

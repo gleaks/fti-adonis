@@ -15,17 +15,24 @@
 
 @section('content')
   <div class="card card-default">
+    <div class="card-header">
+      <div class="card-title">{{ order.name }}</div>
+      <div class="card-controls">
+        <a class="btn btn-sm btn-info" href="{{ route('OrderController.edit', { id: order.id }) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this work order?')" href="/orders/delete/{{ order.id }}/show">Delete</a>
+      </div>
+    </div>
     <div class="card-body">
       <div class="invoice padding-50">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <img src="{{ assetsUrl('images/FTI_LOGO.png')}}" alt="logo" height="47">
-            <address class="m-5-10 font-montserrat all-caps">
+            <address class="m-5-10 font-monteserrat all-caps">
               1965 N. 57th Court, Suite 106,<br />
               Boulder, CO 80301, USA
             </address>
           </div>
-          <div class="col-md-9">
+          <div class="col-md-8">
             <div class="pull-right">
               <h2 class="font-montserrat all-caps hint-text">Work Order</h2>
             </div>
@@ -35,13 +42,10 @@
         <div class="row">
           <div class="col-md-3 right">
             <address>
-              Renesas,<br />
-              Intersil International,<br />
-              Suite A-13-1,<br />
-              157 Hampshire,<br />
-              1 Jalan Mayang Sari,<br />
-              50450 Kuala Lumpur,<br />
-              Malaysia<br />
+              {{ order.customer.name }}<br />
+              @if(order.customer.address)
+                {{ order.customer.address }}
+              @endif
             </address>
           </div>
           <div class="col-md-9" align="center">
@@ -51,24 +55,32 @@
               </div>
               <div class="col-md-3">
                 <strong>Quotation Number</strong><br />
-                REN01180830
+                {{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
               </div>
             </div>
             <hr />
             <div class="row">
               <div class="col-md-3 right">
                 <strong>Delivery</strong><br />
+                @if(order.delivery)
+                  {{ order.delivery }}
+                @endif
               </div>
               <div class="col-md-3 right">
                 <strong>Shipping Terms</strong><br />
-                Ex works Boulder, CO USA
+                @if(order.shipping)
+                  {{ order.shipping }}
+                @endif
               </div>
               <div class="col-md-3 right">
                 <strong>Date</strong><br />
-                August 30, 2018
+                {{ fulldate }}
               </div>
               <div class="col-md-3">
-                <strong>Payment Terms</strong>
+                <strong>Payment Terms</strong><br />
+                @if(order.payment)
+                  {{ order.payment }}
+                @endif
               </div>
             </div>
           </div>
@@ -77,51 +89,41 @@
           <table class="m-t-50">
             <thead>
               <tr>
-                <th style="width: 7.5%" class="text-left">
-                  Item #
-                </th>
-                <th style="width: 7.5%" class="text-center">
-                  Qty
-                </th>
-                <th style="width: 15%" class="text-center">
-                  Part #
-                </th>
-                <th style="width: 42%" class="text-center">
-                  Description
-                </th>
-                <th style="width: 14%" class="text-center">
-                  Unit Price
-                </th>
-                <th style="width: 14%" class="text-right">
-                  Extended Price
-                </th>
+                <th style="width: 7.5%" class="text-left">Item #</th>
+                <th style="width: 7.5%" class="text-center">Qty</th>
+                <th style="width: 15%" class="text-center">Part #</th>
+                <th style="width: 42%" class="text-center">Description</th>
+                <th style="width: 14%" class="text-center">Unit Price</th>
+                <th style="width: 14%" class="text-right">Extended Price</th>
               </tr>
             </thead>
             <tbody>
+              @if(order.description)
+                <tr>
+                  <td colspan="4">
+                    <p class="text-black">{{ order.description }}</p>
+                  </td>
+                  <td class="right"></td>
+                  <td></td>
+                </tr>
+              @endif
+              @each(product in order.products)
               <tr>
-                <td colspan="4">
-                  <p class="text-black">
-                    FTI 1000 test system configured for Quad Die Mosfet Wafer Sort with Adjacent Die. Performs x4 DC leakage and breakdown tests in parallel and x4 UIS tests serially. Maximum voltage: 1,000V. Maximum Current: DC-30A, UIS-100A. Optional Rg and Qg test.
-                  </p>
+                <td>{{ $loop.index + 1 }}</td>
+                <td>1</td>
+                <td>{{ product.partnum }}</td>
+                <td class="text-black">{{ product.name }}
+                  @if(product.description)
+                    <p class="small hint-text">{{ product.description }}</p>
+                  @endif
                 </td>
                 <td class="right"></td>
                 <td></td>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>FTI 1000-02-10</td>
-                <td><p class="text-black">FTI 1000 Power Device Tester</p>
-                  <p class="small hint-text">
-                    Includes 1 Test Head for 2 channel boards. PC, External Power Supplies and FTI Studio Software.Installation and operation training.
-                  </p></td>
-                <td class="right"></td>
-                <td></td>
-              </tr>
+              @endeach
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   </div>
