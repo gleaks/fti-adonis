@@ -10,7 +10,6 @@ class OrderController {
   }) {
     // Fetch orders
     const orders = await Order.query().with('customer').with('products').fetch();
-
     return view.render('index', {
       orders: orders.toJSON()
     })

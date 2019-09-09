@@ -4,6 +4,16 @@
 const Model = use('Model')
 
 class Order extends Model {
+  static get dates () {
+    return super.dates.concat(['date'])
+  }
+
+  static castDates (field, value) {
+    if (field === 'date') {
+      return `${value.format('MMM Do, YYYY')}`
+    }
+    return super.formatDates(field, value)
+  }
   user() {
     return this.belongsTo('App/Models/User');
   }
