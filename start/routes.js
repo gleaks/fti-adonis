@@ -37,7 +37,9 @@ Route.get('/orders/delete/:id/:from', 'OrderController.delete');
 Route.get('/customers', 'CustomerController.home');
 Route.get('/customers/create', 'CustomerController.new');
 Route.post('/customers/create', 'CustomerController.create').validator('CreateCustomer');
-Route.get('/customers/delete/:id', 'CustomerController.delete');
+Route.get('/customers/edit/:id', 'CustomerController.edit');
+Route.post('/customers/update/:id', 'CustomerController.update').validator('CreateCustomer');
+Route.get('/customers/delete/:id/:from', 'CustomerController.delete');
 
 Route.get('/products', 'ProductController.home');
 Route.get('/products/create', 'ProductController.new');

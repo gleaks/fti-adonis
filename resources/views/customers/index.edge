@@ -31,12 +31,31 @@
       @each(customer in customers)
       <tr>
         <td>{{ customer.id }}</td>
-        <td>{{ customer.name }}</td>
-        <td>{{ customer.address }}</td>
-        <td>{{ customer.contact }}</td>
-        <td>{{ customer.email }}</td>
-        <td>{{ customer.phone }}</td>
-        <td><a class="btn btn-sm btn-danger" href="{{ route('CustomerController.delete', { id: customer.id }) }}">Delete</a>
+        <td>
+        @!yield(customer.name)
+        </td>
+        <td>
+        @if(customer.address)
+        {{ customer.address.replace('<br />', ',') }}
+        @endif
+        </td>
+        <td>
+        @if(customer.contact)
+          {{ customer.contact }}
+        @endif
+        </td>
+        <td>
+        @if(customer.email)
+          {{ customer.email }}
+        @endif
+        </td>
+        <td>
+        @if(customer.phone)
+          {{ customer.phone }}
+        @endif
+        </td>
+        <td><a class="btn btn-sm btn-info" href="{{ route('CustomerController.edit', { id: customer.id }) }}">Edit</a>
+        <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this customer? All of their Work Orders will also be deleted.')" href="/customers/delete/{{ customer.id }}/index">Delete</a></td>
       </tr>
       @endeach
     </tbody>

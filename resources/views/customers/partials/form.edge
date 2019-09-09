@@ -1,0 +1,45 @@
+{{ csrfField() }}
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'name', text: 'Company Name', placeholder: 'The name of the company', value: old('name', customer.name || ''), error: getErrorFor('name') })
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <label for="description">Customer Address</label>
+      <textarea placeholder="Enter customer address with <br /> for each new line" name="address" cols="85" rows="3">{{ old('address', customer.address || '') }}</textarea>
+      @if(hasErrorFor('address'))
+          <span>
+              {{ getErrorFor('address') }}
+          </span>
+      @endif
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'contact', text: 'Contact Name', placeholder: 'A person in the company', value: old('contact', customer.contact || ''), error: getErrorFor('contact') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'email', text: 'Contact E-mail Address', placeholder: 'example@example.com', value: old('email', customer.email || ''), error: getErrorFor('email'), type: 'email' })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'phone', text: 'Contact Phone Number', placeholder: '(555) 201-4389', value: old('phone', customer.phone || ''), error: getErrorFor('phone') })
+  </div>
+</div>
+
+
+<button class="btn btn-success" type="submit">Submit</button>
+@unless(customer.id)
+  <a href="/customers/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>
+@endunless
+<a href="/customers" class="btn btn-default"><i class="pg-close">Cancel</i></a>

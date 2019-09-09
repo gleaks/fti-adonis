@@ -16,6 +16,13 @@ class CustomerController {
     return view.render('customers/new');
   }
 
+  async edit({params, view}) {
+    const customer = await Customer.find(params.id)
+    return view.render('customers/edit', {
+      customer: customer.toJSON()
+    });
+  }
+
   async create({ request, response, session, auth}) {
         const customer = request.all();
 
@@ -28,6 +35,24 @@ class CustomerController {
         });
 
         session.flash({ message: 'Your Customer has been created!' });
+        return response.redirect('/customers');
+  }
+
+  async update({ request, response, session, auth, params }) {
+        const data = request.all();
+        const customer = await Customer.find(params.id)
+
+        const posted = await customer.merge({
+            name: data.name,
+            address: data.address,
+            contact: data.contact,
+            email: data.email,
+            phone: data.phone
+        });
+
+        await customer.save()
+
+        session.flash({ message: 'Your Customer has been edited!' });
         return response.redirect('/customers');
   }
 

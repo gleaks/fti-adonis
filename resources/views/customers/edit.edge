@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('title')
-  Focused Test - Create Customer
+  Focused Test - Edit Customer {{ customer.id }}
 @endsection
 
 @section('breadcrumb')
@@ -9,13 +9,13 @@
     <a href="/customers">Customers</a>
   </li>
   <li class="breadcrumb-item active">
-    Create Customer
+    Edit Customer {{ customer.id }}
   </li>
 @endsection
 
 @section('content')
-  <h1>Create a Customer</h1>
-    <form action="{{ route('CustomerController.create') }}" method="POST">
+  <h1>Edit {{ customer.name }}</h1>
+    <form action="{{ route('CustomerController.update', { id: customer.id }) }}" method="POST">
       @include('customers.partials.form')
     </form>
   @endsection
