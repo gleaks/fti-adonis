@@ -1,0 +1,54 @@
+{{ csrfField() }}
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'name', text: 'Product Name', placeholder: 'The name of the product', value: old('name', product.name || ''), error: getErrorFor('name'), required: true })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'description', text: 'Product Description', placeholder: 'Include some details about the product', value: old('description', product.description || ''), error: getErrorFor('description') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'partnum', text: 'Part Number', placeholder: 'ex: FTI 1000-02-200', value: old('partnum', product.partnum || ''), error: getErrorFor('partnum') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'price', text: 'Price', placeholder: 'Do not include commas or $ symbol', value: old('price', product.price || ''), error: getErrorFor('price') })
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group form-group-default">
+      <input type="hidden" class="oldcategory" data-value="{{ old('category', product.category || '') }}" />
+      <label class>Category</label>
+          <!-- Using data-init-plugin='select2' automatically initializes a basic Select2 -->
+          <select id="categoryInput" name="category" class="full-width" data-init-plugin="select2">
+            <option value="Base System">Base System</option>
+            <option value="DC Instrument">DC Instrument</option>
+            <option value="AC Instrument">AC Instrument</option>
+            <option value="IC Instrument">IC Instrument</option>
+            <option value="Accesory">Accessory</option>
+            <option value="Option">Option</option>
+          </select>
+      </div>
+      @if(hasErrorFor('category'))
+          <span>
+              {{ getErrorFor('category') }}
+          </span>
+      @endif
+  </div>
+</div>
+
+<button class="btn btn-success" type="submit">Submit Product</button>
+@unless(product.id)
+  <a href="/customers/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>
+@endunless
+<a href="/products" class="btn btn-default"><i class="pg-close">Cancel</i></a>

@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('title')
-  Focused Test - Create Product
+  Focused Test - Edit Product {{ product.id }}
 @endsection
 
 @section('extrajs')
@@ -13,13 +13,13 @@
     <a href="/products">Products</a>
   </li>
   <li class="breadcrumb-item active">
-    Create Product
+    Edit Product {{ product.id }}
   </li>
 @endsection
 
 @section('content')
-  <h1>Create a Product</h1>
-    <form action="{{ route('ProductController.create') }}" method="POST">
+  <h1>Edit {{ product.name }}</h1>
+    <form action="{{ route('ProductController.update', { id: product.id }) }}" method="POST">
       @include('products.partials.form')
     </form>
 @endsection

@@ -2,15 +2,15 @@
 
 <div class="row">
   <div class="col-md-8">
-    @!component('components.input', { name: 'name', text: 'Order Name', placeholder: 'A unique name to identify different orders', value: old('name', order.name || ''), error: getErrorFor('name') })
+    @!component('components.input', { name: 'name', text: 'Order Name', placeholder: 'A unique name to identify different orders', value: old('name', order.name || ''), error: getErrorFor('name'), required: true })
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-8">
-    <div class="form-group form-group-default">
+    <div class="form-group form-group-default required">
       <label for="customer">Customer</label>
-      <select name="customer" class="full-width select2">
+      <select name="customer" class="full-width select2" required>
         <option></option>
         @each(customer in customers)
           <option value="{{ customer.id }}"

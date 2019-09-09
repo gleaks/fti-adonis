@@ -16,6 +16,14 @@ class ProductController {
     return view.render('products/new');
   }
 
+  async edit({params, view}) {
+    const product = await Product.find(params.id)
+    return view.render('products/edit', {
+      product: product.toJSON()
+    });
+  }
+
+
   async create({ request, response, session, auth}) {
         const product = request.all();
 
@@ -28,6 +36,23 @@ class ProductController {
         });
 
         session.flash({ message: 'Your Product has been created!' });
+        return response.redirect('/products');
+  }
+
+  async update({ request, response, session, auth, params}) {
+        const data = request.all();
+        const product = await Product.find(params.id)
+
+        const posted = await product.merge({
+            name: data.name,
+            description: data.description,
+            price: data.price,
+            partnum: data.partnum,
+            category: data.category
+        });
+        product.save()
+
+        session.flash({ message: 'Your Product has been edited!' });
         return response.redirect('/products');
   }
 

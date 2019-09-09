@@ -1,4 +1,4 @@
-<div class="form-group form-group-default">
+<div class="form-group form-group-default {{ required ? 'required' : null }}">
   <label for="{{ name }}">{{ text }}</label>
   <input class="form-control" name="{{ name }}" type="{{ type ? type : 'text' }}"
   @if(placeholder)

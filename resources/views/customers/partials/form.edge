@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    @!component('components.input', { name: 'name', text: 'Company Name', placeholder: 'The name of the company', value: old('name', customer.name || ''), error: getErrorFor('name') })
+    @!component('components.input', { name: 'name', text: 'Company Name', placeholder: 'The name of the company', value: old('name', customer.name || ''), error: getErrorFor('name'), required: true })
   </div>
 </div>
 <div class="row">
