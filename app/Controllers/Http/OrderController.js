@@ -88,8 +88,13 @@ class OrderController {
       shipping: order.shipping,
       payment: order.payment
     });
-    const postedproducts = await posted.products().attach(order.products)
 
+    if((typeof order.products) !== undefined) {
+      var products = order.products.filter(function(value, index, arr) {
+        return value != '';
+      });
+      const postedproducts = await posted.products().attach(products)
+    }
     session.flash({
       message: 'Your Work Order has been created!'
     });
@@ -134,7 +139,7 @@ class OrderController {
   }) {
     const order = await Order.find(params.id);
 
-    // await order.delete();
+    await order.delete();
     session.flash({
       message: 'Your Work Order has been removed'
     });

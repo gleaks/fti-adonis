@@ -4,16 +4,18 @@
 const Model = use('Model')
 
 class Order extends Model {
+  // Add Order.date to the Adonis date formatter
   static get dates () {
     return super.dates.concat(['date'])
   }
-
+  // Format & return Order.date as Sep 19th, 2019 as the default date style
   static castDates (field, value) {
     if (field === 'date') {
       return `${value.format('MMM Do, YYYY')}`
     }
     return super.formatDates(field, value)
   }
+
   user() {
     return this.belongsTo('App/Models/User');
   }

@@ -43,8 +43,11 @@
           <div class="col-md-3 right">
             <address>
               {{ order.customer.name }}<br />
+              @if(order.customer.contact)
+                {{ order.customer.contact }}<br />
+              @endif
               @if(order.customer.address)
-                {{ order.customer.address }}
+                {{{ order.customer.address }}}
               @endif
             </address>
           </div>
