@@ -10,7 +10,7 @@
   <div class="col-md-8">
     <div class="form-group form-group-default required">
       <label for="customer">Customer</label>
-      <select name="customer" class="full-width select2" required>
+      <select id="customerSelect" name="customer" class="full-width" required>
         <option></option>
         @each(customer in customers)
           <option value="{{ customer.id }}"

@@ -16,7 +16,7 @@ $(document).ready(function() {
     $('#newOrderDate').datepicker();
 
     // Start select2 javascript plugin on the Customer input
-    $('.select2').select2({
+    $('#customerSelect').select2({
       placeholder: 'Select a Customer',
       allowClear: true
     });
