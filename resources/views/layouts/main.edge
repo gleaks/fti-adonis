@@ -13,6 +13,9 @@
   {{ style('plugins/switchery/css/switchery.min') }}
   {{ style('pages-icons') }}
   {{ style('plugins/bootstrap-datepicker/css/datepicker3') }}
+  {{ style('plugins/jquery-datatable/media/css/jquery.dataTables') }}
+  {{ style('plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min') }}
+  {{ style('plugins/datatables-responsive/css/datatables.responsive')}}
   {{ style('themes/modern') }}
   {{ style('style') }}
 
@@ -119,7 +122,13 @@
   {{ script('plugins/jquery-actual/jquery.actual.min') }}
   {{ script('plugins/jquery-scrollbar/jquery.scrollbar.min') }}
   {{ script('plugins/select2/js/select2.full.min') }}
-  {{ script('plugins/bootstrap-datepicker/js/bootstrap-datepicker')}}
+  {{ script('plugins/bootstrap-datepicker/js/bootstrap-datepicker') }}
+  {{ script('plugins/jquery-datatable/media/js/jquery.dataTables.min') }}
+  {{ script('plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min') }}
+  {{ script('plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap') }}
+  {{ script('plugins/datatables-responsive/js/datatables.responsive') }}
+  {{ script('plugins/datatables-responsive/js/lodash.min') }}
+  {{ script('plugins/classie/classie') }}
   {{ script('pages.min') }}
   {{ script('app') }}
   @!section('extrajs')

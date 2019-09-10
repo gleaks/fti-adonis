@@ -89,7 +89,7 @@ class OrderController {
       payment: order.payment
     });
 
-    if((typeof order.products) !== undefined) {
+    if((typeof order.products) != 'undefined') {
       var products = order.products.filter(function(value, index, arr) {
         return value != '';
       });

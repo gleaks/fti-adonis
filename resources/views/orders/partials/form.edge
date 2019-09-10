@@ -77,10 +77,10 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div class="form-group form-group-default">
+    <div class="form-group form-group-default required">
       <input type="hidden" class="oldstatus" data-value="{{ old('status', order.status || '') }}" />
       <label class>Status</label>
-          <select id="statusInput" name="status" class="full-width" data-init-plugin="select2">
+          <select id="statusInput" name="status" class="full-width" data-init-plugin="select2" required>
             <option value="Quote">Quote</option>
             <option value="Possible Order">Possible Order</option>
             <option value="Likely Order">Likely Order</option>
