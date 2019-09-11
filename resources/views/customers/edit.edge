@@ -4,6 +4,10 @@
   Focused Test - Edit Customer {{ customer.id }}
 @endsection
 
+@section('extrajs')
+  {{ script('customer') }}
+@endsection
+
 @section('breadcrumb')
   <li class="breadcrumb-item">
     <a href="/customers">Customers</a>

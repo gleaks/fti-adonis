@@ -31,7 +31,4 @@ $(document).ready(function() {
     };
     orderTable.columns(4).search(search).draw();
   });
-
-  // Star Jquery-validation on the Customer form
-  $('#customerForm').validate();
 });
