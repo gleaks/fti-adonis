@@ -80,7 +80,8 @@
     <div class="form-group form-group-default required">
       <input type="hidden" class="oldstatus" data-value="{{ old('status', order.status || '') }}" />
       <label class>Status</label>
-          <select id="statusInput" name="status" class="full-width" data-init-plugin="select2" required>
+          <select id="statusInput" name="status" class="full-width" data-init-plugin="select2" data-placeholder="Select an Order Status" required>
+            <option></option>
             <option value="Quote">Quote</option>
             <option value="Possible Order">Possible Order</option>
             <option value="Likely Order">Likely Order</option>

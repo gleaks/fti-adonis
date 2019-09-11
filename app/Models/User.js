@@ -35,6 +35,7 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
+  // A user can "own" many different orders - to show who created them
   orders() {
     return this.hasMany('App/Models/Order');
   }

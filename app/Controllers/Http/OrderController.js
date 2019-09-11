@@ -8,7 +8,7 @@ class OrderController {
   async home({
     view
   }) {
-    // Fetch orders
+    // Fetch all orders with their customer & products relationships
     const orders = await Order.query().with('customer').with('products').fetch();
     return view.render('index', {
       orders: orders.toJSON()
@@ -19,13 +19,15 @@ class OrderController {
     params,
     view
   }) {
-    // Fetch order
+    // Fetch order with its user, customer & products relationships
     const order = await Order.query().with('user').with('customer').with('products').where('id', params.id).first();
 
+    // Cast date & break into multiple variables to make the Quote Number
     const date = new Date(order.date);
     const day = ("0" + date.getDate()).slice(-2)
     const month = ("0" + (date.getMonth() + 1)).slice(-2)
     const year = date.getFullYear().toString().substr(-2);
+    // Get a full, properly formatted date for the "Date" portion of the work order
     const fulldate = date.toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'});
 
     return view.render('orders/show', {
@@ -42,6 +44,8 @@ class OrderController {
   }) {
     const customers = await Customer.all();
     const products = await Product.all();
+
+    // Cast a new date of today to be used by the date form input
     const d = new Date(Date.now());
     const date = d.toLocaleDateString('en-US');
 
@@ -59,6 +63,8 @@ class OrderController {
     const order = await Order.query().with('user').with('customer').with('products').where('id', params.id).first();
     const customers = await Customer.all();
     const products = await Product.all();
+
+    // Cast a new date from the date in the database for the date form input
     const d = new Date(order.date);
     const date = d.toLocaleDateString('en-US');
 
@@ -89,10 +95,13 @@ class OrderController {
       payment: order.payment
     });
 
+    // If there are actually some products do this
     if((typeof order.products) != 'undefined') {
+      // Go through the products array and remove any blank ones
       var products = order.products.filter(function(value, index, arr) {
         return value != '';
       });
+      // Associate all the products in the array with this order
       const postedproducts = await posted.products().attach(products)
     }
     session.flash({
@@ -122,6 +131,8 @@ class OrderController {
       payment: data.payment
     });
     await order.save()
+
+    // De-associate all the old products with this order and associate all the new products in the form
     await order.products().detach()
     await order.products().attach(data.products)
 
@@ -143,6 +154,9 @@ class OrderController {
     session.flash({
       message: 'Your Work Order has been removed'
     });
+
+    // If the source of the delete action came from the index stay there instead of refreshing
+    // but if it came from another page then reload the root page
     if(params.from == 'index') {
       return response.redirect('back');
     } else {

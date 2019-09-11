@@ -15,13 +15,15 @@ class Order extends Model {
     }
     return super.formatDates(field, value)
   }
-
+  // An order has a single user - that created it
   user() {
     return this.belongsTo('App/Models/User');
   }
+  // An order has a single customer
   customer() {
     return this.belongsTo('App/Models/Customer')
   }
+  // An order can be attached to many products, and each product in an order can have a "count"
   products() {
     return this.belongsToMany('App/Models/Product').withPivot(['count'])
   }
