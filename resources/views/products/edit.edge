@@ -19,7 +19,7 @@
 
 @section('content')
   <h1>Edit {{ product.name }}</h1>
-    <form action="{{ route('ProductController.update', { id: product.id }) }}" method="POST">
+    <form id="productForm" action="{{ route('ProductController.update', { id: product.id }) }}" method="POST">
       @include('products.partials.form')
     </form>
 @endsection

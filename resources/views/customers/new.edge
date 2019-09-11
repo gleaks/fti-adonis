@@ -15,7 +15,7 @@
 
 @section('content')
   <h1>Create a Customer</h1>
-    <form action="{{ route('CustomerController.create') }}" method="POST">
+    <form id="customerForm" action="{{ route('CustomerController.create') }}" method="POST">
       @include('customers.partials.form')
     </form>
   @endsection

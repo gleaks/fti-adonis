@@ -1,6 +1,9 @@
 $(document).ready(function() {
     var num = 0;
 
+    // Star Jquery-validation on the form
+    $('#workOrderForm').validate();
+
     // If a form has submitted with error the product list is brought back as DIV's
     // with oldproduct as the class. Check if they exist, apply select2 to the inputs
     // and increment the base counting number to the number of the last product

@@ -19,7 +19,7 @@
 
 @section('content')
   <h1>Create a Product</h1>
-    <form action="{{ route('ProductController.create') }}" method="POST">
+    <form id="productForm" action="{{ route('ProductController.create') }}" method="POST">
       @include('products.partials.form')
     </form>
 @endsection

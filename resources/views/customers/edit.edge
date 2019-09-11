@@ -15,7 +15,7 @@
 
 @section('content')
   <h1>Edit {{ customer.name }}</h1>
-    <form action="{{ route('CustomerController.update', { id: customer.id }) }}" method="POST">
+    <form id="customerForm" action="{{ route('CustomerController.update', { id: customer.id }) }}" method="POST">
       @include('customers.partials.form')
     </form>
   @endsection
