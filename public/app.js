@@ -6,16 +6,13 @@ $(document).ready(function() {
 
   // Start DataTables on all the tables, without a search bar (the dom option)
   var orderTable = $('#orderTable').DataTable({
-    dom: '<"row"<"col-md-4 text-left"l><"col-md-4 text-center"f><"#orderTable_selectDiv.col-md-4 text-right">>\
-          trip'
+    dom: '<"row"<"col-md-4 text-left"l><"col-md-4 text-center"f><"#orderTable_selectDiv.col-md-4 text-right">>trip'
   });
   var customerTable = $('#customerTable').DataTable({
-    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#customerTable_selectDiv.col-md-4 text-right">>\
-          trip'
+    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#customerTable_selectDiv.col-md-4 text-right">>trip'
   });
   var productTable = $('#productTable').DataTable({
-    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#productTable_selectDiv.col-md-4 text-right">>\
-          trip'
+    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#productTable_selectDiv.col-md-4 text-right">>trip'
   });
 
   // Apply styling to the DataTables created length dropdown
@@ -25,12 +22,12 @@ $(document).ready(function() {
 
   // Create a dropdown that allows you to filter the Order & Product table by its Category name
   $('#orderTable_selectDiv').html('<select id="orderTable_select" class="cs-select">\
-                                  <option value="All">All</option><option value="Quote">Quote</option>\
-                                  <option value="Possible Order">Possible Order</option>\
-                                  <option value="Likely Order">Likely Order</option>\
-                                  <option value="Confirmed Order">Confirmed Order</option>\
-                                  <option value="Shipped">Shipped</option>\
-                                </select>')
+                                    <option value="All">All</option><option value="Quote">Quote</option>\
+                                    <option value="Possible Order">Possible Order</option>\
+                                    <option value="Likely Order">Likely Order</option>\
+                                    <option value="Confirmed Order">Confirmed Order</option>\
+                                    <option value="Shipped">Shipped</option>\
+                                  </select>')
   $('#productTable_selectDiv').html('<select id="productTable_select" class="cs-select">\
                                       <option value="All">All</option>\
                                       <option value="Base System">Base System</option>\
