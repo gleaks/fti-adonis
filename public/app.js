@@ -22,7 +22,7 @@ $(document).ready(function() {
 
   // Create a dropdown that allows you to filter the Order table by its Category name
   $('#orderTable_length').after('<div class="pull-right"><select id="orderTable_select" class="cs-select"><option value="All">All</option><option value="Quote">Quote</option><option value="Possible Order">Possible Order</option><option value="Likely Order">Likely Order</option><option value="Confirmed Order">Confirmed Order</option><option value="Shipped">Shipped</option></select></div>')
-
+  $('#productTable_length').after('<div class="pull-right"><select id="productTable_select" class="cs-select"><option value="All">All</option><option value="Base System">Base System</option><option value="DC Instrument">DC Instrument</option><option value="AC Instrument">AC Instrument</option><option value="IC Instrument">IC Instrument</option><option value="Accessory">Accessory</option><option value="Option">Option</option></select></div>')
   // When the dropdown is changed apply the value of the dropdown as a filter to the DataTable
   $('#orderTable_select').change(function() {
     var search = this.value
@@ -30,5 +30,12 @@ $(document).ready(function() {
       search = ''
     };
     orderTable.columns(4).search(search).draw();
+  });
+  $('#productTable_select').change(function() {
+    var search = this.value
+    if(search === 'All') {
+      search = ''
+    };
+    productTable.columns(4).search(search).draw();
   });
 });
