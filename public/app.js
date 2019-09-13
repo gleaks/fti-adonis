@@ -6,13 +6,16 @@ $(document).ready(function() {
 
   // Start DataTables on all the tables, without a search bar (the dom option)
   var orderTable = $('#orderTable').DataTable({
-    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#orderTable_selectDiv.col-md-4 text-right">tipr'
+    dom: '<"row"<"col-md-4 text-left"l><"col-md-4 text-center"f><"#orderTable_selectDiv.col-md-4 text-right">>\
+          trip'
   });
   var customerTable = $('#customerTable').DataTable({
-    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#customerTable_selectDiv.col-md-4 text-right">tipr'
+    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#customerTable_selectDiv.col-md-4 text-right">>\
+          trip'
   });
   var productTable = $('#productTable').DataTable({
-    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#productTable_selectDiv.col-md-4 text-right">tipr'
+    dom: '<"row"<"col-md-4"l><"col-md-4 text-center"f><"#productTable_selectDiv.col-md-4 text-right">>\
+          trip'
   });
 
   // Apply styling to the DataTables created length dropdown
