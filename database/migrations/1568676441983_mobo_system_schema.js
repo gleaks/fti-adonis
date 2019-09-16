@@ -8,14 +8,14 @@ class MoboSystemSchema extends Schema {
     this.create('mobo_system', (table) => {
       table.increments()
       table.integer('mobo_id').references('id').inTable('mobos').onDelete('CASCADE')
-      table.integer('system_id').references('id').inTable('systems').onDelete('CASCADE')
+      table.integer('order_system_id').references('id').inTable('order_system').onDelete('CASCADE')
       table.integer('count')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('mobo_systems')
+    this.drop('mobo_system')
   }
 }
 

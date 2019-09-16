@@ -5,10 +5,13 @@ const Model = use('Model')
 
 class System extends Model {
   mobos() {
-    return this.belongsToMany('App/Models/Mobo').withPivot(['count'])
+    return this.hasMany('App/Models/Mobo')
   }
   externals() {
-    return this.belongsToMany('App/Models/External').withPivot(['count'])
+    return this.hasMany('App/Models/External')
+  }
+  modules () {
+    return this.manyThrough('App/Models/Mobo', 'modules')
   }
 }
 

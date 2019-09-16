@@ -15,7 +15,7 @@ class OrderSystemSchema extends Schema {
   }
 
   down () {
-    this.drop('order_systems')
+    this.drop('order_system')
   }
 }
 

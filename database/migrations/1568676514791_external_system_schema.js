@@ -8,14 +8,14 @@ class ExternalSystemSchema extends Schema {
     this.create('external_system', (table) => {
       table.increments()
       table.integer('external_id').references('id').inTable('externals').onDelete('CASCADE')
-      table.integer('system_id').references('id').inTable('systems').onDelete('CASCADE')
+      table.integer('order_system_id').references('id').inTable('order_system').onDelete('CASCADE')
       table.integer('count')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('external_systems')
+    this.drop('external_system')
   }
 }
 
