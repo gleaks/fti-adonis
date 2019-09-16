@@ -65,13 +65,13 @@
 
 <div class="row">
   <div class="col-md-8">
-    @!component('components.input', { name: 'delivery', text: 'Delivery', placeholder: 'ex: Ex-Works Boulder, CO', value: old('delivery', order.delivery || ''), error: getErrorFor('delivery') })
+    @!component('components.input', { name: 'delivery', text: 'Delivery Terms', placeholder: 'ex: 16 weeks ARO', value: old('delivery', order.delivery || ''), error: getErrorFor('delivery') })
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-8">
-    @!component('components.input', { name: 'shipping', text: 'Shipping Terms', placeholder: 'Terms of shipping', value: old('shipping', order.shipping || ''), error: getErrorFor('shipping') })
+    @!component('components.input', { name: 'shipping', text: 'Shipping', placeholder: 'ex: Ex-Works Boulder, CO', value: old('shipping', order.shipping || ''), error: getErrorFor('shipping') })
   </div>
 </div>
 
@@ -97,7 +97,7 @@
   </div>
 </div>
 
-<div id="products0" style="display: none;">
+<!-- <div id="products0" style="display: none;">
 <div class="row">
   <div class="col-md-7">
     <div class="form-group form-group-default">
@@ -148,7 +148,7 @@
   <div class="col-md-8">
       <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add Product</button>
   </div>
-</div>
+</div> -->
 
 <button class="btn btn-success" type="submit">Submit</button>
 @unless(order.id)

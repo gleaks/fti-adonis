@@ -23,9 +23,8 @@ class Order extends Model {
   customer() {
     return this.belongsTo('App/Models/Customer')
   }
-  // An order can be attached to many products, and each product in an order can have a "count"
-  products() {
-    return this.belongsToMany('App/Models/Product').withPivot(['count'])
+  systems() {
+    return this.belongsToMany('App/Models/System').withPivot(['count'])
   }
 }
 
