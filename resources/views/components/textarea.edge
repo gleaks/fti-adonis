@@ -1,0 +1,13 @@
+<div class="form-group form-group-default {{ required ? 'required' : null }}">
+  <label for="{{ name }}">{{ text }}</label>
+  <textarea placeholder="{{ placeholder }}" class="form-control" name="{{ name }}" style="height: 75px;">
+@if(value)
+{{ value }}
+@endif
+</textarea>
+@if(error)
+<span>
+  {{ error }}
+</span>
+@endif
+</div>

@@ -7,15 +7,7 @@
 </div>
 <div class="row">
   <div class="col-md-8">
-    <div class="form-group form-group-default">
-      <label for="description">Customer Address</label>
-      <textarea placeholder="Enter customer address with <br /> for each new line" name="address" cols="85" rows="3">{{ old('address', customer.address || '') }}</textarea>
-      @if(hasErrorFor('address'))
-          <span>
-              {{ getErrorFor('address') }}
-          </span>
-      @endif
-    </div>
+    @!component('components.textarea', { name: 'address', text: 'Customer Address', placeholder: 'Address of the customer - line breaks are stored in the same format', value: old('address', customer.address || ''), error: getErrorFor('address') })
   </div>
 </div>
 
