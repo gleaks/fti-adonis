@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Mobo extends Model {
   modules() {
-    return this.hasMany('App/Models/Module')
+    return this.belongsToMany('App/Models/Module').withPivot(['count'])
   }
 }
 

@@ -38,16 +38,16 @@ $(document).ready(function() {
       $(this).closest('.row').remove();
     });
 
-    // When you go to add an additional product row it copies the HTML of a
+    // When you go to add an additional system it copies the HTML of a
     // hidden input, changes its name with the base incrementing number and
     // finally applies the select2 plugin to the input.
     $('#addButton').click(function(e){
         e.preventDefault();
         num++;
-        $('#addProduct').before($('#products0').html());
-        $('.full-width:last').attr('name', 'products[' + num + ']');
+        $('#addProduct').before($('#systems0').html());
+        $('.full-width:last').attr('name', 'systems[' + num + ']');
         $('.full-width:last').select2({
-          placeholder: 'Select a Product',
+          placeholder: 'Select a System',
           allowClear: true
         });
     });

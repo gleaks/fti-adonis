@@ -23,9 +23,8 @@ class Order extends Model {
   customer() {
     return this.belongsTo('App/Models/Customer')
   }
-
   systems() {
-    return this.belongsToMany('App/Models/System').withPivot(['count'])
+    return this.belongsToMany('App/Models/System').pivotModel('App/Models/OrderSystem')
   }
   mobos() {
     return this.manyThrough('App/Models/System', 'mobos')

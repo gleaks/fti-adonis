@@ -2,6 +2,10 @@
 
 const Order = use('App/Models/Order')
 const Customer = use('App/Models/Customer')
+const System = use('App/Models/System')
+const Mobo = use('App/Models/Mobo')
+const External = use('App/Models/External')
+const Module = use('App/Models/Module')
 // const Product = use('App/Models/Product')
 
 class OrderController {
@@ -20,7 +24,7 @@ class OrderController {
     view
   }) {
     // Fetch order with its user, customer & products relationships
-    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const order = await Order.query().with('user').with('customer').with('systems').where('id', params.id).first()
 
     // Cast date & break into multiple variables to make the Quote Number
     const date = new Date(order.date)
@@ -32,6 +36,7 @@ class OrderController {
 
     return view.render('orders/show', {
       order: order.toJSON(),
+      test: JSON.stringify(order.toJSON(), undefined, 2),
       day: day,
       month: month,
       year: year,
@@ -43,6 +48,10 @@ class OrderController {
     view
   }) {
     const customers = await Customer.all()
+    const systems = await System.all()
+    const mobos = await Mobo.all()
+    const externals = await External.all()
+    const modules = await Module.all()
     // const products = await Product.all()
 
     // Cast a new date of today to be used by the date form input
@@ -51,6 +60,10 @@ class OrderController {
 
     return view.render('orders/new', {
       customers: customers.toJSON(),
+      systems: systems.toJSON(),
+      mobos: mobos.toJSON(),
+      externals: externals.toJSON(),
+      modules: modules.toJSON(),
       // products: products.toJSON(),
       date: date
     })
@@ -95,15 +108,15 @@ class OrderController {
       payment: order.payment
     })
 
-    // // If there are actually some products do this
-    // if((typeof order.products) != 'undefined') {
-    //   // Go through the products array and remove any blank ones
-    //   var products = order.products.filter(function(value, index, arr) {
-    //     return value != ''
-    //   })
-    //   // Associate all the products in the array with this order
-    //   const postedproducts = await posted.products().attach(products)
-    // }
+    // If there are actually some products do this
+    if((typeof order.systems) != 'undefined') {
+      // Go through the products array and remove any blank ones
+      var products = order.systems.filter(function(value, index, arr) {
+        return value != ''
+      })
+      // Associate all the products in the array with this order
+      const postedproducts = await posted.systems().attach(products)
+    }
     session.flash({
       message: 'Your Work Order has been created!'
     })

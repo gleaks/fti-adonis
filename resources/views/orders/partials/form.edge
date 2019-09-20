@@ -88,19 +88,15 @@
       @endif
   </div>
 </div>
-
-<!-- <div id="products0" style="display: none;">
+<div id="systems0" style="display: none;">
 <div class="row">
   <div class="col-md-7">
     <div class="form-group form-group-default">
-      <label>Product</label>
+      <label>System Type</label>
       <select name="nothing" class="full-width">
         <option></option>
-        @each((products, category) in groupBy(products, 'category'))
-          <optgroup label="{{ category }}">
-            @each(product in products)
-              <option value="{{ product.id }}">{{ product.name }}</option>
-            @endeach
+        @each(system in systems)
+        <option value="{{ system.id }}">{{ system.name }}</option>
         @endeach
       </select>
     </div>
@@ -110,38 +106,11 @@
   </div>
 </div>
 </div>
-@set('loop', old('products') || order.products)
-@each(old in loop)
-<div class="row">
-  <div class="col-md-7">
-    <div class="form-group form-group-default">
-      <label>Product {{ old.id }}</label>
-      <select name="products[{{ $loop.index }}]" class="full-width oldproduct">
-        <option></option>
-        @each((products, category) in groupBy(products, 'category'))
-          <optgroup label="{{ category }}">
-            @each(product in products)
-              <option value="{{ product.id }}"
-              @if($parent.$parent.old == product.id || $parent.$parent.old.id == product.id)
-                selected="selected"
-              @endif
-              >{{ product.name }}</option>
-            @endeach
-        @endeach
-      </select>
-    </div>
-  </div>
-  <div class="col-md-1">
-    <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
-  </div>
-</div>
-@endeach
 <div id="addProduct" class="row">
   <div class="col-md-8">
-      <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add Product</button>
+      <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add a System</button>
   </div>
-</div> -->
-
+</div>
 <button class="btn btn-success" type="submit">Submit</button>
 @unless(order.id)
   <a href="/orders/create" class="btn btn-default"><i class="pg-refresh_new">Clear</i></a>
