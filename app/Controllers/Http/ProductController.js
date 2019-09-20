@@ -25,10 +25,25 @@ class ProductController {
     return view.render('products/new')
   }
 
-  async edit({params, view}) {
-    const product = await Product.find(params.id)
+  async edit({view, params}) {
+    var product = ''
+    switch(params.table) {
+      case 'systems':
+        product = await System.find(params.id)
+        break
+      case 'mobos':
+        product = await Mobo.find(params.id)
+        break
+      case 'externals':
+        product = await External.find(params.id)
+        break
+      case 'modules':
+        product = await Module.find(params.id)
+        break
+    }
     return view.render('products/edit', {
-      product: product.toJSON()
+      product: product.toJSON(),
+      table: params.table
     })
   }
 
@@ -63,14 +78,26 @@ class ProductController {
 
   async update({ request, response, session, auth, params}) {
         const data = request.all()
-        const product = await Product.find(params.id)
-
+        var product = ''
+        switch(params.table) {
+          case 'systems':
+            product = await System.find(params.id)
+            break
+          case 'mobos':
+            product = await Mobo.find(params.id)
+            break
+          case 'externals':
+            product = await External.find(params.id)
+            break
+          case 'modules':
+            product = await Module.find(params.id)
+            break
+        }
         const posted = await product.merge({
             name: data.name,
             description: data.description,
             price: data.price,
-            partnum: data.partnum,
-            category: data.category
+            partnum: data.partnum
         })
         product.save()
 
@@ -79,8 +106,21 @@ class ProductController {
   }
 
   async delete({ response, session, params}) {
-        const product = await Product.find(params.id)
-
+    var product = ''
+    switch(params.table) {
+      case 'systems':
+        product = await System.find(params.id)
+        break
+      case 'mobos':
+        product = await Mobo.find(params.id)
+        break
+      case 'externals':
+        product = await External.find(params.id)
+        break
+      case 'modules':
+        product = await Module.find(params.id)
+        break
+    }
         await product.delete()
         session.flash({ message: 'Your Product has been removed'})
         return response.redirect('back')
