@@ -27,23 +27,29 @@ class ProductController {
 
   async edit({view, params}) {
     var product = ''
+    var text = ''
     switch(params.table) {
       case 'systems':
         product = await System.find(params.id)
+        text = 'Base System'
         break
       case 'mobos':
         product = await Mobo.find(params.id)
+        text = 'Motherboard'
         break
       case 'externals':
         product = await External.find(params.id)
+        text = 'External Module / Accessory'
         break
       case 'modules':
         product = await Module.find(params.id)
+        text = 'Internal Module'
         break
     }
     return view.render('products/edit', {
       product: product.toJSON(),
-      table: params.table
+      table: params.table,
+      text: text
     })
   }
 

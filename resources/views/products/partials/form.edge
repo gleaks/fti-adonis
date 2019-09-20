@@ -26,15 +26,16 @@
 
 <div class="row">
   <div class="col-md-8">
+    @unless(text)
     <div class="form-group form-group-default required">
-      <input type="hidden" class="oldcategory" data-value="{{ old('category', product.category || '') }}" />
+      <input type="hidden" class="oldcategory" data-value="{{ old('category', '') }}" />
       <label class>Category</label>
           <!-- Using data-init-plugin='select2' automatically initializes a basic Select2 -->
           <select id="categoryInput" name="category" class="full-width" data-init-plugin="select2" data-placeholder="Select a Category" required>
             <option></option>
             <option value="System">Base System</option>
             <option value="Mobo">Motherboard</option>
-            <option value="Module">Motherboard Module</option>
+            <option value="Module">Internal Module</option>
             <option value="External">External Module / Accessory</option>
           </select>
       </div>
@@ -43,6 +44,12 @@
               {{ getErrorFor('category') }}
           </span>
       @endif
+    @else
+    <div class="form-group form-group-default disabled">
+      <label>Category</label>
+      <input type="text" class="form-control" value="{{ text }}" disabled />
+    </div>
+    @endunless
   </div>
 </div>
 
