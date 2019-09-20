@@ -31,11 +31,9 @@ $(document).ready(function() {
   $('#productTable_selectDiv').html('<select id="productTable_select" class="cs-select">\
                                       <option value="All">All</option>\
                                       <option value="Base System">Base System</option>\
-                                      <option value="DC Instrument">DC Instrument</option>\
-                                      <option value="AC Instrument">AC Instrument</option>\
-                                      <option value="IC Instrument">IC Instrument</option>\
-                                      <option value="Accessory">Accessory</option>\
-                                      <option value="Option">Option</option>\
+                                      <option value="Motherboard">Motherboard</option>\
+                                      <option value="Internal Module">Internal Module</option>\
+                                      <option value="External Module / Accessory">External Module / Accessory</option>\
                                     </select>')
 
   // When the dropdown is changed apply the value of the dropdown as a filter to the DataTable

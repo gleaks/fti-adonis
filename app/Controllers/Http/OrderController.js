@@ -9,7 +9,7 @@ class OrderController {
     view
   }) {
     // Fetch all orders with their customer & products relationships
-    const orders = await Order.query().with('customer').fetch();
+    const orders = await Order.query().with('customer').fetch()
     return view.render('index', {
       orders: orders.toJSON()
     })
@@ -20,15 +20,15 @@ class OrderController {
     view
   }) {
     // Fetch order with its user, customer & products relationships
-    const order = await Order.query().with('user').with('customer').where('id', params.id).first();
+    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
 
     // Cast date & break into multiple variables to make the Quote Number
-    const date = new Date(order.date);
+    const date = new Date(order.date)
     const day = ("0" + date.getDate()).slice(-2)
     const month = ("0" + (date.getMonth() + 1)).slice(-2)
-    const year = date.getFullYear().toString().substr(-2);
+    const year = date.getFullYear().toString().substr(-2)
     // Get a full, properly formatted date for the "Date" portion of the work order
-    const fulldate = date.toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'});
+    const fulldate = date.toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'})
 
     return view.render('orders/show', {
       order: order.toJSON(),
@@ -42,38 +42,38 @@ class OrderController {
   async new({
     view
   }) {
-    const customers = await Customer.all();
-    // const products = await Product.all();
+    const customers = await Customer.all()
+    // const products = await Product.all()
 
     // Cast a new date of today to be used by the date form input
-    const d = new Date(Date.now());
-    const date = d.toLocaleDateString('en-US');
+    const d = new Date(Date.now())
+    const date = d.toLocaleDateString('en-US')
 
     return view.render('orders/new', {
       customers: customers.toJSON(),
       // products: products.toJSON(),
       date: date
-    });
+    })
   }
 
   async edit({
     params,
     view
   }) {
-    const order = await Order.query().with('user').with('customer').where('id', params.id).first();
-    const customers = await Customer.all();
-    // const products = await Product.all();
+    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const customers = await Customer.all()
+    // const products = await Product.all()
 
     // Cast a new date from the date in the database for the date form input
-    const d = new Date(order.date);
-    const date = d.toLocaleDateString('en-US');
+    const d = new Date(order.date)
+    const date = d.toLocaleDateString('en-US')
 
     return view.render('orders/edit', {
       order: order.toJSON(),
       customers: customers.toJSON(),
       // products: products.toJSON(),
       date: date
-    });
+    })
   }
 
   async create({
@@ -82,7 +82,7 @@ class OrderController {
     session,
     auth
   }) {
-    const order = request.all();
+    const order = request.all()
 
     const posted = await auth.user.orders().create({
       name: order.name,
@@ -93,21 +93,21 @@ class OrderController {
       delivery: order.delivery,
       shipping: order.shipping,
       payment: order.payment
-    });
+    })
 
     // // If there are actually some products do this
     // if((typeof order.products) != 'undefined') {
     //   // Go through the products array and remove any blank ones
     //   var products = order.products.filter(function(value, index, arr) {
-    //     return value != '';
-    //   });
+    //     return value != ''
+    //   })
     //   // Associate all the products in the array with this order
     //   const postedproducts = await posted.products().attach(products)
     // }
     session.flash({
       message: 'Your Work Order has been created!'
-    });
-    return response.redirect('/orders/' + posted.id);
+    })
+    return response.redirect('/orders/' + posted.id)
   }
 
   async update({
@@ -117,7 +117,7 @@ class OrderController {
     auth,
     params
   }) {
-    const data = request.all();
+    const data = request.all()
     const order = await Order.find(params.id)
 
     const posted = await order.merge({
@@ -129,7 +129,7 @@ class OrderController {
       delivery: data.delivery,
       shipping: data.shipping,
       payment: data.payment
-    });
+    })
     await order.save()
 
     // De-associate all the old products with this order and associate all the new products in the form
@@ -138,8 +138,8 @@ class OrderController {
 
     session.flash({
       message: 'Your Work Order has been edited!'
-    });
-    return response.redirect('/orders/' + order.id);
+    })
+    return response.redirect('/orders/' + order.id)
   }
 
   async delete({
@@ -148,17 +148,17 @@ class OrderController {
     params,
     request
   }) {
-    const order = await Order.find(params.id);
+    const order = await Order.find(params.id)
 
-    await order.delete();
+    await order.delete()
     session.flash({
       message: 'Your Work Order has been removed'
-    });
+    })
 
     // If the source of the delete action came from the index stay there instead of refreshing
     // but if it came from another page then reload the root page
     if(params.from == 'index') {
-      return response.redirect('back');
+      return response.redirect('back')
     } else {
       return response.redirect('/')
     }

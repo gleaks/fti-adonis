@@ -1,46 +1,68 @@
 'use strict'
 
-const Product = use('App/Models/Product')
+const System = use('App/Models/System')
+const Mobo = use('App/Models/Mobo')
+const Module = use('App/Models/Module')
+const External = use('App/Models/External')
 
 class ProductController {
   async home({view}) {
     // Fetch orders
-    const products = await Product.all();
+    const systems = await System.all()
+    const mobos = await Mobo.all()
+    const modules = await Module.all()
+    const externals = await External.all()
 
     return view.render('products/index', {
-      products: products.toJSON()
-    });
+      systems: systems.toJSON(),
+      mobos: mobos.toJSON(),
+      modules: modules.toJSON(),
+      externals: externals.toJSON()
+    })
   }
 
   async new({view}) {
-    return view.render('products/new');
+    return view.render('products/new')
   }
 
   async edit({params, view}) {
     const product = await Product.find(params.id)
     return view.render('products/edit', {
       product: product.toJSON()
-    });
+    })
   }
 
 
   async create({ request, response, session, auth}) {
-        const product = request.all();
+        const data = request.all()
+        var product = ''
+        switch(data.category) {
+          case 'System':
+            product = new System()
+            break
+          case 'Mobo':
+            product = new Mobo()
+            break
+          case 'External':
+            product = new External()
+            break
+          case 'Module':
+            product = new Module()
+            break
+        }
+        product.name = data.name
+        product.description = data.description
+        product.price = data.price
+        product.partnum = data.partnum
 
-        const posted = await Product.create({
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            partnum: product.partnum,
-            category: product.category
-        });
+        await product.save()
 
-        session.flash({ message: 'Your Product has been created!' });
-        return response.redirect('/products');
+        session.flash({ message: 'Your Product has been created!' })
+        return response.redirect('/products')
   }
 
   async update({ request, response, session, auth, params}) {
-        const data = request.all();
+        const data = request.all()
         const product = await Product.find(params.id)
 
         const posted = await product.merge({
@@ -49,19 +71,19 @@ class ProductController {
             price: data.price,
             partnum: data.partnum,
             category: data.category
-        });
+        })
         product.save()
 
-        session.flash({ message: 'Your Product has been edited!' });
-        return response.redirect('/products');
+        session.flash({ message: 'Your Product has been edited!' })
+        return response.redirect('/products')
   }
 
   async delete({ response, session, params}) {
-        const product = await Product.find(params.id);
+        const product = await Product.find(params.id)
 
-        await product.delete();
-        session.flash({ message: 'Your Product has been removed'});
-        return response.redirect('back');
+        await product.delete()
+        session.flash({ message: 'Your Product has been removed'})
+        return response.redirect('back')
     }
 }
 
