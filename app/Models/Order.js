@@ -26,14 +26,8 @@ class Order extends Model {
   systems() {
     return this.belongsToMany('App/Models/System').pivotModel('App/Models/OrderSystem')
   }
-  mobos() {
-    return this.manyThrough('App/Models/System', 'mobos')
-  }
   externals() {
-    return this.manyThrough('App/Models/System', 'externals')
-  }
-  modules() {
-    return this.manyThrough('App/Models/Mobo', 'modules')
+    return this.manyThrough('App/Models/OrderSystem', 'externals')
   }
 }
 

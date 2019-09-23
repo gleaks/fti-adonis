@@ -73,8 +73,12 @@ class OrderController {
     params,
     view
   }) {
-    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const order = await Order.query().with('user').with('customer').with('systems').where('id', params.id).first()
     const customers = await Customer.all()
+    const systems = await System.all()
+    const mobos = await Mobo.all()
+    const externals = await External.all()
+    const modules = await Module.all()
     // const products = await Product.all()
 
     // Cast a new date from the date in the database for the date form input
@@ -84,6 +88,8 @@ class OrderController {
     return view.render('orders/edit', {
       order: order.toJSON(),
       customers: customers.toJSON(),
+      systems: systems.toJSON(),
+      mobos: mobos.toJSON(),
       // products: products.toJSON(),
       date: date
     })

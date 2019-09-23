@@ -35,7 +35,7 @@ $(document).ready(function() {
     // row to remove the entire row.
     $('#workOrderForm').on('click', '.deleteButton', function(e){
       e.preventDefault();
-      $(this).closest('.row').remove();
+      $(this).closest('.form-group-attached').remove();
     });
 
     // When you go to add an additional system it copies the HTML of a
