@@ -50,8 +50,25 @@ $(document).ready(function() {
           switch(e.params.data.text) {
             case '2 Channel Testhead':
               $('.motherboarda:last').show()
-              // $('.motherboarda-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]');
+              $('.motherboardb:last').show()
               mba = $('.motherboarda-dropdown:last').select2({
+                placeholder: 'Select a Motherboard',
+                allowClear: true
+              });
+              mba.on('select2:select', function(a) {
+                $(a.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]');
+                $('.modules:last').show()
+                $('.modules:last .module1-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+                $('.modules:last .module2-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+                $('.modules:last .module3-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+                $('.modules:last .module4-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+                $('.modules:last .module5-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+                $('.modules:last .module-dropdown').select2({
+                  placeholder: 'Select a Module',
+                  allowClear: true
+                });
+              })
+              mbb = $('.motherboardb-dropdown:last').select2({
                 placeholder: 'Select a Motherboard',
                 allowClear: true
               });

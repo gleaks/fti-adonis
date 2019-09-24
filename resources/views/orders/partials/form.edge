@@ -124,90 +124,94 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <div class="form-group form-group-default">
-          <label>Module 1</label>
-          <select name="nothing" class="full-width">
-            <option></option>
-            @each(module in modules)
-            <option value="{{ module.id }}">{{ module.name }}</option>
-            @endeach
-          </select>
+    <div class="modules" style="display: none">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 1</label>
+            <select name="nothing" class="full-width module-dropdown module1-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 2</label>
+            <select name="nothing" class="full-width module-dropdown module2-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 3</label>
+            <select name="nothing" class="full-width module-dropdown module3-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 4</label>
+            <select name="nothing" class="full-width module-dropdown module4-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 5</label>
+            <select name="nothing" class="full-width module-dropdown module5-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <div class="form-group form-group-default">
-          <label>Module 2</label>
-          <select name="nothing" class="full-width">
-            <option></option>
-            @each(module in modules)
-            <option value="{{ module.id }}">{{ module.name }}</option>
-            @endeach
-          </select>
+    <div class="motherboardb" style="display: none">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+          <div class="form-group form-group-default">
+            <label>Side B Motherboard</label>
+            <select name="nothing" class="full-width motherboardb-dropdown">
+              <option></option>
+              @each(mobo in mobos)
+              <option value="{{ mobo.id }}">{{ mobo.name }}</option>
+              @endeach
+            </select>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <div class="form-group form-group-default">
-          <label>Module 3</label>
-          <select name="nothing" class="full-width">
-            <option></option>
-            @each(module in modules)
-            <option value="{{ module.id }}">{{ module.name }}</option>
-            @endeach
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <div class="form-group form-group-default">
-          <label>Module 4</label>
-          <select name="nothing" class="full-width">
-            <option></option>
-            @each(module in modules)
-            <option value="{{ module.id }}">{{ module.name }}</option>
-            @endeach
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-6">
-        <div class="form-group form-group-default">
-          <label>Module 5</label>
-          <select name="nothing" class="full-width">
-            <option></option>
-            @each(module in modules)
-            <option value="{{ module.id }}">{{ module.name }}</option>
-            @endeach
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-7">
-        <div class="form-group form-group-default">
-          <label>Side B Motherboard</label>
-          <select name="nothing" class="full-width">
-            <option></option>
-            @each(mobo in mobos)
-            <option value="{{ mobo.id }}">{{ mobo.name }}</option>
-            @endeach
-          </select>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 @set('loop', old('systems') || order.systems)

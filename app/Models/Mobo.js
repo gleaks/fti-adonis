@@ -4,9 +4,9 @@
 const Model = use('Model')
 
 class Mobo extends Model {
-  // modules() {
-  //   return this.belongsToMany('App/Models/Module').withPivot(['count'])
-  // }
+  modules() {
+    return this.manyThrough('App/Models/MoboOrderSystem', 'modules')
+  }
 }
 
 module.exports = Mobo
