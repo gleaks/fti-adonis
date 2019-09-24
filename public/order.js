@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    var num = 0;
-
     // Star Jquery-validation on the form
     $('#workOrderForm').validate();
 
@@ -12,7 +10,6 @@ $(document).ready(function() {
         placeholder: 'Select a Product',
         allowClear: true
       });
-      num = $('.oldproduct:last').attr('name').split('[')[1].split(']')[0];
     }
 
     // Start the javascript datepicker plugin
@@ -43,13 +40,27 @@ $(document).ready(function() {
     // finally applies the select2 plugin to the input.
     $('#addButton').click(function(e){
         e.preventDefault();
-        num++;
         $('#addProduct').before($('#systems0').html());
-        $('.full-width:last').attr('name', 'systems[' + num + ']');
-        $('.full-width:last').select2({
+        // $('.system-dropdown:last').attr('name', 'systems[' + num + ']');
+        select = $('.system-dropdown:last').select2({
           placeholder: 'Select a System',
           allowClear: true
         });
+        select.on('select2:select', function(e) {
+          switch(e.params.data.text) {
+            case '2 Channel Testhead':
+              $('.motherboarda:last').show()
+              // $('.motherboarda-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]');
+              mba = $('.motherboarda-dropdown:last').select2({
+                placeholder: 'Select a Motherboard',
+                allowClear: true
+              });
+              break;
+            default:
+              console.log('something went wrong');
+              break;
+          }
+        })
     });
 
 });

@@ -11,10 +11,13 @@ class OrderSystem extends Model {
   //   return this.belongsTo('App/Models/System')
   // }
   mobos() {
-    return this.belongsToMany('App/Models/Mobo').withPivot(['count'])
+    return this.belongsToMany('App/Models/Mobo').pivotModel('App/Models/MoboOrderSystem')
   }
   externals() {
     return this.belongsToMany('App/Models/External').withPivot(['count'])
+  }
+  modules() {
+    return this.manyThrough('App/Models/MoboOrderSystem', 'modules')
   }
 }
 

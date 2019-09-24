@@ -6,6 +6,7 @@ const System = use('App/Models/System')
 const Mobo = use('App/Models/Mobo')
 const External = use('App/Models/External')
 const Module = use('App/Models/Module')
+const OrderSystem = use('App/Models/OrderSystem')
 // const Product = use('App/Models/Product')
 
 class OrderController {
@@ -24,8 +25,8 @@ class OrderController {
     view
   }) {
     // Fetch order with its user, customer & products relationships
-    const order = await Order.query().with('user').with('customer').with('systems').where('id', params.id).first()
-
+    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const systems = await OrderSystem.query().with('mobos').where('order_id', params.id).fetch()
     // Cast date & break into multiple variables to make the Quote Number
     const date = new Date(order.date)
     const day = ("0" + date.getDate()).slice(-2)
@@ -37,6 +38,7 @@ class OrderController {
     return view.render('orders/show', {
       order: order.toJSON(),
       test: JSON.stringify(order.toJSON(), undefined, 2),
+      systems: JSON.stringify(systems.toJSON()),
       day: day,
       month: month,
       year: year,
@@ -113,18 +115,34 @@ class OrderController {
       shipping: order.shipping,
       payment: order.payment
     })
-
+    var postedsystem = ''
+    var motherboardid = ''
     // If there are actually some products do this
     if((typeof order.systems) != 'undefined') {
-      // Go through the products array and remove any blank ones
-      var products = order.systems.filter(function(value, index, arr) {
-        return value != ''
-      })
-      // Associate all the products in the array with this order
-      const postedproducts = await posted.systems().attach(products)
+      for (var system in order.systems) {
+        postedsystem = await posted.systems().attach(system.split('-')[1])
+        const pivot = await OrderSystem.find(postedsystem[0].id)
+        motherboardid = order.systems[system]['motherboarda']
+        pivot.mobos().attach(order.systems[system]['motherboarda'])
+      }
+      // order.systems.forEach(function(system) {
+      //   if(Array.isArray(system)) {
+      //     system.forEach(function(motherboard){
+      //       test2 = motherboard
+      //     })
+      //   } else {
+      //     test = system
+      //   }
+      // })
+      // // Go through the products array and remove any blank ones
+      // var products = order.systems.filter(function(value, index, arr) {
+      //   return value != ''
+      // })
+      // // Associate all the products in the array with this order
+      // const postedproducts = await posted.systems().attach(products)
     }
     session.flash({
-      message: 'Your Work Order has been created!'
+      message: 'Your Work Order has been created!' + JSON.stringify(order.systems) + '- ' + postedsystem[0].id + '-' + motherboardid
     })
     return response.redirect('/orders/' + posted.id)
   }
