@@ -38,7 +38,9 @@ class OrderController {
     return view.render('orders/show', {
       order: order.toJSON(),
       test: JSON.stringify(order.toJSON(), undefined, 2),
-      systems: JSON.stringify(systems.toJSON()),
+      test2: JSON.stringify(systems.toJSON()),
+      systems: systems.toJSON(),
+      loop: parseInt(0),
       day: day,
       month: month,
       year: year,

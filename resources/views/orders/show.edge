@@ -89,8 +89,6 @@
           </div>
         </div>
         <div class="table table-responsive table-invoice">
-          {{ test }} <br />
-          {{ systems }}
           <table class="m-t-50">
             <thead>
               <tr>
@@ -112,19 +110,76 @@
                   <td></td>
                 </tr>
               @endif
-              @each(product in order.products)
+              @set('loop', 0)
+              @each(system in systems)
+              @set('loop', loop+1)
               <tr>
-                <td>{{ $loop.index + 1 }}</td>
+                <td>{{ loop }}</td>
                 <td>1</td>
-                <td>{{ product.partnum }}</td>
-                <td class="text-black">{{ product.name }}
-                  @if(product.description)
-                    <p class="small hint-text">{{ product.description }}</p>
+                <td>{{ system.system.partnum }}</td>
+                <td class="text-black">{{ system.system.name }}
+                  @if(system.system.description)
+                    <p class="small hint-text">{{ system.system.description }}</p>
                   @endif
                 </td>
                 <td class="right"></td>
                 <td></td>
               </tr>
+              @each(mobo in system.pivot)
+              @set('loop', loop+1)
+              <tr class="
+              @if(mobo.modules.length > 0)
+              hasModules
+              @endif
+              ">
+                <td>{{ loop }}</td>
+                <td>1</td>
+                <td>{{ mobo.mobo.partnum }}</td>
+                <td class="text-black">{{ mobo.mobo.name }}
+                  @if(mobo.mobo.description)
+                    <p class="small hint-text">{{ mobo.mobo.description }}</p>
+                  @endif
+                </td>
+                <td class="right"></td>
+                <td></td>
+              </tr>
+              @each(module in mobo.modules)
+              @set('loop', loop+1)
+              <tr class="
+              @if($loop.last)
+              invoiceModuleLast
+              @else
+              invoiceModule
+              @endif
+              ">
+                <td>{{ loop }}</td>
+                <td>1</td>
+                <td>{{ module.partnum }}</td>
+                <td class="text-black">Module {{ $loop.index + 1 }} : {{ module.name }}
+                  @if(module.description)
+                    <p class="small hint-text">{{ module.description }}</p>
+                  @endif
+                </td>
+                <td class="right"></td>
+                <td></td>
+              </tr>
+              @endeach
+              @endeach
+              @each(external in system.externals)
+              @set('loop', loop+1)
+              <tr>
+                <td>{{ loop }}</td>
+                <td>1</td>
+                <td>{{ external.partnum }}</td>
+                <td class="text-black">{{ external.name }}
+                  @if(external.description)
+                    <p class="small hint-text">{{ external.description }}</p>
+                  @endif
+                </td>
+                <td class="right"></td>
+                <td></td>
+              </tr>
+              @endeach
               @endeach
             </tbody>
           </table>

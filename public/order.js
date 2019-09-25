@@ -54,6 +54,7 @@ $(document).ready(function() {
         select.on('select2:select', function(e) {
           switch(e.params.data.text) {
             case '2 Channel Testhead':
+            case 'Upgrade Only':
               $('.motherboarda:last').show()
               $('.motherboardb:last').show()
               mba = $('.motherboarda-dropdown:last').select2({
@@ -98,6 +99,15 @@ $(document).ready(function() {
                   placeholder: 'Select an External Module',
                   allowClear: true
                 });
+              });
+              break;
+            case 'Spares Kit':
+              $('.motherboarda-dropdown:last').val('6').trigger('change').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]');
+              $('.amodules:last').show()
+              $('.amodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+              $('.amodules:last .module-dropdown').select2({
+                placeholder: 'Select a Module',
+                allowClear: true
               });
               break;
             default:
