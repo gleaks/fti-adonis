@@ -7,6 +7,9 @@ class MoboOrderSystem extends Model {
   static get table () {
     return 'mobo_order_system'
   }
+  mobo() {
+    return this.belongsTo('App/Models/Mobo')
+  }
   modules() {
     return this.belongsToMany('App/Models/Module').withPivot(['count'])
   }

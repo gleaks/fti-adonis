@@ -35,6 +35,11 @@ $(document).ready(function() {
       $(this).closest('.form-group-attached').remove();
     });
 
+    $('#workOrderForm').on('click', '.deleteExternal', function(e){
+      e.preventDefault();
+      $(this).closest('.row').remove();
+    });
+
     // When you go to add an additional system it copies the HTML of a
     // hidden input, changes its name with the base incrementing number and
     // finally applies the select2 plugin to the input.
@@ -57,13 +62,9 @@ $(document).ready(function() {
               });
               mba.on('select2:select', function(a) {
                 $(a.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]');
-                $('.modules:last').show()
-                $('.modules:last .module1-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-                $('.modules:last .module2-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-                $('.modules:last .module3-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-                $('.modules:last .module4-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-                $('.modules:last .module5-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-                $('.modules:last .module-dropdown').select2({
+                $('.amodules:last').show()
+                $('.amodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+                $('.amodules:last .module-dropdown').select2({
                   placeholder: 'Select a Module',
                   allowClear: true
                 });
@@ -71,6 +72,32 @@ $(document).ready(function() {
               mbb = $('.motherboardb-dropdown:last').select2({
                 placeholder: 'Select a Motherboard',
                 allowClear: true
+              });
+              mbb.on('select2:select', function(b) {
+                $(b.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboardb]');
+                $('.bmodules:last').show()
+                $('.bmodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboardb][modules]')
+                $('.bmodules:last .module-dropdown').select2({
+                  placeholder: 'Select a Module',
+                  allowClear: true
+                });
+              })
+              $('.externals:last').show()
+              $('.externals:last .external-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][externals]')
+              $('.externals:last .external-dropdown:last').select2({
+                placeholder: 'Select an External Module',
+                allowClear: true
+              });
+              $('.addExternal').click(function(c){
+                c.preventDefault();
+                $('.externals:last .row:last').after($('#systems0 .externals').html());
+                $('.externals:last .row:last button').removeClass('addExternal btn-primary').addClass('deleteExternal btn-danger');
+                $('.externals:last .row:last button i').removeClass('pg-plus').addClass('pg-minus');
+                $('.externals:last .external-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][externals]')
+                $('.externals:last .external-dropdown:last').select2({
+                  placeholder: 'Select an External Module',
+                  allowClear: true
+                });
               });
               break;
             default:

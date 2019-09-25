@@ -8,7 +8,6 @@ const External = use('App/Models/External')
 const Module = use('App/Models/Module')
 const OrderSystem = use('App/Models/OrderSystem')
 const MoboOrderSystem = use('App/Models/MoboOrderSystem')
-// const Product = use('App/Models/Product')
 
 class OrderController {
   async home({
@@ -27,7 +26,7 @@ class OrderController {
   }) {
     // Fetch order with its user, customer & products relationships
     const order = await Order.query().with('user').with('customer').where('id', params.id).first()
-    const systems = await OrderSystem.query().with('mobos').with('mobos.modules').where('order_id', params.id).fetch()
+    const systems = await OrderSystem.query().with('system').with('externals').with('pivot.mobo').with('pivot.modules').where('order_id', params.id).fetch()
     // Cast date & break into multiple variables to make the Quote Number
     const date = new Date(order.date)
     const day = ("0" + date.getDate()).slice(-2)
@@ -67,7 +66,6 @@ class OrderController {
       mobos: mobos.toJSON(),
       externals: externals.toJSON(),
       modules: modules.toJSON(),
-      // products: products.toJSON(),
       date: date
     })
   }
@@ -116,27 +114,42 @@ class OrderController {
       shipping: order.shipping,
       payment: order.payment
     })
-    var postedsystem = ''
-    var values = ''
-    // If there are actually some products do this
+    var test = ''
+    // If there are actually some systems attached to the order do this
     if((typeof order.systems) != 'undefined') {
+      // Loop through each system
       for (var system in order.systems) {
-        postedsystem = await posted.systems().attach(system.split('-')[1])
+        // Attach a system (split the text because data comes in as system-23)
+        const postedsystem = await posted.systems().attach(system.split('-')[1])
+        // Get the ID of the row from the order_system entry we just made
         const pivot = await OrderSystem.find(postedsystem[0].id)
+        // Loop through each level below system (motherboards & externals)
         for (var side in order.systems[system]) {
-          const postedmb = await pivot.mobos().attach(order.systems[system][side]['0'])
-          const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
-          values = order.systems[system][side][1]['modules']
-          for (var module in values) {
-            if (module != '') {
-              pivotmb.modules().attach(module)
+          if (side == 'motherboarda' || side == 'motherboardb') {
+            // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
+            const postedmb = await pivot.mobos().attach(order.systems[system][side]['0'])
+            // Get the ID of the row just created in MoboOrderSystem
+            const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
+            // Loop over the motherboards modules
+            for (var module in order.systems[system][side][1]['modules']) {
+              // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
+              if (module != '') {
+                pivotmb.modules().attach(order.systems[system][side][1]['modules'][module])
+              }
+            }
+          }
+          if (side == 'externals') {
+            for (var external in order.systems[system][side]) {
+              if (external != '') {
+                 await pivot.externals().attach(order.systems[system][side][external])
+              }
             }
           }
         }
       }
     }
     session.flash({
-      message: 'Your Work Order has been created!' + JSON.stringify(order.systems) + ' - ' + values
+      message: 'Your Work Order has been created!' + JSON.stringify(order.systems) + ' - ' + test
     })
     return response.redirect('/orders/' + posted.id)
   }
