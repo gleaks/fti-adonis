@@ -62,7 +62,22 @@ class CustomerController {
         await customer.delete()
         session.flash({ message: 'Your Customer has been removed'})
         return response.redirect('back')
-    }
+  }
+
+  async remote({ request, response, session, params }) {
+    const customer = request.all()
+
+    const posted = await Customer.create({
+        name: customer.name,
+        address: customer.address,
+        contact: customer.contact,
+        email: customer.email,
+        phone: customer.phone
+    })
+
+    session.flash({ message: 'Your Customer has been created!' })
+    return response.redirect('back')
+  }
 }
 
 module.exports = CustomerController

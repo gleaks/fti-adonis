@@ -114,7 +114,7 @@
               @each(system in systems)
               @set('loop', loop+1)
               <tr>
-                <td>{{ loop }}</td>
+                <td>{{ loop.length }}</td>
                 <td>1</td>
                 <td>{{ system.system.partnum }}</td>
                 <td class="text-black">{{ system.system.name }}
@@ -132,7 +132,7 @@
               hasModules
               @endif
               ">
-                <td>{{ loop }}</td>
+                <td>{{ loop.length }}</td>
                 <td>1</td>
                 <td>{{ mobo.mobo.partnum }}</td>
                 <td class="text-black">{{ mobo.mobo.name }}
@@ -152,7 +152,7 @@
               invoiceModule
               @endif
               ">
-                <td>{{ loop }}</td>
+                <td>{{ loop.length }}</td>
                 <td>1</td>
                 <td>{{ module.partnum }}</td>
                 <td class="text-black">Module {{ $loop.index + 1 }} : {{ module.name }}
@@ -168,7 +168,7 @@
               @each(external in system.externals)
               @set('loop', loop+1)
               <tr>
-                <td>{{ loop }}</td>
+                <td>{{ loop.length }}</td>
                 <td>1</td>
                 <td>{{ external.partnum }}</td>
                 <td class="text-black">{{ external.name }}
