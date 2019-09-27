@@ -1,19 +1,19 @@
 @layout('layouts.main')
 
 @section('title')
-  Focused Test - Work Orders
+  Focused Test - Quotes
 @endsection
 
 @section('breadcrumb')
   <li class="breadcrumb-item active">
-    Work Orders
+    Quotes
   </li>
 @endsection
 
 @section('content')
-  <h1>All Work Orders</h1>
+  <h1>All Quotes</h1>
   @loggedIn
-  <p class="small m-b-20"><i class="pg-plus_circle"></i> <a href="/orders/create">CREATE ORDER</a></p>
+  <p class="small m-b-20"><i class="pg-plus_circle"></i> <a href="/orders/create">CREATE QUOTE</a></p>
   @endloggedIn
   <table id="orderTable" class="table table-hover">
     <thead>

@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('title')
-  Focused Test - Create Work Order
+  Focused Test - Create Quote
 @endsection
 
 @section('extrajs')
@@ -10,15 +10,15 @@
 
 @section('breadcrumb')
   <li class="breadcrumb-item">
-    <a href="/">Work Orders</a>
+    <a href="/">Quotes</a>
   </li>
   <li class="breadcrumb-item active">
-    Create Work Order
+    Create a Quote
   </li>
 @endsection
 
 @section('content')
-  <h1>Create a Work Order</h1>
+  <h1>Create a Quote</h1>
     <form id="workOrderForm" action="{{ route('OrderController.create') }}" method="POST">
       @include('orders.partials.form')
     </form>

@@ -1,7 +1,7 @@
 @layout('layouts.main')
 
 @section('title')
-  Focused Test - Edit Work Order {{ order.id }}
+  Focused Test - Edit Quote {{ order.name }}
 @endsection
 
 @section('extrajs')
@@ -10,15 +10,15 @@
 
 @section('breadcrumb')
   <li class="breadcrumb-item">
-    <a href="/">Work Orders</a>
+    <a href="/">Quotes</a>
   </li>
   <li class="breadcrumb-item active">
-    Edit Work Order {{ order.id }}
+    Edit Quote {{ order.id }}
   </li>
 @endsection
 
 @section('content')
-  <h1>Edit Work Order {{ order.id }}</h1>
+  <h1>Edit Quote {{ order.id }}</h1>
     <form id="workOrderForm" action="{{ route('OrderController.update', { id: order.id }) }}" method="POST">
       @include('orders.partials.form')
     </form>
