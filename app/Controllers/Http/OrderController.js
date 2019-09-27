@@ -51,7 +51,7 @@ class OrderController {
   async new({
     view
   }) {
-    const customers = await Customer.all()
+    const customers = await Customer.query().orderBy('name', 'asc').fetch()
     const systems = await System.all()
     const mobos = await Mobo.all()
     const externals = await External.all()
@@ -77,7 +77,7 @@ class OrderController {
     view
   }) {
     const order = await Order.query().with('user').with('customer').with('systems').where('id', params.id).first()
-    const customers = await Customer.all()
+    const customers = await Customer.query().orderBy('name', 'asc').fetch()
     const systems = await System.all()
     const mobos = await Mobo.all()
     const externals = await External.all()
@@ -198,7 +198,7 @@ class OrderController {
 
     await order.delete()
     session.flash({
-      message: 'Your Work Order has been removed'
+      message: 'Your Work Order has been archived!'
     })
 
     // If the source of the delete action came from the index stay there instead of refreshing

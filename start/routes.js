@@ -44,6 +44,7 @@ Route.post('/customers/create', 'CustomerController.create').validator('CreateCu
 Route.get('/customers/edit/:id', 'CustomerController.edit');
 Route.post('/customers/update/:id', 'CustomerController.update').validator('CreateCustomer');
 Route.get('/customers/delete/:id/:from', 'CustomerController.delete');
+Route.post('/customers/remote', 'CustomerController.remote').validator('CreateCustomer');
 
 // Products routes
 Route.get('/products', 'ProductController.home');

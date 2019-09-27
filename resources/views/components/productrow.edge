@@ -1,6 +1,5 @@
 @each(product in products)
 <tr>
-  <td>{{ product.id }}</td>
   <td>{{ product.name }}</td>
   <td>
   @if(product.description)
@@ -13,7 +12,11 @@
   @endif
   </td>
   <td>{{ category }}</td>
-  <td class="text-right"><a class="btn btn-sm btn-info" href="/products/edit/{{ table }}/{{ product.id }}">Edit</a>
-  <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product? It will be removed from all existing work orders.')" href="/products/delete/{{ table }}/{{ product.id }}/index">Delete</a></td>
+  <td class="text-right">
+    <div class="btn-group btn-group-sm">
+      <a class="btn btn-sm btn-default" href="/products/edit/{{ table }}/{{ product.id }}">Edit</a>
+      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this product?')" href="/products/delete/{{ table }}/{{ product.id }}/index">Archive</a>
+    </div>
+  </td>
 </tr>
 @endeach

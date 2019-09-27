@@ -75,8 +75,8 @@ class CustomerController {
         phone: customer.phone
     })
 
-    session.flash({ message: 'Your Customer has been created!' })
-    return response.redirect('back')
+    // session.flash({ message: 'Your Customer has been created!' })
+    return response.send(posted)
   }
 }
 

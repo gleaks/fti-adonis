@@ -11,14 +11,10 @@
 @endsection
 
 @section('content')
-  <h1>All Quotes</h1>
-  @loggedIn
-  <p class="small m-b-20"><i class="pg-plus_circle"></i> <a href="/orders/create">CREATE QUOTE</a></p>
-  @endloggedIn
+  <h1>All Quotes <a class="btn btn btn-primary pull-right" href="/orders/create"><i class="pg-plus_circle"></i> CREATE QUOTE</a></h1>
   <table id="orderTable" class="table table-hover">
     <thead>
       <tr>
-        <th>#</th>
         <th>Name</th>
         <th>Customer</th>
         <th>Date</th>
@@ -29,13 +25,17 @@
     <tbody>
       @each(order in orders)
       <tr>
-        <td>{{ order.id }}</td>
         <td><a href="/orders/{{ order.id }}">{{ order.name }}</a></td>
         <td>{{ order.customer.name }}</td>
         <td>{{ order.date }}</td>
         <td>{{ order.status }}</td>
-        <td class="text-right"><a class="btn btn-sm btn-info" href="{{ route('OrderController.edit', { id: order.id }) }}">Edit</a>
-        <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this work order?')" href="/orders/delete/{{ order.id }}/index">Delete</a></td>
+        <td class="text-right">
+          <div class="btn-group btn-group-sm">
+            <a class="btn btn-sm btn-default" href="{{ route('OrderController.edit', { id: order.id }) }}">Edit</a>
+            <a class="btn btn-sm btn-default">Copy</a>
+            <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this quote?')" href="/orders/delete/{{ order.id }}/index">Archive</a>
+          </div>
+        </td>
       </tr>
       @endeach
     </tbody>
