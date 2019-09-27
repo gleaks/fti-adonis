@@ -24,10 +24,7 @@ $(document).ready(function() {
   // Create a dropdown that allows you to filter the Order & Product table by its Category name
   $('#orderTable_selectDiv').html('<select id="orderTable_select" class="cs-select">\
                                     <option value="All">All</option><option value="Quote">Quote</option>\
-                                    <option value="Possible Order">Possible Order</option>\
-                                    <option value="Likely Order">Likely Order</option>\
-                                    <option value="Confirmed Order">Confirmed Order</option>\
-                                    <option value="Shipped">Shipped</option>\
+                                    <option value="Possible Order">Probable Order</option>\
                                   </select>')
   $('#productTable_selectDiv').html('<select id="productTable_select" class="cs-select">\
                                       <option value="All">All</option>\
@@ -43,13 +40,13 @@ $(document).ready(function() {
     if(search === 'All') {
       search = ''
     }
-    orderTable.columns(4).search(search).draw()
+    orderTable.columns(3).search(search).draw()
   })
   $('#productTable_select').change(function() {
     var search = this.value
     if(search === 'All') {
       search = ''
     }
-    productTable.columns(4).search(search).draw()
+    productTable.columns(3).search(search).draw()
   })
 })

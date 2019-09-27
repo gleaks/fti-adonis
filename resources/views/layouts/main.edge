@@ -96,13 +96,15 @@
   <div class="page-container">
     <div class="page-content-wrapper full-height">
       <div class="content">
-        <div class="container container-fixed-lg">
-          <ul class="breadcrumb p-l-0">
-            <li class="breadcrumb-item">
-              <a href="/">Home</a>
-            </li>
-            @!section('breadcrumb')
-          </ul>
+        <div class="bg-white">
+          <div class="container container-fixed-lg">
+            <ul class="breadcrumb p-l-0">
+              <li class="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              @!section('breadcrumb')
+            </ul>
+          </div>
         </div>
         <div class="container container-fixed-lg">
           @!section('content')
