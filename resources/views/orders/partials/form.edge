@@ -69,35 +69,51 @@
     @endif
   </div>
 </div>
+
+
 <h3 class="m-b-20">Systems</h3>
 <div class="panel bg-white m-b-40">
   <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple">
     <li class="active">
-      <a data-toggle="tab" class="active show" href="#tab2hellowWorld">2-Channel Testhead</a>
-    </li>
-    <li>
-      <a data-toggle="tab" href="#tab2FollowUs"><i class="pg-plus_circle"></i> Add a System</a>
+      <a data-toggle="tab" class="active show" href="#system-1"><i class="pg-plus_circle"></i> Add a System</a>
     </li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane active" id="tab2hellowWorld">
+    <div class="tab-pane" id="system-example">
       <div class="row column-seperation">
-        <div class="col-md-3 right">
-          <div class="form-group form-group-default">
-            <label>System Type</label>
-            <select name="nothing" class="full-width system-dropdown">
-              <option></option>
-              @each(system in systems)
-              <option value="{{ system.id }}">{{ system.name }}</option>
-              @endeach
-            </select>
+        <div class="col-md-4 right">
+          <div class="row system lightBottomRow">
+            <div class="col-md-12">
+              <div class="form-group">
+                <select name="nothing" class="full-width system-dropdown">
+                  <option></option>
+                  @each(system in systems)
+                  <option value="{{ system.id }}">{{ system.name }}</option>
+                  @endeach
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row lightBottomRow external" style="display: none">
+            <div class="col-md-9">
+              <div class="form-group">
+                <select name="nothing" class="full-width external-dropdown">
+                  <option></option>
+                  @each(external in externals)
+                  <option value="{{ external.id }}">{{ external.name }}</option>
+                  @endeach
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <a href="#" class="btn btn-xs btn-rounded btn-info addExternal"><i class="pg-plus_circle"></i> ADD</a>
+            </div>
           </div>
         </div>
-        <div class="col-md-9">
-          <div class="row">
+        <div class="col-md-8 motherboards" style="display:none">
+          <div class="row lightBottomRow">
               <div class="col-md-6">
-                <div class="form-group form-group-default">
-                  <label>Side A Motherboard</label>
+                <div class="form-group">
                   <select name="nothing" class="full-width motherboarda-dropdown">
                     <option></option>
                     @each(mobo in mobos)
@@ -106,16 +122,15 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-1 right">
-                <a href="#motherboardaCollapse" data-toggle="collapse" class="btn btn-xs btn-default" aria-expanded="false"><i class="pg-plus_circle"></i></a>
+              <div class="col-md-1 motherboardaCollapse right" style="display: none">
+                <a href="#motherboardaCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_minimize"></i></a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-5 motherboardaModules" style="display: none">
                 <div class="collapse multi-collapse" id="motherboardaCollapse">
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -126,9 +141,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -139,9 +153,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -152,9 +165,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -165,9 +177,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -180,9 +191,8 @@
             </div>
           </div>
           <div class="row">
-              <div class="col-md-6 right">
-                <div class="form-group form-group-default">
-                  <label>Side B Motherboard</label>
+              <div class="col-md-6">
+                <div class="form-group">
                   <select name="nothing" class="full-width motherboardb-dropdown">
                     <option></option>
                     @each(mobo in mobos)
@@ -191,16 +201,15 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-1 right">
-                <a href="#motherboardbCollapse" data-toggle="collapse" class="btn btn-xs btn-default" aria-expanded="false"><i class="pg-plus_circle"></i></a>
+              <div class="col-md-1 right motherboardbCollapse" style="display: none">
+                <a href="#motherboardbCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_minimize"></i></a>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-5 motherboardbModules" style="display: none">
                 <div class="collapse multi-collapse" id="motherboardbCollapse">
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -211,9 +220,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -224,9 +232,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -237,9 +244,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -250,9 +256,8 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <div class="form-group form-group-default">
-                      <label>Module 1</label>
-                      <select name="nothing" class="full-width module-dropdown module1-dropdown">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
                         <option></option>
                         @each(module in modules)
                         <option value="{{ module.id }}">{{ module.name }}</option>
@@ -264,26 +269,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane" id="tab2FollowUs">
-      <div class="row">
-        <div class="col-md-12">
-          <h3>
-            “ Nothing is <span class="semi-bold">impossible</span>, the word
-            itself says 'I'm <span class="semi-bold">possible</span>'! ”
-          </h3>
-          <p>
-            A style represents visual customizations on top of a layout. By
-            editing a style, you can use Squarespace's visual interface to
-            customize your...
-          </p><br>
-          <p class="pull-right">
-            <button class="btn btn-white btn-cons" type="button">White</button>
-            <button class="btn btn-success btn-cons" type=
-            "button">Success</button>
-          </p>
         </div>
       </div>
     </div>

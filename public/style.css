@@ -39,3 +39,7 @@ z-index:9999999 !important;
 .bottomRow {
 	border-bottom: 1px solid rgba(62, 62, 62, 0.7) !important;
 }
+.lightBottomRow {
+	border-bottom: 1px solid rgba(225, 225, 226, 0.7) !important;
+	margin-bottom: 10px;
+}

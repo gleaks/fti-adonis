@@ -30,91 +30,100 @@ $(document).ready(function() {
 
     // Apply a jquery listener to dynamically added Delete buttons on each
     // row to remove the entire row.
-    $('#workOrderForm').on('click', '.deleteButton', function(e){
+    $('#workOrderForm').on('click', '.collapseToggle', function(e){
       e.preventDefault()
-      $(this).closest('.form-group-attached').remove()
+      target = $(this).attr('href')
+      pane = $(this).closest('.tab-pane')
+      pane.find(target).collapse('toggle')
+      $(this).find('i').toggleClass('pg-arrow_minimize pg-arrow_right')
     })
 
-    $('#workOrderForm').on('click', '.deleteExternal', function(e){
+    $('#workOrderForm').on('click', '.removeExternal', function(e){
       e.preventDefault()
       $(this).closest('.row').remove()
     })
-
-    // When you go to add an additional system it copies the HTML of a
-    // hidden input, changes its name with the base incrementing number and
-    // finally applies the select2 plugin to the input.
-    $('#addButton').click(function(e){
-        e.preventDefault()
-        $('#addProduct').before($('#systems0').html())
-        // $('.system-dropdown:last').attr('name', 'systems[' + num + ']')
-        select = $('.system-dropdown:last').select2({
-          placeholder: 'Select a System',
-          allowClear: true
-        })
-        select.on('select2:select', function(e) {
-          switch(e.params.data.text) {
-            case '2 Channel Testhead':
-            case 'Upgrade Only':
-              $('.motherboarda:last').show()
-              $('.motherboardb:last').show()
-              mba = $('.motherboarda-dropdown:last').select2({
-                placeholder: 'Select a Motherboard',
-                allowClear: true
-              })
-              mba.on('select2:select', function(a) {
-                $(a.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]')
-                $('.amodules:last').show()
-                $('.amodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-                $('.amodules:last .module-dropdown').select2({
-                  placeholder: 'Select a Module',
-                  allowClear: true
-                })
-              })
-              mbb = $('.motherboardb-dropdown:last').select2({
-                placeholder: 'Select a Motherboard',
-                allowClear: true
-              })
-              mbb.on('select2:select', function(b) {
-                $(b.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboardb]')
-                $('.bmodules:last').show()
-                $('.bmodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboardb][modules]')
-                $('.bmodules:last .module-dropdown').select2({
-                  placeholder: 'Select a Module',
-                  allowClear: true
-                })
-              })
-              $('.externals:last').show()
-              $('.externals:last .external-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][externals]')
-              $('.externals:last .external-dropdown:last').select2({
-                placeholder: 'Select an External Module',
-                allowClear: true
-              })
-              $('.addExternal').click(function(c){
-                c.preventDefault()
-                $('.externals:last .row:last').after($('#systems0 .externals').html())
-                $('.externals:last .row:last button').removeClass('addExternal btn-primary').addClass('deleteExternal btn-danger')
-                $('.externals:last .row:last button i').removeClass('pg-plus').addClass('pg-minus')
-                $('.externals:last .external-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][externals]')
-                $('.externals:last .external-dropdown:last').select2({
-                  placeholder: 'Select an External Module',
-                  allowClear: true
-                })
-              })
-              break
-            case 'Spares Kit':
-              $('.motherboarda-dropdown:last').val('6').trigger('change').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]')
-              $('.amodules:last').show()
-              $('.amodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
-              $('.amodules:last .module-dropdown').select2({
-                placeholder: 'Select a Module',
-                allowClear: true
-              })
-              break
-            default:
-              console.log('something went wrong')
-              break
-          }
-        })
+    var num = 1
+    $('#system-example').after($('#system-example').prop('outerHTML'))
+    $('.tab-pane:last').attr('id', 'system-1').addClass('active')
+    $('.system-dropdown:last').select2({
+      placeholder: 'System Type',
+      allowClear: false
+    })
+    $('#workOrderForm').on('select2:select', '.system-dropdown', function(e) {
+      num++
+      newpane = 'system-' + num
+      pane = $(e.target).closest('.tab-pane')
+      pane.after($('#system-example').prop('outerHTML'))
+      $('.tab-pane:last').attr('id', newpane)
+      $('.nav-tabs li:last a').text(e.params.data.text)
+      $('.nav-tabs li:last').after('<li><a data-toggle="tab" href="#' + newpane + '"><i class="pg-plus_circle"></i> Add a System</a></li>')
+      newselect = $('.system-dropdown:last').select2({
+        placeholder: 'System Type',
+        allowClear: false
+      })
+      $(e.target).attr('name', 'systems[system-' + e.params.data.id + ']')
+      switch(e.params.data.text) {
+        case '2 Channel Testhead':
+        case 'Upgrade Only':
+          pane.find('.motherboards').show()
+          // pane.find('#motherboardbCollapse').collapse()
+          mba = pane.find('.motherboarda-dropdown').select2({
+            placeholder: 'Motherboard Side A',
+            allowClear: true
+          })
+          mba.on('select2:select', function(a) {
+            $(a.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]')
+            modules = pane.find('.motherboardaModules')
+            pane.find('.motherboardaCollapse').show()
+            modules.show()
+            pane.find('#motherboardaCollapse').collapse('show')
+            modules.find('.module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]').select2({
+              allowClear: true
+            })
+          })
+          mbb = pane.find('.motherboardb-dropdown').select2({
+            placeholder: 'Motherboard Side B',
+            allowClear: true
+          })
+          mbb.on('select2:select', function(b) {
+            $(b.target).attr('name', 'systems[system-' + e.params.data.id + '][motherboardb]')
+            modules = pane.find('.motherboardbModules')
+            pane.find('.motherboardbCollapse').show()
+            modules.show()
+            pane.find('#motherboardbCollapse').collapse('show')
+            modules.find('.module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboardb][modules]').select2({
+              allowClear: true
+            })
+          })
+          pane.find('.external').show()
+          pane.find('.external-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][externals]').select2({
+            placeholder: 'External Module',
+            allowClear: true
+          })
+          $('.addExternal').click(function(c){
+            c.preventDefault()
+            pane.find('.external').after($('#system-example .external').prop('outerHTML'))
+            pane.find('.external:last').show()
+            pane.find('.addExternal:last').removeClass('addExternal btn-info').addClass('removeExternal btn-danger').html('<i class="pg-minus_circle"></i> DEL')
+            pane.find('.external-dropdown:last').attr('name', 'systems[system-' + e.params.data.id + '][externals]').select2({
+              placeholder: 'External Module',
+              allowClear: false
+            })
+          })
+          break
+        case 'Spares Kit':
+          $('.motherboarda-dropdown:last').val('6').trigger('change').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda]')
+          $('.amodules:last').show()
+          $('.amodules:last .module-dropdown').attr('name', 'systems[system-' + e.params.data.id + '][motherboarda][modules]')
+          $('.amodules:last .module-dropdown').select2({
+            placeholder: 'Select a Module',
+            allowClear: true
+          })
+          break
+        default:
+          console.log('something went wrong')
+          break
+      }
     })
     $('#customerModalForm').submit(function(e){
       e.preventDefault()
