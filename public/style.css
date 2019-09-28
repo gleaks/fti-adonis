@@ -36,3 +36,6 @@ z-index:9999999 !important;
 .flex-center {
 	align-items: center !important;
 }
+.bottomRow {
+	border-bottom: 1px solid rgba(62, 62, 62, 0.7) !important;
+}

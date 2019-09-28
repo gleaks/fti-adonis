@@ -1,0 +1,245 @@
+<div id="systems0" style="display: none;">
+  <div class="form-group-attached m-b-20">
+    <div id="system0">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="form-group form-group-default">
+            <label>System Type</label>
+            <select name="nothing" class="full-width system-dropdown">
+              <option></option>
+              @each(system in systems)
+              <option value="{{ system.id }}">{{ system.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="motherboarda" style="display: none">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+          <div class="form-group form-group-default">
+            <label>Side A Motherboard</label>
+            <select name="nothing" class="full-width motherboarda-dropdown">
+              <option></option>
+              @each(mobo in mobos)
+              <option value="{{ mobo.id }}">{{ mobo.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="amodules" style="display: none">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 1</label>
+            <select name="nothing" class="full-width module-dropdown module1-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 2</label>
+            <select name="nothing" class="full-width module-dropdown module2-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 3</label>
+            <select name="nothing" class="full-width module-dropdown module3-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 4</label>
+            <select name="nothing" class="full-width module-dropdown module4-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 5</label>
+            <select name="nothing" class="full-width module-dropdown module5-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="motherboardb" style="display: none">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+          <div class="form-group form-group-default">
+            <label>Side B Motherboard</label>
+            <select name="nothing" class="full-width motherboardb-dropdown">
+              <option></option>
+              @each(mobo in mobos)
+              <option value="{{ mobo.id }}">{{ mobo.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bmodules" style="display: none">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 1</label>
+            <select name="nothing" class="full-width module-dropdown module1-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 2</label>
+            <select name="nothing" class="full-width module-dropdown module2-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 3</label>
+            <select name="nothing" class="full-width module-dropdown module3-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 4</label>
+            <select name="nothing" class="full-width module-dropdown module4-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>Module 5</label>
+            <select name="nothing" class="full-width module-dropdown module5-dropdown">
+              <option></option>
+              @each(module in modules)
+              <option value="{{ module.id }}">{{ module.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="externals" style="display: none">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+          <div class="form-group form-group-default">
+            <label>External Module</label>
+            <select name="nothing" class="full-width external-dropdown">
+              <option></option>
+              @each(external in externals)
+              <option value="{{ external.id }}">{{ external.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="btn-sm btn-primary btn-rounded addExternal"><i class="pg-plus"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@set('loop', old('systems') || order.systems)
+@each(old in loop)
+<div class="row">
+  <div class="col-md-7">
+    <div class="form-group form-group-default">
+      <label>System {{ $loop.index + 1 }}</label>
+      <select name="systems[{{ $loop.index }}]" class="full-width oldproduct">
+        <option></option>
+          @each(s in systems)
+            <option value="{{ s.id }}"
+            @if($parent.old == s.id || $parent.old.id == s.id)
+              selected="selected"
+            @endif
+            >{{ s.name }}</option>
+          @endeach
+      </select>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
+  </div>
+</div>
+@endeach
+<div id="addProduct" class="row m-t-10">
+  <div class="col-md-8">
+      <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add a System</button>
+  </div>
+</div>
