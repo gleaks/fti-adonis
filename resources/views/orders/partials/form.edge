@@ -86,6 +86,7 @@
 <h3 class="m-b-20">Systems</h3>
 <div class="panel bg-white m-b-40">
   <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple">
+    @set('finalindex', '0')
     @each(ordersystem in loop)
     <li class="
     @if($loop.last)
@@ -94,6 +95,7 @@
     ">
       <a data-toggle="tab" class="
       @if($loop.last)
+      @set('finalindex', ($loop.index + 1))
       active show
       @endif
       " href="#system-{{ $loop.index }}">{{ ordersystem.system.name }}</a>
@@ -108,7 +110,7 @@
       @if(loop === undefined)
       active show
       @endif
-      " href="#system-1"><i class="pg-plus_circle"></i> Add a System</a>
+      " href="#system-{{ finalindex }}"><i class="pg-plus_circle"></i> Add a System</a>
     </li>
   </ul>
   <div class="tab-content">
@@ -316,7 +318,7 @@
           <div class="row system lightBottomRow">
             <div class="col-md-12">
               <div class="form-group">
-                <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown">
+                <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown" data-placeholder="Select System Type">
                   <option></option>
                   @each(system in systems)
                   <option value="{{ system.id }}"
@@ -359,7 +361,7 @@
           <div class="row lightBottomRow">
               <div class="col-md-6">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown">
+                  <select name="systems[{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown" data-placeholder="Motherboard Side A">
                     <option></option>
                     @each(mobo in mobos)
                     <option value="{{ mobo.id }}"
@@ -462,7 +464,7 @@
           <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown">
+                  <select name="systems[{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown" data-placeholder="Motherboard Side B">
                     <option></option>
                     @each(mobo in mobos)
                     <option value="{{ mobo.id }}"
