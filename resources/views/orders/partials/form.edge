@@ -30,7 +30,11 @@
       <select id="customerSelect" name="customer" class="full-width" required>
         <option></option>
         @each(customer in customers)
-        <option value="{{ customer.id }}" @if(old('customer', '' )==customer.id || order.customer.id==customer.id) selected="selected" @endif>{{ customer.name }}</option>
+        <option value="{{ customer.id }}"
+        @if(old('customer', '' )==customer.id || order.customer.id==customer.id)
+        selected="selected"
+        @endif
+        >{{ customer.name }}</option>
         @endeach
       </select>
       @if(hasErrorFor('customer'))
@@ -58,8 +62,16 @@
       <label class>Status</label>
       <select id="statusInput" name="status" class="full-width" data-init-plugin="select2" data-placeholder="Select an Order Status" required>
         <option></option>
-        <option value="Quote">Quote</option>
-        <option value="Probable Order">Probable Order</option>
+        <option value="Quote"
+        @if(old('status', '' )=='Quote' || order.status=='Quote')
+        selected="selected"
+        @endif
+        >Quote</option>
+        <option value="Probable Order"
+        @if(old('status', '' )=='Probable Order' || order.status=='Probable Order')
+        selected="selected"
+        @endif
+        >Probable Order</option>
       </select>
     </div>
     @if(hasErrorFor('status'))
@@ -70,12 +82,33 @@
   </div>
 </div>
 
-
+@set('loop', old('systems') || ordersystems)
 <h3 class="m-b-20">Systems</h3>
 <div class="panel bg-white m-b-40">
   <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple">
-    <li class="active">
-      <a data-toggle="tab" class="active show" href="#system-1"><i class="pg-plus_circle"></i> Add a System</a>
+    @each(ordersystem in loop)
+    <li class="
+    @if($loop.last)
+    active
+    @endif
+    ">
+      <a data-toggle="tab" class="
+      @if($loop.last)
+      active show
+      @endif
+      " href="#system-{{ $loop.index }}">{{ ordersystem.system.name }}</a>
+    </li>
+    @endeach
+    <li class="
+    @if(loop === undefined)
+    active
+    @endif
+    ">
+      <a data-toggle="tab" class="
+      @if(loop === undefined)
+      active show
+      @endif
+      " href="#system-1"><i class="pg-plus_circle"></i> Add a System</a>
     </li>
   </ul>
   <div class="tab-content">
@@ -85,7 +118,7 @@
           <div class="row system lightBottomRow">
             <div class="col-md-12">
               <div class="form-group">
-                <select name="nothing" class="full-width system-dropdown">
+                <select name="nothing" class="full-width system-dropdown" data-placeholder="Select System Type">
                   <option></option>
                   @each(system in systems)
                   <option value="{{ system.id }}">{{ system.name }}</option>
@@ -97,7 +130,7 @@
           <div class="row lightBottomRow external" style="display: none">
             <div class="col-md-9">
               <div class="form-group">
-                <select name="nothing" class="full-width external-dropdown">
+                <select name="nothing" class="full-width external-dropdown" data-placeholder="External Module / Accessory">
                   <option></option>
                   @each(external in externals)
                   <option value="{{ external.id }}">{{ external.name }}</option>
@@ -114,7 +147,7 @@
           <div class="row lightBottomRow">
               <div class="col-md-6">
                 <div class="form-group">
-                  <select name="nothing" class="full-width motherboarda-dropdown">
+                  <select name="nothing" class="full-width motherboarda-dropdown" data-placeholder="Motherboard Side A">
                     <option></option>
                     @each(mobo in mobos)
                     <option value="{{ mobo.id }}">{{ mobo.name }}</option>
@@ -193,7 +226,7 @@
           <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <select name="nothing" class="full-width motherboardb-dropdown">
+                  <select name="nothing" class="full-width motherboardb-dropdown" data-placeholder="Motherboard Side B">
                     <option></option>
                     @each(mobo in mobos)
                     <option value="{{ mobo.id }}">{{ mobo.name }}</option>
@@ -272,6 +305,267 @@
         </div>
       </div>
     </div>
+    @each(ordersystem in loop)
+    <div id="system-{{ $loop.index }}" class="tab-pane
+    @if($loop.last)
+    active show
+    @endif
+    ">
+      <div class="row column-seperation">
+        <div class="col-md-4 right">
+          <div class="row system lightBottomRow">
+            <div class="col-md-12">
+              <div class="form-group">
+                <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown">
+                  <option></option>
+                  @each(system in systems)
+                  <option value="{{ system.id }}"
+                  @if($parent.ordersystem.system.id==system.id)
+                  selected="selected"
+                  @endif
+                  >{{ system.name }}</option>
+                  @endeach
+                </select>
+              </div>
+            </div>
+          </div>
+          @each(orderexternal in ordersystem.externals)
+          <div class="row lightBottomRow external">
+            <div class="col-md-9">
+              <div class="form-group">
+                <select name="systems[system-{{ $parent.$loop.index }}][externals]" class="full-width external-dropdown" data-placeholder="External Module / Accessory">
+                  <option></option>
+                  @each(external in externals)
+                  <option value="{{ external.id }}"
+                  @if($parent.orderexternal.id==external.id)
+                  selected="selected"
+                  @endif
+                  >{{ external.name }}</option>
+                  @endeach
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              @if($loop.index == 0)
+              <a href="#" class="btn btn-xs btn-rounded btn-info addExternal"><i class="pg-plus_circle"></i> ADD</a>
+              @else
+              <a href="#" class="btn btn-xs btn-rounded btn-danger removeExternal"><i class="pg-minus_circle"></i> DEL</a>
+              @endif
+            </div>
+          </div>
+          @endeach
+        </div>
+        <div class="col-md-8 motherboards">
+          <div class="row lightBottomRow">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select name="systems[{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown">
+                    <option></option>
+                    @each(mobo in mobos)
+                    <option value="{{ mobo.id }}"
+                    @if($parent.ordersystem.pivot[0].mobo.id==mobo.id)
+                    selected="selected"
+                    @endif
+                    >{{ mobo.name }}</option>
+                    @endeach
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-1 motherboardaCollapse right">
+                <a href="#motherboardaCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_right"></i></a>
+              </div>
+              <div class="col-md-5 motherboardaModules">
+                <div class="collapse multi-collapse show" id="motherboardaCollapse">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[0].modules[0].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[0].modules[1].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[0].modules[2].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[0].modules[3].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[0].modules[4].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select name="systems[{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown">
+                    <option></option>
+                    @each(mobo in mobos)
+                    <option value="{{ mobo.id }}"
+                    @if($parent.ordersystem.pivot[1].mobo.id==mobo.id)
+                    selected="selected"
+                    @endif
+                    >{{ mobo.name }}</option>
+                    @endeach
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-1 right motherboardbCollapse">
+                <a href="#motherboardbCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_right"></i></a>
+              </div>
+              <div class="col-md-5 motherboardbModules">
+                <div class="collapse multi-collapse show" id="motherboardbCollapse">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[1].modules[0].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[1].modules[1].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[1].modules[2].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[1].modules[3].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in modules)
+                        <option value="{{ module.id }}"
+                        @if($parent.ordersystem.pivot[1].modules[4].id==module.id)
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endeach
   </div>
 </div>
 

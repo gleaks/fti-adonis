@@ -76,7 +76,8 @@ class OrderController {
     params,
     view
   }) {
-    const order = await Order.query().with('user').with('customer').with('systems').where('id', params.id).first()
+    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const ordersystems = await OrderSystem.query().with('system').with('externals').with('pivot.mobo').with('pivot.modules').where('order_id', params.id).fetch()
     const customers = await Customer.query().orderBy('name', 'asc').fetch()
     const systems = await System.all()
     const mobos = await Mobo.all()
@@ -93,7 +94,9 @@ class OrderController {
       customers: customers.toJSON(),
       systems: systems.toJSON(),
       mobos: mobos.toJSON(),
-      // products: products.toJSON(),
+      externals: externals.toJSON(),
+      modules: modules.toJSON(),
+      ordersystems: ordersystems.toJSON(),
       date: date
     })
   }

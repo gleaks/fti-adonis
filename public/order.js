@@ -2,31 +2,11 @@ $(document).ready(function() {
     // Star Jquery-validation on the form
     $('#workOrderForm').validate()
 
-    // If a form has submitted with error the product list is brought back as DIV's
-    // with oldproduct as the class. Check if they exist, apply select2 to the inputs
-    // and increment the base counting number to the number of the last product
-    if ($('.oldproduct').length) {
-      $('.oldproduct').select2({
-        placeholder: 'Select a Product',
-        allowClear: true
-      })
-    }
-
     // Start the javascript datepicker plugin
     $('#newOrderDate').datepicker()
 
     // Start select2 javascript plugin on the Customer input
-    $('#customerSelect').select2({
-      placeholder: 'Select a Customer',
-      allowClear: true
-    })
-
-    // When form fails check to see if the Status input has a previously set
-    // value and apply it to the select2 input if it exists.
-    var value = $('.oldstatus').data('value')
-    if (value != '') {
-      $('#statusInput').val(value).trigger('change')
-    }
+    $('.full-width:visible').select2()
 
     // Apply a jquery listener to dynamically added Delete buttons on each
     // row to remove the entire row.
@@ -42,13 +22,16 @@ $(document).ready(function() {
       e.preventDefault()
       $(this).closest('.row').remove()
     })
-    var num = 1
-    $('#system-example').after($('#system-example').prop('outerHTML'))
-    $('.tab-pane:last').attr('id', 'system-1').addClass('active')
-    $('.system-dropdown:last').select2({
-      placeholder: 'System Type',
-      allowClear: false
-    })
+
+    var num = 0
+    var paneclass = 'active'
+    if($('.tab-pane:last').attr('id') != 'system-example') {
+      num = 1 + Number($('.tab-pane:last').attr('id').split('-')[1])
+      paneclass = ''
+    }
+    $('.tab-pane:last').after($('#system-example').prop('outerHTML'))
+    $('.tab-pane:last').attr('id', 'system-' + num).addClass(paneclass)
+    $('.system-dropdown:last').select2()
     $('#workOrderForm').on('select2:select', '.system-dropdown', function(e) {
       num++
       newpane = 'system-' + num
