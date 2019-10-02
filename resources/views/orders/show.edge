@@ -1,5 +1,9 @@
 @layout('layouts.main')
 
+@section('extrajs')
+  {{ script('ordershow') }}
+@endsection
+
 @section('title')
   Focused Test - Quote #{{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
 @endsection
@@ -15,14 +19,16 @@
 
 @section('content')
   <div class="card card-default">
-    <div class="card-header">
+    <div class="card-header no-print">
       <div class="card-title">{{ order.name }}</div>
       <div class="card-controls">
+        <a class="btn btn-sm btn-info" href="#" onclick="window.print()">Print</a>
+        <a class="btn btn-sm btn-info" href="#" id="printpdf">PDF</a>
         <a class="btn btn-sm btn-info" href="{{ route('OrderController.edit', { id: order.id }) }}">Edit</a>
         <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this quote?')" href="/orders/delete/{{ order.id }}/show">Archive</a>
       </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" id="pdfpoint">
       <div class="invoice padding-50">
         <div class="row">
           <div class="col-md-4">
@@ -59,6 +65,9 @@
               <div class="col-md-3">
                 <strong>Quotation Number</strong><br />
                 {{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
+                <div id="quotenumber" style="display: none">
+                  {{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
+                </div>
               </div>
             </div>
             <hr />
@@ -122,8 +131,16 @@
                     <p class="small hint-text">{{ system.system.description }}</p>
                   @endif
                 </td>
-                <td class="right"></td>
-                <td></td>
+                <td class="text-center right">
+                  @if(system.system.price)
+                  {{ priceString(system.system.price) }}
+                  @endif
+                </td>
+                <td class="text-center extended">
+                  @if(system.system.price)
+                  {{ priceString(system.system.price) }}
+                  @endif
+                </td>
               </tr>
               @each(mobo in system.pivot)
               @set('loop', loop+1)
@@ -140,8 +157,16 @@
                     <p class="small hint-text">{{ mobo.mobo.description }}</p>
                   @endif
                 </td>
-                <td class="right"></td>
-                <td></td>
+                <td class="text-center right">
+                  @if(mobo.mobo.price)
+                  {{ priceString(mobo.mobo.price) }}
+                  @endif
+                </td>
+                <td class="text-center extended">
+                  @if(mobo.mobo.price)
+                  {{ priceString(mobo.mobo.price) }}
+                  @endif
+                </td>
               </tr>
               @each(module in mobo.modules)
               @set('loop', loop+1)
@@ -155,13 +180,21 @@
                 <td>{{ loop.length }}</td>
                 <td>1</td>
                 <td>{{ module.partnum }}</td>
-                <td class="text-black">Module {{ $loop.index + 1 }} : {{ module.name }}
+                <td class="text-black">Module {{ module.pivot.slot }} : {{ module.name }}
                   @if(module.description)
                     <p class="small hint-text">{{ module.description }}</p>
                   @endif
                 </td>
-                <td class="right"></td>
-                <td></td>
+                <td class="text-center right">
+                  @if(module.price)
+                  {{ priceString(module.price) }}
+                  @endif
+                </td>
+                <td class="text-center extended">
+                  @if(module.price)
+                  {{ priceString(module.price) }}
+                  @endif
+                </td>
               </tr>
               @endeach
               @endeach
@@ -176,14 +209,32 @@
                     <p class="small hint-text">{{ external.description }}</p>
                   @endif
                 </td>
-                <td class="right"></td>
-                <td></td>
+                <td class="text-center right">
+                  @if(external.price)
+                  {{ priceString(external.price) }}
+                  @endif
+                </td>
+                <td class="text-center extended">
+                  @if(external.price)
+                  {{ priceString(external.price) }}
+                  @endif
+                </td>
               </tr>
               @endeach
               @endeach
             </tbody>
           </table>
         </div>
+        <div class="row m-t-40">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-5">
+          </div>
+          <div class="col-md-5 text-right bg-master-darker col-sm-height padding-15 d-flex flex-column justify-content-center align-items-end">
+            <h5 class="font-montserrat all-caps small no-margin hint-text text-white bold">Total</h5>
+            <h1 class="no-margin text-white totalprice"></h1>
+          </div>
+          </div>
       </div>
     </div>
   </div>

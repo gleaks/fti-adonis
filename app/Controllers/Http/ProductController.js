@@ -85,7 +85,7 @@ class ProductController {
 
         await product.save()
 
-        session.flash({ message: 'Your Product has been created!' + data })
+        session.flash({ message: 'Your Product has been created!'})
         return response.redirect('/products')
   }
 
@@ -273,7 +273,7 @@ class ProductController {
         }
         await product.save()
 
-        session.flash({ message: 'Your Product has been edited!' + JSON.stringify(product) })
+        session.flash({ message: 'Your Product has been edited!'})
         return response.redirect('/products')
   }
 

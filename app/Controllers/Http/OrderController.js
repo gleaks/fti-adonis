@@ -147,12 +147,12 @@ class OrderController {
       shipping: order.shipping,
       payment: order.payment
     })
-    var test = ''
+    var slot = 1
     // If there are actually some systems attached to the order do this
     if((typeof order.systems) != 'undefined') {
       // Loop through each system
       for (var system in order.systems) {
-        // Attach a system (split the text because data comes in as system-23)
+        // Attach a system
         const postedsystem = await posted.systems().attach(order.systems[system][0])
         // Get the ID of the row from the order_system entry we just made
         const pivot = await OrderSystem.find(postedsystem[0].id)
@@ -162,7 +162,7 @@ class OrderController {
              await pivot.externals().attach(order.systems[system][1]['externals'][external])
           }
         }
-        // Loop through each level below system (motherboards & externals)
+        // Loop through each level below system (motherboards then modules)
         for (var side in order.systems[system]) {
           if (side == 'motherboarda' || side == 'motherboardb') {
             // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
@@ -170,12 +170,16 @@ class OrderController {
               const postedmb = await pivot.mobos().attach(order.systems[system][side][0])
               // Get the ID of the row just created in MoboOrderSystem
               const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
+              slot = 1
               // Loop over the motherboards modules
               for (var module in order.systems[system][side][1]['modules']) {
                 // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
-                if (module != '') {
-                  pivotmb.modules().attach(order.systems[system][side][1]['modules'][module])
+                if (order.systems[system][side][1]['modules'][module] != '') {
+                  await pivotmb.modules().attach(order.systems[system][side][1]['modules'][module], (row) => {
+                    row.slot = slot
+                  })
                 }
+                slot++
               }
             }
           }

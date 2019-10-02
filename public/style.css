@@ -43,3 +43,13 @@ z-index:9999999 !important;
 	border-bottom: 1px solid rgba(225, 225, 226, 0.7) !important;
 	margin-bottom: 10px;
 }
+
+@media print
+{
+		body { overflow-x: hidden !important; overflow-y: hidden !important; overflow: hidden !important; -ms-overflow-style: none !important; overflow: -moz-scrollbars-none !important; }
+		::-webkit-scrollbar { width: 0 !important }
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

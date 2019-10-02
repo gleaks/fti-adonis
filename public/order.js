@@ -72,11 +72,12 @@ $(document).ready(function() {
       pane.find('.motherboardaCollapse').show()
       pane.find('#motherboardaCollapse').collapse('show')
       modules.show()
-      modules.find('.module-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
+      modules.find('.module-dropdown').val('').trigger('change')
       modules.find('.acmodules').hide()
       modules.find('.dcmodules').hide()
       modules.find('.icmodules').hide()
       modules.find('.' + mobotype + 'modules').show()
+      modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
     })
 
     $('#workOrderForm').on('select2:selecting', '.motherboardb-dropdown', function(e) {
@@ -87,11 +88,12 @@ $(document).ready(function() {
       pane.find('.motherboardbCollapse').show()
       pane.find('#motherboardbCollapse').collapse('show')
       modules.show()
-      modules.find('.module-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
+      modules.find('.module-dropdown').val('').trigger('change')
       modules.find('.acmodules').hide()
       modules.find('.dcmodules').hide()
       modules.find('.icmodules').hide()
       modules.find('.' + mobotype + 'modules').show()
+      modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
     })
 
     $('#workOrderForm').on('click', '.addExternal', function(e) {
@@ -131,4 +133,8 @@ $(document).ready(function() {
     $('#customerModalCancel').click(function(e){
       $(this).closest('form').find('input[type=text], input[type=email], textarea').val('')
     })
+
+    for(price in $('.extended')) {
+      console.log(price)
+    }
 })

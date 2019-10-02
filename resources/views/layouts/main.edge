@@ -30,7 +30,7 @@
   @if(flashMessage('message'))
     <div id="flashmessage" style="display: none;">{{ flashMessage('message') }}</div>
   @endif
-  <div class="header p-r-0 bg-primary">
+  <div class="header p-r-0 bg-primary no-print">
     <div class="header-inner header-md-height">
       <div class="">
         <div class="brand inline no-border d-sm-inline-block">
@@ -96,7 +96,7 @@
   <div class="page-container">
     <div class="page-content-wrapper full-height">
       <div class="content">
-        <div class="bg-white">
+        <div class="bg-white no-print">
           <div class="container container-fixed-lg">
             <ul class="breadcrumb p-l-0">
               <li class="breadcrumb-item">
@@ -132,6 +132,8 @@
   {{ script('plugins/datatables-responsive/js/lodash.min') }}
   {{ script('plugins/classie/classie') }}
   {{ script('plugins/jquery-validation/js/jquery.validate.min') }}
+  {{ script('https://unpkg.com/jspdf@latest/dist/jspdf.min.js') }}
+  {{ script('https://html2canvas.hertzen.com/dist/html2canvas.js') }}
   {{ script('pages.min') }}
   {{ script('app') }}
   @!section('extrajs')
