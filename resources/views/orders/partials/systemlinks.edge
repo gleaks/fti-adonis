@@ -1,0 +1,28 @@
+<ul class="nav nav-tabs nav-tabs-left nav-tabs-simple">
+  @set('finalindex', '0')
+  @each(ordersystem in loop)
+  <li class="
+  @if($loop.last)
+  active
+  @endif
+  ">
+    <a data-toggle="tab" class="
+    @if($loop.last)
+    @set('finalindex', ($loop.index + 1))
+    active show
+    @endif
+    " href="#system-{{ $loop.index }}">{{ ordersystem.system.name }}</a>
+  </li>
+  @endeach
+  <li class="
+  @if(loop === undefined)
+  active
+  @endif
+  ">
+    <a data-toggle="tab" class="
+    @if(loop === undefined)
+    active show
+    @endif
+    " href="#system-{{ finalindex }}"><i class="pg-plus_circle"></i> Add a System</a>
+  </li>
+</ul>

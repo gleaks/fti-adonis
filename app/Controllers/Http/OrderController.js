@@ -37,8 +37,6 @@ class OrderController {
 
     return view.render('orders/show', {
       order: order.toJSON(),
-      test: JSON.stringify(order.toJSON(), undefined, 2),
-      test2: JSON.stringify(systems.toJSON()),
       systems: systems.toJSON(),
       loop: parseInt(0),
       day: day,
@@ -155,28 +153,29 @@ class OrderController {
       // Loop through each system
       for (var system in order.systems) {
         // Attach a system (split the text because data comes in as system-23)
-        const postedsystem = await posted.systems().attach(system.split('-')[1])
+        const postedsystem = await posted.systems().attach(order.systems[system][0])
         // Get the ID of the row from the order_system entry we just made
         const pivot = await OrderSystem.find(postedsystem[0].id)
+        // Attach all externals
+        for (var external in order.systems[system][1]['externals']) {
+          if (external != '') {
+             await pivot.externals().attach(order.systems[system][1]['externals'][external])
+          }
+        }
         // Loop through each level below system (motherboards & externals)
         for (var side in order.systems[system]) {
           if (side == 'motherboarda' || side == 'motherboardb') {
             // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
-            const postedmb = await pivot.mobos().attach(order.systems[system][side]['0'])
-            // Get the ID of the row just created in MoboOrderSystem
-            const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
-            // Loop over the motherboards modules
-            for (var module in order.systems[system][side][1]['modules']) {
-              // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
-              if (module != '') {
-                pivotmb.modules().attach(order.systems[system][side][1]['modules'][module])
-              }
-            }
-          }
-          if (side == 'externals') {
-            for (var external in order.systems[system][side]) {
-              if (external != '') {
-                 await pivot.externals().attach(order.systems[system][side][external])
+            if(order.systems[system][side][0] != undefined) {
+              const postedmb = await pivot.mobos().attach(order.systems[system][side][0])
+              // Get the ID of the row just created in MoboOrderSystem
+              const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
+              // Loop over the motherboards modules
+              for (var module in order.systems[system][side][1]['modules']) {
+                // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
+                if (module != '') {
+                  pivotmb.modules().attach(order.systems[system][side][1]['modules'][module])
+                }
               }
             }
           }
@@ -184,7 +183,7 @@ class OrderController {
       }
     }
     session.flash({
-      message: 'Your Work Order has been created!' + JSON.stringify(order.systems) + ' - ' + test
+      message: 'Your Work Order has been created!'
     })
     return response.redirect('/orders/' + posted.id)
   }

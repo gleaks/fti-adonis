@@ -8,8 +8,6 @@ $(document).ready(function() {
     // Start select2 javascript plugin on the Customer input
     $('.full-width:visible').select2()
 
-    // Apply a jquery listener to dynamically added Delete buttons on each
-    // row to remove the entire row.
     $('#workOrderForm').on('click', '.collapseToggle', function(e){
       e.preventDefault()
       target = $(this).attr('href')
@@ -83,12 +81,17 @@ $(document).ready(function() {
 
     $('#workOrderForm').on('select2:selecting', '.motherboardb-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
+      mobotype = e.params.args.data.element.getAttribute('data-mobotype').toLowerCase()
       thisnum = Number(pane.attr('id').split('-')[1])
       modules = pane.find('.motherboardbModules')
       pane.find('.motherboardbCollapse').show()
       pane.find('#motherboardbCollapse').collapse('show')
       modules.show()
-      modules.find('.module-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
+      modules.find('.module-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
+      modules.find('.acmodules').hide()
+      modules.find('.dcmodules').hide()
+      modules.find('.icmodules').hide()
+      modules.find('.' + mobotype + 'modules').show()
     })
 
     $('#workOrderForm').on('click', '.addExternal', function(e) {
@@ -124,6 +127,7 @@ $(document).ready(function() {
         }
       })
     })
+
     $('#customerModalCancel').click(function(e){
       $(this).closest('form').find('input[type=text], input[type=email], textarea').val('')
     })

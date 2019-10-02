@@ -1,206 +1,22 @@
-<div id="systems0" style="display: none;">
-  <div class="form-group-attached m-b-20">
-    <div id="system0">
-      <div class="row">
-        <div class="col-md-7">
-          <div class="form-group form-group-default">
-            <label>System Type</label>
-            <select name="nothing" class="full-width system-dropdown">
+<div class="tab-pane" id="system-example">
+  <div class="row column-seperation">
+    <div class="col-md-4 right">
+      <div class="row system lightBottomRow">
+        <div class="col-md-12">
+          <div class="form-group">
+            <select name="nothing" class="full-width system-dropdown" data-placeholder="Select System Type">
               <option></option>
               @each(system in systems)
-              <option value="{{ system.id }}">{{ system.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-        <div class="col-md-1">
-          <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
-        </div>
-      </div>
-    </div>
-    <div class="motherboarda" style="display: none">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-7">
-          <div class="form-group form-group-default">
-            <label>Side A Motherboard</label>
-            <select name="nothing" class="full-width motherboarda-dropdown">
-              <option></option>
-              @each(mobo in mobos)
-              <option value="{{ mobo.id }}">{{ mobo.name }}</option>
+              <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}">{{ system.name }}</option>
               @endeach
             </select>
           </div>
         </div>
       </div>
-    </div>
-    <div class="amodules" style="display: none">
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 1</label>
-            <select name="nothing" class="full-width module-dropdown module1-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 2</label>
-            <select name="nothing" class="full-width module-dropdown module2-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 3</label>
-            <select name="nothing" class="full-width module-dropdown module3-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 4</label>
-            <select name="nothing" class="full-width module-dropdown module4-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 5</label>
-            <select name="nothing" class="full-width module-dropdown module5-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="motherboardb" style="display: none">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-7">
-          <div class="form-group form-group-default">
-            <label>Side B Motherboard</label>
-            <select name="nothing" class="full-width motherboardb-dropdown">
-              <option></option>
-              @each(mobo in mobos)
-              <option value="{{ mobo.id }}">{{ mobo.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bmodules" style="display: none">
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 1</label>
-            <select name="nothing" class="full-width module-dropdown module1-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 2</label>
-            <select name="nothing" class="full-width module-dropdown module2-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 3</label>
-            <select name="nothing" class="full-width module-dropdown module3-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 4</label>
-            <select name="nothing" class="full-width module-dropdown module4-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>Module 5</label>
-            <select name="nothing" class="full-width module-dropdown module5-dropdown">
-              <option></option>
-              @each(module in modules)
-              <option value="{{ module.id }}">{{ module.name }}</option>
-              @endeach
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="externals" style="display: none">
-      <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-6">
-          <div class="form-group form-group-default">
-            <label>External Module</label>
-            <select name="nothing" class="full-width external-dropdown">
+      <div class="row lightBottomRow external" style="display: none">
+        <div class="col-md-9">
+          <div class="form-group">
+            <select name="nothing" class="full-width external-dropdown" data-placeholder="External Module / Accessory">
               <option></option>
               @each(external in externals)
               <option value="{{ external.id }}">{{ external.name }}</option>
@@ -208,38 +24,494 @@
             </select>
           </div>
         </div>
-        <div class="col-md-1">
-          <button class="btn-sm btn-primary btn-rounded addExternal"><i class="pg-plus"></i></button>
+        <div class="col-md-3">
+          <a href="#" class="btn btn-xs btn-rounded btn-info addExternal"><i class="pg-plus_circle"></i> ADD</a>
         </div>
       </div>
     </div>
-  </div>
-</div>
-@set('loop', old('systems') || order.systems)
-@each(old in loop)
-<div class="row">
-  <div class="col-md-7">
-    <div class="form-group form-group-default">
-      <label>System {{ $loop.index + 1 }}</label>
-      <select name="systems[{{ $loop.index }}]" class="full-width oldproduct">
-        <option></option>
-          @each(s in systems)
-            <option value="{{ s.id }}"
-            @if($parent.old == s.id || $parent.old.id == s.id)
-              selected="selected"
-            @endif
-            >{{ s.name }}</option>
-          @endeach
-      </select>
+    <div class="col-md-8 motherboards" style="display:none">
+      <div class="row lightBottomRow">
+        <div class="col-md-6">
+          <div class="form-group">
+            <select name="nothing" class="full-width motherboarda-dropdown" data-placeholder="Motherboard Side A">
+              <option></option>
+              @each(mobo in mobos)
+              <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1 motherboardaCollapse right" style="display: none">
+          <a href="#motherboardaCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_minimize"></i></a>
+        </div>
+        <div class="col-md-5 motherboardaModules" style="display: none">
+          <div class="collapse multi-collapse" id="motherboardaCollapse">
+            <div class="acmodules">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                      <option></option>
+                      @each(module in ac1modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                      <option></option>
+                      @each(module in ac2modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                      <option></option>
+                      @each(module in ac3modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                      <option></option>
+                      @each(module in ac4modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                      <option></option>
+                      @each(module in ac5modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row slotsix" style="display: none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                      <option></option>
+                      @each(module in modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dcmodules">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                      <option></option>
+                      @each(module in dc1modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                      <option></option>
+                      @each(module in dc2modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                      <option></option>
+                      @each(module in dc3modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                      <option></option>
+                      @each(module in dc4modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                      <option></option>
+                      @each(module in dc5modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row slotsix" style="display: none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                      <option></option>
+                      @each(module in modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="icmodules">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                      <option></option>
+                      @each(module in ic1modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                      <option></option>
+                      @each(module in ic2modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                      <option></option>
+                      @each(module in ic3modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                      <option></option>
+                      @each(module in ic4modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                      <option></option>
+                      @each(module in ic5modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row slotsix" style="display: none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                      <option></option>
+                      @each(module in modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <select name="nothing" class="full-width motherboardb-dropdown" data-placeholder="Motherboard Side B">
+              <option></option>
+              @each(mobo in mobos)
+              <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
+              @endeach
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1 right motherboardbCollapse" style="display: none">
+          <a href="#motherboardbCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_minimize"></i></a>
+        </div>
+        <div class="col-md-5 motherboardbModules" style="display: none">
+          <div class="collapse multi-collapse" id="motherboardbCollapse">
+            <div class="acmodules">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                      <option></option>
+                      @each(module in ac1modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                      <option></option>
+                      @each(module in ac2modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                      <option></option>
+                      @each(module in ac3modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                      <option></option>
+                      @each(module in ac4modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                      <option></option>
+                      @each(module in ac5modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row slotsix" style="display: none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                      <option></option>
+                      @each(module in modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dcmodules">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                      <option></option>
+                      @each(module in dc1modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                      <option></option>
+                      @each(module in dc2modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                      <option></option>
+                      @each(module in dc3modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                      <option></option>
+                      @each(module in dc4modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                      <option></option>
+                      @each(module in dc5modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row slotsix" style="display: none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                      <option></option>
+                      @each(module in modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="icmodules">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                      <option></option>
+                      @each(module in ic1modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                      <option></option>
+                      @each(module in ic2modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                      <option></option>
+                      @each(module in ic3modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                      <option></option>
+                      @each(module in ic4modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                      <option></option>
+                      @each(module in ic5modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row slotsix" style="display: none">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                      <option></option>
+                      @each(module in modules)
+                      <option value="{{ module.id }}">{{ module.name }}</option>
+                      @endeach
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-md-1">
-    <button class="btn btn-danger btn-rounded deleteButton"><i class="pg-minus"></i></button>
-  </div>
-</div>
-@endeach
-<div id="addProduct" class="row m-t-10">
-  <div class="col-md-8">
-      <button id="addButton" class="pull-right btn btn-primary btn-rounded">Add a System</button>
   </div>
 </div>
