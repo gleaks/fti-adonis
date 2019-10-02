@@ -56,6 +56,21 @@ class OrderController {
     const mobos = await Mobo.all()
     const externals = await External.all()
     const modules = await Module.all()
+    const ac1modules = await Module.query().where('ac1', true).fetch()
+    const ac2modules = await Module.query().where('ac2', true).fetch()
+    const ac3modules = await Module.query().where('ac3', true).fetch()
+    const ac4modules = await Module.query().where('ac4', true).fetch()
+    const ac5modules = await Module.query().where('ac5', true).fetch()
+    const dc1modules = await Module.query().where('dc1', true).fetch()
+    const dc2modules = await Module.query().where('dc2', true).fetch()
+    const dc3modules = await Module.query().where('dc3', true).fetch()
+    const dc4modules = await Module.query().where('dc4', true).fetch()
+    const dc5modules = await Module.query().where('dc5', true).fetch()
+    const ic1modules = await Module.query().where('ic1', true).fetch()
+    const ic2modules = await Module.query().where('ic2', true).fetch()
+    const ic3modules = await Module.query().where('ic3', true).fetch()
+    const ic4modules = await Module.query().where('ic4', true).fetch()
+    const ic5modules = await Module.query().where('ic5', true).fetch()
     // const products = await Product.all()
 
     // Cast a new date of today to be used by the date form input
@@ -68,6 +83,21 @@ class OrderController {
       mobos: mobos.toJSON(),
       externals: externals.toJSON(),
       modules: modules.toJSON(),
+      ac1modules: ac1modules.toJSON(),
+      ac2modules: ac2modules.toJSON(),
+      ac3modules: ac3modules.toJSON(),
+      ac4modules: ac4modules.toJSON(),
+      ac5modules: ac5modules.toJSON(),
+      dc1modules: dc1modules.toJSON(),
+      dc2modules: dc2modules.toJSON(),
+      dc3modules: dc3modules.toJSON(),
+      dc4modules: dc4modules.toJSON(),
+      dc5modules: dc5modules.toJSON(),
+      ic1modules: ic1modules.toJSON(),
+      ic2modules: ic2modules.toJSON(),
+      ic3modules: ic3modules.toJSON(),
+      ic4modules: ic4modules.toJSON(),
+      ic5modules: ic5modules.toJSON(),
       date: date
     })
   }

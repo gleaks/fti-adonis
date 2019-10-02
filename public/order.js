@@ -21,12 +21,10 @@ $(document).ready(function() {
     var num = 0
     var paneclass = 'active'
     if($('.tab-pane:last').attr('id') != 'system-example') {
-      console.log('last is not system-example and the num is' + num)
       num = 1 + Number($('.tab-pane:last').attr('id').split('-')[1])
       paneclass = ''
     }
     $('.tab-pane:last').after($('#system-example').prop('outerHTML'))
-    console.log('the number is now' + num)
     $('.tab-pane:last').attr('id', 'system-' + num).addClass(paneclass)
     $('.system-dropdown:last').select2()
 
@@ -45,9 +43,8 @@ $(document).ready(function() {
         console.log(link)
         $('.nav-tabs a[href="#' + link + '"]').text(e.params.args.data.text)
       }
-      switch(e.params.args.data.text) {
-        case '2 Channel Testhead':
-        case 'Upgrade Only':
+      switch(e.params.args.data.element.getAttribute('data-hasmobos')) {
+        case 'true':
           pane.find('.motherboards').show()
           pane.find('.motherboarda-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboarda]').select2()
           pane.find('.motherboardb-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboardb]').select2()
@@ -60,6 +57,9 @@ $(document).ready(function() {
           pane.find('#motherboardbCollapse').collapse('hide')
           pane.find('.motherboardbCollapse').hide()
           break
+        case 'false':
+          console.log('There are no motherboards on this system type')
+          break
         default:
           console.log('Dropdown case did not match any selectors')
           break
@@ -68,12 +68,17 @@ $(document).ready(function() {
     })
     $('#workOrderForm').on('select2:selecting', '.motherboarda-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
+      mobotype = e.params.args.data.element.getAttribute('data-mobotype').toLowerCase()
       thisnum = Number(pane.attr('id').split('-')[1])
       modules = pane.find('.motherboardaModules')
       pane.find('.motherboardaCollapse').show()
       pane.find('#motherboardaCollapse').collapse('show')
       modules.show()
       modules.find('.module-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
+      modules.find('.acmodules').hide()
+      modules.find('.dcmodules').hide()
+      modules.find('.icmodules').hide()
+      modules.find('.' + mobotype + 'modules').show()
     })
 
     $('#workOrderForm').on('select2:selecting', '.motherboardb-dropdown', function(e) {

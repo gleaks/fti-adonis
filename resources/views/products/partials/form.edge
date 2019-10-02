@@ -23,7 +23,6 @@
     @!component('components.input', { name: 'price', text: 'Price', placeholder: 'Do not include commas or $ symbol', value: old('price', product.price || ''), error: getErrorFor('price') })
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-8">
     @unless(text)
@@ -50,6 +49,377 @@
       <input type="text" class="form-control" value="{{ text }}" disabled />
     </div>
     @endunless
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    @!component('components.input', { name: 'mobotype', text: 'Motherboard Type', placeholder: 'e.g. AC, DC, IC', value: old('mobotype', product.mobotype || ''), error: getErrorFor('mobotype') })
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    {{ product.mobotype }}
+    @!component('components.input', { name: 'slots', text: '# of Slots', placeholder: 'Must be an Integer', value: old('slots', product.slots || ''), error: getErrorFor('slots') })
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Has Motherboards?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="hasmobos"
+          @if(old('hasmobos', '' )==true || product.hasmobos==true || product.hasmobos==null)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on AC?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ac"
+          @if(old('ac', '' )==true || product.ac==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on AC slot1?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ac1"
+          @if(old('ac1', '' )==true || product.ac1==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on AC slot2?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ac2"
+          @if(old('ac2', '' )==true || product.ac2==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on AC slot3?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ac3"
+          @if(old('ac3', '' )==true || product.ac3==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on AC slot4?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ac4"
+          @if(old('ac4', '' )==true || product.ac4==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on AC slot5?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ac5"
+          @if(old('ac5', '' )==true || product.ac5==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on DC?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="dc"
+          @if(old('dc', '' )==true || product.dc==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on DC 1?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="dc1"
+          @if(old('dc1', '' )==true || product.dc1==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on DC 2?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="dc2"
+          @if(old('dc2', '' )==true || product.dc2==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on DC 3?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="dc3"
+          @if(old('dc3', '' )==true || product.dc3==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on DC 4?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="dc4"
+          @if(old('dc4', '' )==true || product.dc4==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on DC 5?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="dc5"
+          @if(old('dc5', '' )==true || product.dc5==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic"
+          @if(old('ic', '' )==true || product.ic==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC 1?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic1"
+          @if(old('ic1', '' )==true || product.ic1==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC 2?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic2"
+          @if(old('ic2', '' )==true || product.ic2==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC 3?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic3"
+          @if(old('ic3', '' )==true || product.ic3==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC 4?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic4"
+          @if(old('ic4', '' )==true || product.ic4==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC 5?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic5"
+          @if(old('ic5', '' )==true || product.ic5==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Goes on IC 6?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="ic6"
+          @if(old('ic6', '' )==true || product.ic6==true)
+          checked="checked"
+          @endif
+          >
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 
