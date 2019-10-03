@@ -1,9 +1,9 @@
 $(document).ready(function() {
   console.log($('.extended'))
-  var price = 0.0
-  var totalprice = 0.0
+  var price = 0
+  var totalprice = 0
   for (extended of $('.extended')) {
-    price = parseFloat(extended.textContent.replace(',', '').replace('$', ''))
+    price = parseInt(extended.textContent.replace(',', '').replace('$', '').replace('.00', ''))
     if (price === price) {
       totalprice = totalprice + price
     }
