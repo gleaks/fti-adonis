@@ -126,7 +126,11 @@
               <tr>
                 <td>{{ loop.length }}</td>
                 <td>1</td>
-                <td>{{ system.system.partnum }}</td>
+                <td>
+                  @if(system.system.partnum)
+                  {{ system.system.partnum }}
+                  @endif
+                </td>
                 <td class="text-black">{{ system.system.name }}
                   @if(system.system.description)
                     <p class="small hint-text">{{ system.system.description }}</p>
@@ -152,7 +156,11 @@
               ">
                 <td>{{ loop.length }}</td>
                 <td>1</td>
-                <td>{{ mobo.mobo.partnum }}</td>
+                <td>
+                  @if(mobo.mobo.partnum)
+                  {{ mobo.mobo.partnum }}
+                  @endif
+                </td>
                 <td class="text-black">{{ mobo.mobo.name }}
                   @if(mobo.mobo.description)
                     <p class="small hint-text">{{ mobo.mobo.description }}</p>
@@ -180,7 +188,11 @@
               ">
                 <td>{{ loop.length }}</td>
                 <td>1</td>
-                <td>{{ module.partnum }}</td>
+                <td>
+                  @if(module.partnum)
+                  {{ module.partnum }}
+                  @endif
+                </td>
                 <td class="text-black">Module {{ module.pivot.slot }} : {{ module.name }}
                   @if(module.description)
                     <p class="small hint-text">{{ module.description }}</p>
@@ -204,7 +216,11 @@
               <tr>
                 <td>{{ loop.length }}</td>
                 <td>1</td>
-                <td>{{ external.partnum }}</td>
+                <td>
+                  @if(external.partnum)
+                  {{ external.partnum }}
+                  @endif
+                </td>
                 <td class="text-black">{{ external.name }}
                   @if(external.description)
                     <p class="small hint-text">{{ external.description }}</p>
