@@ -11,7 +11,7 @@
     @set('finalindex', ($loop.index + 1))
     active show
     @endif
-    " href="#system-{{ $loop.index }}">{{ ordersystem.system.name }}</a>
+    " href="#system-{{ $loop.index }}">{{ truncate(ordersystem.system.name, 20, '...') }}</a>
   </li>
   @endeach
   <li class="

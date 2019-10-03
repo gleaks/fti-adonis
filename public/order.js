@@ -32,14 +32,14 @@ $(document).ready(function() {
         newpane = 'system-' + (parseInt(num) + 1)
         pane.after($('#system-example').prop('outerHTML'))
         $('.tab-pane:last').attr('id', newpane)
-        $('.nav-tabs li:last a').text(e.params.args.data.text)
+        $('.nav-tabs li:last a').text(e.params.args.data.text.slice(0,25))
         $('.nav-tabs li:last').after('<li><a data-toggle="tab" href="#' + newpane + '"><i class="pg-plus_circle"></i> Add a System</a></li>')
         $('.system-dropdown:last').select2()
         $(e.target).attr('name', 'systems[system-' + num + ']')
       } else {
         link = pane.attr('id')
         console.log(link)
-        $('.nav-tabs a[href="#' + link + '"]').text(e.params.args.data.text)
+        $('.nav-tabs a[href="#' + link + '"]').text(e.params.args.data.text.slice(0,25))
       }
       switch(e.params.args.data.element.getAttribute('data-hasmobos')) {
         case 'true':
@@ -59,7 +59,7 @@ $(document).ready(function() {
           console.log('There are no motherboards on this system type')
           pane.find('.motherboards').show()
           pane.find('.motherboardb').hide()
-          pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + num + '][motherboarda]').attr('disabled', 'true').select2().val('7').trigger('change')
+          pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + num + '][motherboarda]').attr('disabled', 'true').select2()
           break
         default:
           console.log('Dropdown case did not match any selectors')
