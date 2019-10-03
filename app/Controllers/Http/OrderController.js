@@ -46,6 +46,32 @@ class OrderController {
     })
   }
 
+  async workorder({
+    params,
+    view
+  }) {
+    // Fetch order with its user, customer & products relationships
+    const order = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const systems = await OrderSystem.query().with('system').with('externals').with('pivot.mobo').with('pivot.modules').where('order_id', params.id).fetch()
+    // Cast date & break into multiple variables to make the Quote Number
+    const date = new Date(order.date)
+    const day = ("0" + date.getDate()).slice(-2)
+    const month = ("0" + (date.getMonth() + 1)).slice(-2)
+    const year = date.getFullYear().toString().substr(-2)
+    // Get a full, properly formatted date for the "Date" portion of the work order
+    const fulldate = date.toLocaleDateString("en-US", {month: 'long', day: 'numeric', year: 'numeric'})
+
+    return view.render('orders/workorder', {
+      order: order.toJSON(),
+      systems: systems.toJSON(),
+      loop: parseInt(0),
+      day: day,
+      month: month,
+      year: year,
+      fulldate: fulldate
+    })
+  }
+
   async new({
     view
   }) {

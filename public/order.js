@@ -57,6 +57,9 @@ $(document).ready(function() {
           break
         case 'false':
           console.log('There are no motherboards on this system type')
+          pane.find('.motherboards').show()
+          pane.find('.motherboardb').hide()
+          pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + num + '][motherboarda]').attr('disabled', 'true').select2().val('7').trigger('change')
           break
         default:
           console.log('Dropdown case did not match any selectors')
@@ -108,7 +111,10 @@ $(document).ready(function() {
 
     $('#workOrderForm').on('click', '.removeExternal', function(e){
       e.preventDefault()
-      $(this).closest('.row').remove()
+      proceed = confirm('Are you sure you want to remove this External Module from the order?')
+      if(proceed == true){
+        $(this).closest('.row').remove()
+      }
     })
 
     $('#customerModalForm').submit(function(e){

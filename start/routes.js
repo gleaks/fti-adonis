@@ -36,6 +36,7 @@ Route.get('/orders/:id', 'OrderController.show');
 Route.get('/orders/edit/:id', 'OrderController.edit');
 Route.post('/orders/update/:id', 'OrderController.update').validator('CreateOrder');
 Route.get('/orders/delete/:id/:from', 'OrderController.delete');
+Route.get('/orders/workorder/:id', 'OrderController.workorder')
 
 // Customers routes
 Route.get('/customers', 'CustomerController.home');

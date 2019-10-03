@@ -30,10 +30,10 @@
       </div>
     </div>
     <div class="col-md-8 motherboards" style="display:none">
-      <div class="row lightBottomRow">
+      <div class="row lightBottomRow motherboarda">
         <div class="col-md-6">
           <div class="form-group">
-            <select name="nothing" class="full-width motherboarda-dropdown" data-placeholder="Motherboard Side A">
+            <select name="nothing" class="full-width motherboarda-dropdown" data-placeholder="Channel Board Side A">
               <option></option>
               @each(mobo in mobos)
               <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
@@ -271,10 +271,10 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row motherboardb">
         <div class="col-md-6">
           <div class="form-group">
-            <select name="nothing" class="full-width motherboardb-dropdown" data-placeholder="Motherboard Side B">
+            <select name="nothing" class="full-width motherboardb-dropdown" data-placeholder="Channel Board Side B">
               <option></option>
               @each(mobo in mobos)
               <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
