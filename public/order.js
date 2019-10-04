@@ -38,13 +38,14 @@ $(document).ready(function() {
         $(e.target).attr('name', 'systems[system-' + num + ']')
       } else {
         link = pane.attr('id')
-        console.log(link)
         $('.nav-tabs a[href="#' + link + '"]').text(e.params.args.data.text.slice(0,25))
       }
       switch(e.params.args.data.element.getAttribute('data-hasmobos')) {
         case 'true':
           pane.find('.motherboards').show()
-          pane.find('.motherboarda-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboarda]').select2()
+          pane.find('.motherboarda').show()
+          pane.find('.motherboardb').show()
+          pane.find('.motherboarda-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboarda]').removeAttr('disabled').select2()
           pane.find('.motherboardb-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboardb]').select2()
           pane.find('.external').show()
           pane.find('.external-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][externals]').select2()
@@ -56,13 +57,10 @@ $(document).ready(function() {
           pane.find('.motherboardbCollapse').hide()
           break
         case 'false':
-          console.log('There are no motherboards on this system type')
+          pane.find('.external').hide()
           pane.find('.motherboards').show()
           pane.find('.motherboardb').hide()
           pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + num + '][motherboarda]').attr('disabled', 'true').select2()
-          break
-        default:
-          console.log('Dropdown case did not match any selectors')
           break
       }
     num++
@@ -82,7 +80,6 @@ $(document).ready(function() {
       modules.find('.' + mobotype + 'modules').show()
       modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
     })
-
     $('#workOrderForm').on('select2:selecting', '.motherboardb-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
       mobotype = e.params.args.data.element.getAttribute('data-mobotype').toLowerCase()
@@ -98,7 +95,43 @@ $(document).ready(function() {
       modules.find('.' + mobotype + 'modules').show()
       modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
     })
-
+    $('#workOrderForm').on('select2:unselect', '.system-dropdown', function(e) {
+      oldpane = $('.nav-tabs li:last a').attr('href')
+      pane = $(e.target).closest('.tab-pane')
+      $('.nav-tabs li:last').remove()
+      $(oldpane).remove()
+      $('.nav-tabs li:last a').html('<i class="pg-plus_circle"></i> Add a System')
+      num--
+      pane.find('.motherboards').hide()
+      pane.find('.motherboarda-dropdown').val('')
+      pane.find('.motherboardb-dropdown').val('')
+      pane.find('.module-dropdown').val('')
+      pane.find('.external:not(:first)').remove()
+      pane.find('.external-dropdown').val('')
+      pane.find('.external').hide()
+    })
+    $('#workOrderForm').on('select2:unselect', '.motherboarda-dropdown', function(e) {
+      pane = $(e.target).closest('.tab-pane')
+      modules = pane.find('.motherboardaModules')
+      pane.find('.motherboardaCollapse').hide()
+      pane.find('#motherboardaCollapse').collapse('hide')
+      modules.hide()
+      modules.find('.module-dropdown').val('').trigger('change')
+      modules.find('.acmodules').hide()
+      modules.find('.dcmodules').hide()
+      modules.find('.icmodules').hide()
+    })
+    $('#workOrderForm').on('select2:unselect', '.motherboardb-dropdown', function(e) {
+      pane = $(e.target).closest('.tab-pane')
+      modules = pane.find('.motherboardbModules')
+      pane.find('.motherboardbCollapse').hide()
+      pane.find('#motherboardbCollapse').collapse('hide')
+      modules.hide()
+      modules.find('.module-dropdown').val('').trigger('change')
+      modules.find('.acmodules').hide()
+      modules.find('.dcmodules').hide()
+      modules.find('.icmodules').hide()
+    })
     $('#workOrderForm').on('click', '.addExternal', function(e) {
       e.preventDefault()
       pane = $(e.target).closest('.tab-pane')
@@ -108,7 +141,6 @@ $(document).ready(function() {
       pane.find('.addExternal:last').toggleClass('addExternal btn-info removeExternal btn-danger').html('<i class="pg-minus_circle"></i> DEL')
       pane.find('.external-dropdown:last').attr('name', 'systems[system-' + thisnum + '][externals]').select2()
     })
-
     $('#workOrderForm').on('click', '.removeExternal', function(e){
       e.preventDefault()
       proceed = confirm('Are you sure you want to remove this External Module from the order?')
@@ -139,8 +171,4 @@ $(document).ready(function() {
     $('#customerModalCancel').click(function(e){
       $(this).closest('form').find('input[type=text], input[type=email], textarea').val('')
     })
-
-    for(price in $('.extended')) {
-      console.log(price)
-    }
 })
