@@ -24,7 +24,7 @@ $(document).ready(function() {
   // Create a dropdown that allows you to filter the Order & Product table by its Category name
   $('#orderTable_selectDiv').html('<select id="orderTable_select" class="cs-select">\
                                     <option value="All">All</option><option value="Quote">Quote</option>\
-                                    <option value="Possible Order">Probable Order</option>\
+                                    <option value="Probable Order">Probable Order</option>\
                                   </select>')
   $('#productTable_selectDiv').html('<select id="productTable_select" class="cs-select">\
                                       <option value="All">All</option>\

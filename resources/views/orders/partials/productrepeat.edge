@@ -26,7 +26,7 @@
       <div class="row lightBottomRow external">
         <div class="col-md-9">
           <div class="form-group">
-            <select name="systems[system-{{ $parent.$loop.index }}][externals]" class="full-width external-dropdown" data-placeholder="External Module / Accessory">
+            <select name="systems[system-{{ $parent.$loop.index }}][externals]" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
               <option></option>
               @each(external in externals)
               <option value="{{ external.id }}"

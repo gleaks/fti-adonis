@@ -4,7 +4,7 @@
       <div class="row system lightBottomRow">
         <div class="col-md-12">
           <div class="form-group">
-            <select name="nothing" class="full-width system-dropdown" data-placeholder="Select System Type">
+            <select name="nothing" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
               <option></option>
               @each(system in systems)
               <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}">{{ system.name }}</option>
@@ -16,7 +16,7 @@
       <div class="row lightBottomRow external" style="display: none">
         <div class="col-md-9">
           <div class="form-group">
-            <select name="nothing" class="full-width external-dropdown" data-placeholder="External Module / Accessory">
+            <select name="nothing" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
               <option></option>
               @each(external in externals)
               <option value="{{ external.id }}">{{ external.name }}</option>
@@ -33,7 +33,7 @@
       <div class="row lightBottomRow motherboarda">
         <div class="col-md-6">
           <div class="form-group">
-            <select name="nothing" class="full-width motherboarda-dropdown" data-placeholder="Channel Board Side A">
+            <select name="nothing" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
               <option></option>
               @each(mobo in mobos)
               <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
@@ -50,7 +50,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                       <option></option>
                       @each(module in ac1modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -62,7 +62,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                       <option></option>
                       @each(module in ac2modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -74,7 +74,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                       <option></option>
                       @each(module in ac3modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -86,7 +86,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                       <option></option>
                       @each(module in ac4modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -98,7 +98,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                       <option></option>
                       @each(module in ac5modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -110,7 +110,7 @@
               <div class="row slotsix" style="display: none">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
                       <option></option>
                       @each(module in modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -124,7 +124,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                       <option></option>
                       @each(module in dc1modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -136,7 +136,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                       <option></option>
                       @each(module in dc2modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -148,7 +148,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                       <option></option>
                       @each(module in dc3modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -160,7 +160,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                       <option></option>
                       @each(module in dc4modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -172,7 +172,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                       <option></option>
                       @each(module in dc5modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -184,7 +184,7 @@
               <div class="row slotsix" style="display: none">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
                       <option></option>
                       @each(module in modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -198,7 +198,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                       <option></option>
                       @each(module in ic1modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -210,7 +210,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                       <option></option>
                       @each(module in ic2modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -222,7 +222,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                       <option></option>
                       @each(module in ic3modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -234,7 +234,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                       <option></option>
                       @each(module in ic4modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -246,7 +246,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                       <option></option>
                       @each(module in ic5modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -258,7 +258,7 @@
               <div class="row slotsix" style="display: none">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
                       <option></option>
                       @each(module in modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -274,7 +274,7 @@
       <div class="row motherboardb">
         <div class="col-md-6">
           <div class="form-group">
-            <select name="nothing" class="full-width motherboardb-dropdown" data-placeholder="Channel Board Side B">
+            <select name="nothing" class="full-width motherboardb-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side B">
               <option></option>
               @each(mobo in mobos)
               <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
@@ -291,7 +291,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                       <option></option>
                       @each(module in ac1modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -303,7 +303,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                       <option></option>
                       @each(module in ac2modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -315,7 +315,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                       <option></option>
                       @each(module in ac3modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -327,7 +327,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                       <option></option>
                       @each(module in ac4modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -339,7 +339,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                       <option></option>
                       @each(module in ac5modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -351,7 +351,7 @@
               <div class="row slotsix" style="display: none">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
                       <option></option>
                       @each(module in modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -365,7 +365,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                       <option></option>
                       @each(module in dc1modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -377,7 +377,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                       <option></option>
                       @each(module in dc2modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -389,7 +389,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                       <option></option>
                       @each(module in dc3modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -401,7 +401,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                       <option></option>
                       @each(module in dc4modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -413,7 +413,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                       <option></option>
                       @each(module in dc5modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -425,7 +425,7 @@
               <div class="row slotsix" style="display: none">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
                       <option></option>
                       @each(module in modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -439,7 +439,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 1">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                       <option></option>
                       @each(module in ic1modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -451,7 +451,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 2">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                       <option></option>
                       @each(module in ic2modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -463,7 +463,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 3">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                       <option></option>
                       @each(module in ic3modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -475,7 +475,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 4">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                       <option></option>
                       @each(module in ic4modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -487,7 +487,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 5">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                       <option></option>
                       @each(module in ic5modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>
@@ -499,7 +499,7 @@
               <div class="row slotsix" style="display: none">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-placeholder="Module 6">
+                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
                       <option></option>
                       @each(module in modules)
                       <option value="{{ module.id }}">{{ module.name }}</option>

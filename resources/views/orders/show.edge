@@ -102,9 +102,9 @@
           <table class="m-t-50">
             <thead>
               <tr>
-                <th style="width: 7.5%" class="text-left">Item #</th>
-                <th style="width: 7.5%" class="text-center">Qty</th>
-                <th style="width: 15%" class="text-center">Part #</th>
+                <th style="width: 5%" class="text-left">Item #</th>
+                <th style="width: 5%" class="text-center">Qty</th>
+                <th style="width: 20%" class="text-center">Part #</th>
                 <th style="width: 42%" class="text-center">Description</th>
                 <th style="width: 14%" class="text-center">Unit Price</th>
                 <th style="width: 14%" class="text-right">Extended Price</th>
@@ -149,6 +149,7 @@
               </tr>
               @each(mobo in system.pivot)
               @set('loop', loop+1)
+              @set('thismobo', loop.length)
               <tr class="
               @if(mobo.modules.length > 0)
               hasModules
@@ -166,12 +167,12 @@
                     <p class="small hint-text">{{ mobo.mobo.description }}</p>
                   @endif
                 </td>
-                <td class="text-center right">
+                <td class="text-center right moboprice-{{ thismobo }}">
                   @if(mobo.mobo.price)
                   {{ priceString(mobo.mobo.price) }}
                   @endif
                 </td>
-                <td class="text-center extended">
+                <td class="text-center extended moboprice moboprice-{{ thismobo }}">
                   @if(mobo.mobo.price)
                   {{ priceString(mobo.mobo.price) }}
                   @endif
@@ -199,14 +200,14 @@
                   @endif
                 </td>
                 <td class="text-center right">
-                  @if(module.price)
-                  {{ priceString(module.price) }}
-                  @endif
+                  Included
                 </td>
-                <td class="text-center extended">
-                  @if(module.price)
-                  {{ priceString(module.price) }}
-                  @endif
+                <td class="text-center">
+                  <div class="mobo-{{ thismobo }}" style="display: none">
+                    @if(module.price)
+                    {{ priceString(module.price) }}
+                    @endif
+                  </div>
                 </td>
               </tr>
               @endeach
