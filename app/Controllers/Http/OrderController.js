@@ -240,11 +240,48 @@ class OrderController {
       shipping: data.shipping,
       payment: data.payment
     })
+    var slot = 1
+    await order.systems().detach()
+    if((typeof data.systems) != 'undefined') {
+      // Loop through each system
+      for (var system in data.systems) {
+        if (data.systems[system][0] != '') {
+          // Attach a system
+          const postedsystem = await order.systems().attach(data.systems[system][0])
+          // Get the ID of the row from the order_system entry we just made
+          const pivot = await OrderSystem.find(postedsystem[0].id)
+          // Attach all externals
+          for (var external in data.systems[system][1]['externals']) {
+            if (external != '') {
+               await pivot.externals().attach(data.systems[system][1]['externals'][external])
+            }
+          }
+          // Loop through each level below system (motherboards then modules)
+          for (var side in data.systems[system]) {
+            if (side == 'motherboarda' || side == 'motherboardb') {
+              // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
+              if(data.systems[system][side][0] != undefined) {
+                const postedmb = await pivot.mobos().attach(data.systems[system][side][0])
+                // Get the ID of the row just created in MoboOrderSystem
+                const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
+                slot = 1
+                // Loop over the motherboards modules
+                for (var module in data.systems[system][side][1]['modules']) {
+                  // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
+                  if (data.systems[system][side][1]['modules'][module] != '') {
+                    await pivotmb.modules().attach(data.systems[system][side][1]['modules'][module], (row) => {
+                      row.slot = slot
+                    })
+                  }
+                  slot++
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     await order.save()
-
-    // De-associate all the old products with this order and associate all the new products in the form
-    // await order.products().detach()
-    // await order.products().attach(data.products)
 
     session.flash({
       message: 'Your Work Order has been edited!'

@@ -9,7 +9,7 @@
       <div class="row system lightBottomRow">
         <div class="col-md-12">
           <div class="form-group">
-            <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown" data-placeholder="Select System Type">
+            <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
               <option></option>
               @each(system in systems)
               <option value="{{ system.id }}"
@@ -52,7 +52,7 @@
       <div class="row lightBottomRow">
         <div class="col-md-6">
           <div class="form-group">
-            <select name="systems[{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown" data-placeholder="Channel Board Side A">
+            <select name="systems[system-{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
               <option></option>
               @each(mobo in mobos)
               <option value="{{ mobo.id }}"
@@ -72,11 +72,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 1">
+                  <select name="systems[system-{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[0].modules[0].id==module.id)
+                    @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -88,11 +88,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 2">
+                  <select name="systems[system-{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[0].modules[1].id==module.id)
+                    @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -104,11 +104,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 3">
+                  <select name="systems[system-{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[0].modules[2].id==module.id)
+                    @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -120,11 +120,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 4">
+                  <select name="systems[system-{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[0].modules[3].id==module.id)
+                    @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -136,11 +136,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-placeholder="Module 5">
+                  <select name="systems[system-{{ $loop.index }}][motherboarda][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[0].modules[4].id==module.id)
+                    @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -155,7 +155,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <select name="systems[{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown" data-placeholder="Channel Board Side B">
+            <select name="systems[system-{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side B">
               <option></option>
               @each(mobo in mobos)
               <option value="{{ mobo.id }}"
@@ -175,11 +175,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 1">
+                  <select name="systems[system-{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[1].modules[0].id==module.id)
+                    @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -191,11 +191,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 2">
+                  <select name="systems[system-{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[1].modules[1].id==module.id)
+                    @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -207,11 +207,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 3">
+                  <select name="systems[system-{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[1].modules[2].id==module.id)
+                    @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -223,11 +223,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 4">
+                  <select name="systems[system-{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[1].modules[3].id==module.id)
+                    @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>
@@ -239,11 +239,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <select name="systems[{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-placeholder="Module 5">
+                  <select name="systems[system-{{ $loop.index }}][motherboardb][modules]" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
                     <option></option>
                     @each(module in modules)
                     <option value="{{ module.id }}"
-                    @if($parent.ordersystem.pivot[1].modules[4].id==module.id)
+                    @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5))
                     selected="selected"
                     @endif
                     >{{ module.name }}</option>

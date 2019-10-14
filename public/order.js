@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('#newOrderDate').datepicker()
 
     // Start select2 javascript plugin on the Customer input
-    $('.full-width:visible').select2()
+    $('.tab-pane:not(#system-example) .full-width').select2()
 
     $('#workOrderForm').on('click', '.collapseToggle', function(e){
       e.preventDefault()
@@ -61,6 +61,7 @@ $(document).ready(function() {
           pane.find('.motherboards').show()
           pane.find('.motherboardb').hide()
           pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + num + '][motherboarda]').attr('disabled', 'true').select2()
+          pane.find('.motherboardaCollapse').show()
           break
       }
     num++
