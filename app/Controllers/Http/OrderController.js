@@ -295,7 +295,7 @@ class OrderController {
                 // Get the ID of the row just created in MoboOrderSystem
                 const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
                 slot = 1
-                if (data.systems[system][side][1] != undefined) {
+                if (data.systems[system][side] != undefined) {
                 // Loop over the motherboards modules
                   for (var module in data.systems[system][side][1]['modules']) {
                     // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
