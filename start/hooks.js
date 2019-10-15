@@ -9,4 +9,8 @@ hooks.after.providersRegistered(() => {
       currency: 'USD'
     })
   })
+  
+  View.global('multilineBreak', function (text) {
+    return text.replace(/(?:\\[rn])+/g, '<br />').replace(/['"]+/g, '');
+  })
 })

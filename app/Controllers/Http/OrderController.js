@@ -139,6 +139,21 @@ class OrderController {
     const mobos = await Mobo.all()
     const externals = await External.all()
     const modules = await Module.all()
+    const ac1modules = await Module.query().where('ac1', true).orderBy('name', 'asc').fetch()
+    const ac2modules = await Module.query().where('ac2', true).orderBy('name', 'asc').fetch()
+    const ac3modules = await Module.query().where('ac3', true).orderBy('name', 'asc').fetch()
+    const ac4modules = await Module.query().where('ac4', true).orderBy('name', 'asc').fetch()
+    const ac5modules = await Module.query().where('ac5', true).orderBy('name', 'asc').fetch()
+    const dc1modules = await Module.query().where('dc1', true).orderBy('name', 'asc').fetch()
+    const dc2modules = await Module.query().where('dc2', true).orderBy('name', 'asc').fetch()
+    const dc3modules = await Module.query().where('dc3', true).orderBy('name', 'asc').fetch()
+    const dc4modules = await Module.query().where('dc4', true).orderBy('name', 'asc').fetch()
+    const dc5modules = await Module.query().where('dc5', true).orderBy('name', 'asc').fetch()
+    const ic1modules = await Module.query().where('ic1', true).orderBy('name', 'asc').fetch()
+    const ic2modules = await Module.query().where('ic2', true).orderBy('name', 'asc').fetch()
+    const ic3modules = await Module.query().where('ic3', true).orderBy('name', 'asc').fetch()
+    const ic4modules = await Module.query().where('ic4', true).orderBy('name', 'asc').fetch()
+    const ic5modules = await Module.query().where('ic5', true).orderBy('name', 'asc').fetch()
     // const products = await Product.all()
 
     // Cast a new date from the date in the database for the date form input
@@ -153,6 +168,21 @@ class OrderController {
       externals: externals.toJSON(),
       modules: modules.toJSON(),
       ordersystems: ordersystems.toJSON(),
+      ac1modules: ac1modules.toJSON(),
+      ac2modules: ac2modules.toJSON(),
+      ac3modules: ac3modules.toJSON(),
+      ac4modules: ac4modules.toJSON(),
+      ac5modules: ac5modules.toJSON(),
+      dc1modules: dc1modules.toJSON(),
+      dc2modules: dc2modules.toJSON(),
+      dc3modules: dc3modules.toJSON(),
+      dc4modules: dc4modules.toJSON(),
+      dc5modules: dc5modules.toJSON(),
+      ic1modules: ic1modules.toJSON(),
+      ic2modules: ic2modules.toJSON(),
+      ic3modules: ic3modules.toJSON(),
+      ic4modules: ic4modules.toJSON(),
+      ic5modules: ic5modules.toJSON(),
       date: date
     })
   }
@@ -260,16 +290,16 @@ class OrderController {
           for (var side in data.systems[system]) {
             if (side == 'motherboarda' || side == 'motherboardb') {
               // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
-              if(data.systems[system][side][0] != undefined) {
+              if(data.systems[system][side][0] != '') {
                 const postedmb = await pivot.mobos().attach(data.systems[system][side][0])
                 // Get the ID of the row just created in MoboOrderSystem
                 const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
                 slot = 1
                 // Loop over the motherboards modules
-                for (var module in data.systems[system][side][1]['modules']) {
+                for (var module in data.systems[system][side]['modules']) {
                   // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
-                  if (data.systems[system][side][1]['modules'][module] != '') {
-                    await pivotmb.modules().attach(data.systems[system][side][1]['modules'][module], (row) => {
+                  if (data.systems[system][side]['modules'][module] != '') {
+                    await pivotmb.modules().attach(data.systems[system][side]['modules'][module], (row) => {
                       row.slot = slot
                     })
                   }
@@ -284,7 +314,7 @@ class OrderController {
     await order.save()
 
     session.flash({
-      message: 'Your Work Order has been edited!'
+      message: 'Your Work Order has been edited! - ' + JSON.stringify(data)
     })
     return response.redirect('/orders/' + order.id)
   }
