@@ -290,20 +290,22 @@ class OrderController {
           for (var side in data.systems[system]) {
             if (side == 'motherboarda' || side == 'motherboardb') {
               // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
-              if(data.systems[system][side][0] != '') {
+              if(data.systems[system][side] != '') {
                 const postedmb = await pivot.mobos().attach(data.systems[system][side][0])
                 // Get the ID of the row just created in MoboOrderSystem
                 const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
                 slot = 1
+                if (data.systems[system][side][1] != undefined) {
                 // Loop over the motherboards modules
-                for (var module in data.systems[system][side]['modules']) {
-                  // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
-                  if (data.systems[system][side]['modules'][module] != '') {
-                    await pivotmb.modules().attach(data.systems[system][side]['modules'][module], (row) => {
-                      row.slot = slot
-                    })
+                  for (var module in data.systems[system][side][1]['modules']) {
+                    // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
+                    if (data.systems[system][side][1]['modules'][module] != '') {
+                      await pivotmb.modules().attach(data.systems[system][side][1]['modules'][module], (row) => {
+                        row.slot = slot
+                      })
+                    }
+                    slot++
                   }
-                  slot++
                 }
               }
             }

@@ -69,7 +69,7 @@ $(document).ready(function() {
     $('#workOrderForm').on('select2:selecting', '.motherboarda-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
       mobotype = e.params.args.data.element.getAttribute('data-mobotype').toLowerCase()
-      thisnum = Number(pane.attr('id').split('-')[1])
+      thisnum = pane.attr('id').split('-')[1]
       modules = pane.find('.motherboardaModules')
       pane.find('.motherboardaCollapse').show()
       pane.find('#motherboardaCollapse').collapse('show')
