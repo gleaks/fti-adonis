@@ -32,7 +32,7 @@ $(document).ready(function() {
       thisnum = pane.attr('id').split('-')[1]
       systemPrice = pane.find('.system-price')
       systemPrice.show()
-      systemPrice.find('input').attr('name', 'systems[system-' + num + ']').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
+      systemPrice.find('input').attr('name', 'systems[system-' + thisnum + ']').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
       if($(this).val() == '') {
         newpane = 'system-' + (parseInt(num) + 1)
         pane.after($('#system-example').prop('outerHTML'))
@@ -50,10 +50,10 @@ $(document).ready(function() {
           pane.find('.motherboards').show()
           pane.find('.motherboarda').show()
           pane.find('.motherboardb').show()
-          pane.find('.motherboarda-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboarda]').removeAttr('disabled').select2()
-          pane.find('.motherboardb-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][motherboardb]').select2()
+          pane.find('.motherboarda-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboarda]').removeAttr('disabled').select2()
+          pane.find('.motherboardb-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][motherboardb]').select2()
           pane.find('.external').show()
-          pane.find('.external-dropdown').val('').trigger('change').attr('name', 'systems[system-' + num + '][externals]').select2()
+          pane.find('.external-dropdown').val('').trigger('change').attr('name', 'systems[system-' + thisnum + '][externals]').select2()
           pane.find('.external:not(:first)').remove()
           pane.find('.module-dropdown').val('').trigger('change')
           pane.find('#motherboardaCollapse').collapse('hide')
@@ -65,7 +65,7 @@ $(document).ready(function() {
           pane.find('.external').hide()
           pane.find('.motherboards').show()
           pane.find('.motherboardb').hide()
-          pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + num + '][motherboarda]').attr('disabled', 'true').select2()
+          pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + thisnum + '][motherboarda]').attr('disabled', 'true').select2()
           pane.find('.motherboardaCollapse').show()
           break
       }
