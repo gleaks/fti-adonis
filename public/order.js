@@ -28,6 +28,7 @@ $(document).ready(function() {
 
     $('#workOrderForm').on('select2:selecting', '.system-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
+      thisnum = pane.attr('id').split('-')[1]
       systemPrice = pane.find('.system-price')
       systemPrice.show()
       systemPrice.find('input').attr('name', 'systems[system-' + num + ']').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
@@ -84,9 +85,11 @@ $(document).ready(function() {
       modules.find('.acmodules').hide()
       modules.find('.dcmodules').hide()
       modules.find('.icmodules').hide()
-      modules.find('.' + mobotype + 'modules').show()
-      modules.find('.module-dropdown:hidden').attr('name', 'nothing')
-      modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
+      modules.find('.module-dropdown').attr('name', 'nothing')
+      thismodules = modules.find('.' + mobotype + 'modules')
+      thismodules.show()
+      thismodules.find('.module-dropdown').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
+      thismodules.find('.module-price input').attr('name', 'systems[system-' + thisnum + '][motherboarda][moduleprices]')
     })
     $('#workOrderForm').on('select2:selecting', '.motherboardb-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
@@ -103,13 +106,21 @@ $(document).ready(function() {
       modules.find('.acmodules').hide()
       modules.find('.dcmodules').hide()
       modules.find('.icmodules').hide()
-      modules.find('.' + mobotype + 'modules').show()
-      modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
+      modules.find('.module-dropdown').attr('name', 'nothing')
+      thismodules = modules.find('.' + mobotype + 'modules')
+      thismodules.show()
+      thismodules.find('.module-dropdown').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
+      thismodules.find('.module-price input').attr('name', 'systems[system-' + thisnum + '][motherboardb][moduleprices]')
+    })
+    $('#workOrderForm').on('select2:selecting', '.external-dropdown', function(e) {
+      group = $(e.target).closest('.form-group-attached')
+      group.find('.external-price').show()
+      group.find('.external-price input').attr('name', 'systems[system-' + thisnum + '][externalprices]').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
     })
     $('#workOrderForm').on('select2:selecting', '.module-dropdown', function(e) {
       group = $(e.target).closest('.form-group-attached')
       group.find('.module-price').show()
-      group.find('.module-price input').attr('name', 'systems[system-' + thisnum + '][moduleprices]').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
+      group.find('.module-price input').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
     })
 
 

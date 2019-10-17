@@ -212,7 +212,9 @@
                 </td>
                 <td class="text-center">
                   <div class="mobo-{{ thismobo }}" style="display: none">
-                    @if(module.price)
+                    @if(module.pivot.price)
+                    {{ priceString(module.pivot.price) }}
+                    @elseif(module.price)
                     {{ priceString(module.price) }}
                     @endif
                   </div>
@@ -236,12 +238,16 @@
                   @endif
                 </td>
                 <td class="text-center right">
-                  @if(external.price)
+                  @if(external.pivot.price)
+                  {{ priceString(external.pivot.price) }}
+                  @elseif(external.price)
                   {{ priceString(external.price) }}
                   @endif
                 </td>
                 <td class="text-center extended">
-                  @if(external.price)
+                  @if(external.pivot.price)
+                  {{ priceString(external.pivot.price) }}
+                  @elseif(external.price)
                   {{ priceString(external.price) }}
                   @endif
                 </td>

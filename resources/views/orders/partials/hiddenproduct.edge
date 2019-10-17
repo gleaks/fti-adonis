@@ -25,13 +25,23 @@
       </div>
       <div class="row lightBottomRow external" style="display: none">
         <div class="col-md-9">
-          <div class="form-group">
-            <select name="nothing" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
-              <option></option>
-              @each(external in externals)
-              <option value="{{ external.id }}">{{ external.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="nothing" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
+                <option></option>
+                @each(external in externals)
+                <option value="{{ external.id }}" data-price="{{ external.price }}">{{ external.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group external-price" style="display: none">
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -64,73 +74,111 @@
             <div class="acmodules">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in ac1modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in ac1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in ac2modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in ac2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in ac3modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in ac3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in ac4modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in ac4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in ac5modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row slotsix" style="display: none">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
-                      <option></option>
-                      @each(module in modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in ac5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -138,73 +186,111 @@
             <div class="dcmodules">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in dc1modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in dc1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in dc2modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in dc2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in dc3modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in dc3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in dc4modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in dc4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in dc5modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row slotsix" style="display: none">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
-                      <option></option>
-                      @each(module in modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in dc5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -212,73 +298,111 @@
             <div class="icmodules">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in ic1modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in ic1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in ic2modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in ic2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in ic3modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in ic3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in ic4modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in ic4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in ic5modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row slotsix" style="display: none">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
-                      <option></option>
-                      @each(module in modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in ic5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -315,25 +439,40 @@
                       <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
                         <option></option>
                         @each(module in ac1modules)
-                        <option value="{{ module.id }}">{{ module.name }}</option>
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
                         @endeach
                       </select>
                     </div>
                     <div class="form-group module-price" style="display: none">
-                      <input type="text" name="nothing" class="form-control" placeholder="Custom Price" />
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in ac2modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in ac2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -349,44 +488,57 @@
                       </select>
                     </div>
                     <div class="form-group module-price" style="display: none">
-                      <input type="text" name="nothing" class="form-control" placeholder="Custom Price" />
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in ac4modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in ac4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in ac5modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row slotsix" style="display: none">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
-                      <option></option>
-                      @each(module in modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in ac5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -394,73 +546,111 @@
             <div class="dcmodules">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in dc1modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in dc1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in dc2modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in dc2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in dc3modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in dc3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in dc4modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in dc4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in dc5modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row slotsix" style="display: none">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
-                      <option></option>
-                      @each(module in modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in dc5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -468,73 +658,111 @@
             <div class="icmodules">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in ic1modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in ic1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in ic2modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in ic2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in ic3modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in ic3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in ic4modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in ic4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in ic5modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row slotsix" style="display: none">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 6">
-                      <option></option>
-                      @each(module in modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in ic5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

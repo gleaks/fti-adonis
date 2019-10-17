@@ -222,7 +222,9 @@ class OrderController {
         // Attach all externals
         for (var external in order.systems[system]['externals']) {
           if (external != '') {
-             await pivot.externals().attach(order.systems[system]['externals'][external])
+             await pivot.externals().attach(order.systems[system]['externals'][external], (row) => {
+               row.price = order.systems[system]['externalprices'][external]
+             })
           }
         }
         // Loop through each level below system (motherboards then modules)
@@ -241,7 +243,8 @@ class OrderController {
                 // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
                 if (order.systems[system][side]['modules'][module] != '') {
                   await pivotmb.modules().attach(order.systems[system][side]['modules'][module], (row) => {
-                    row.slot = slot
+                    row.slot = slot,
+                    row.price = order.systems[system][side]['moduleprices'][module]
                   })
                 }
                 slot++
