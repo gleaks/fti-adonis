@@ -8,34 +8,54 @@
     <div class="col-md-4 right">
       <div class="row system lightBottomRow">
         <div class="col-md-12">
-          <div class="form-group">
-            <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
-              <option></option>
-              @each(system in systems)
-              <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}"
-              @if($parent.ordersystem.system.id==system.id)
-              selected="selected"
-              @endif
-              >{{ system.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
+                <option></option>
+                @each(system in systems)
+                <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}" data-price="{{ system.price }}"
+                @if($parent.ordersystem.system.id==system.id)
+                selected="selected"
+                @endif
+                >{{ system.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group system-price">
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="systems[system-{{ $loop.index }}]" class="form-control input-sm" placeholder="Custom Price" value="{{ ordersystem.price }}" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
       @each(orderexternal in ordersystem.externals)
       <div class="row lightBottomRow external">
         <div class="col-md-9">
-          <div class="form-group">
-            <select name="systems[system-{{ $parent.$loop.index }}][externals]" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
-              <option></option>
-              @each(external in externals)
-              <option value="{{ external.id }}"
-              @if($parent.orderexternal.id==external.id)
-              selected="selected"
-              @endif
-              >{{ external.name }}</option>
-              @endeach
-            </select>
+            <div class="form-group-attached">
+            <div class="form-group">
+              <select name="systems[system-{{ $parent.$loop.index }}][externals]" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
+                <option></option>
+                @each(external in externals)
+                <option value="{{ external.id }}" data-price="{{ external.price }}"
+                @if($parent.orderexternal.id==external.id)
+                selected="selected"
+                @endif
+                >{{ external.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group external-price">
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="systems[system-{{ $loop.index }}][externalprices]" class="form-control input-sm" placeholder="Custom Price" value="{{ orderexternal.pivot.price }}" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -50,13 +70,23 @@
       @if(size(ordersystem.externals) == 0)
       <div class="row lightBottomRow external">
         <div class="col-md-9">
-          <div class="form-group">
-            <select name="systems[system-{{ $loop.index }}][externals]" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
-              <option></option>
-              @each(external in externals)
-              <option value="{{ external.id }}">{{ external.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="systems[system-{{ $loop.index }}][externals]" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
+                <option></option>
+                @each(external in externals)
+                <option value="{{ external.id }}" data-price="{{ external.price }}">{{ external.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group external-price" style="display: none">
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -68,20 +98,42 @@
     <div class="col-md-8 motherboards">
       <div class="row lightBottomRow">
         <div class="col-md-6">
-          <div class="form-group">
-            <select name="systems[system-{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
-              <option></option>
-              @each(mobo in mobos)
-              <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}"
-              @if($parent.ordersystem.pivot[0].mobo.id==mobo.id)
-               selected="selected"
-               @endif
-               >{{ mobo.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="systems[system-{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
+                <option></option>
+                @each(mobo in mobos)
+                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}"
+                @if($parent.ordersystem.pivot[0].mobo.id==mobo.id)
+                 selected="selected"
+                 @endif
+                 >{{ mobo.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group motherboarda-price"
+            @if(ordersystem.pivot[0])
+            style=""
+            @else
+            style="display: none"
+            @endif
+            >
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="systems[system-{{ $loop.index }}][motherboarda]" class="form-control input-sm" placeholder="Custom Price" value="{{ ordersystem.pivot[0].price }}" />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-1 motherboardaCollapse right">
+        <div class="col-md-1 motherboardaCollapse right"
+        @if(ordersystem.pivot[0])
+        style=""
+        @else
+        style="display: none"
+        @endif
+        >
           <a href="#motherboardaCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_right"></i></a>
         </div>
         <div class="col-md-5 motherboardaModules">
@@ -93,111 +145,259 @@
             >
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in ac1modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in ac1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @unless(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in ac2modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in ac2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==2 || ordersystem.pivot[0].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in ac3modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in ac3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==3 || ordersystem.pivot[0].modules[1].pivot.slot==3 || ordersystem.pivot[0].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in ac4modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in ac4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==4 || ordersystem.pivot[0].modules[1].pivot.slot==4 || ordersystem.pivot[0].modules[2].pivot.slot==4 || ordersystem.pivot[0].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in ac5modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in ac5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==5 || ordersystem.pivot[0].modules[1].pivot.slot==5 || ordersystem.pivot[0].modules[2].pivot.slot==5 || ordersystem.pivot[0].modules[3].pivot.slot==5 || ordersystem.pivot[0].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[4].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -209,111 +409,259 @@
             >
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in dc1modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in dc1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==1))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @unless(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in dc2modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in dc2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==2))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==2 || ordersystem.pivot[0].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in dc3modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in dc3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==3))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==3 || ordersystem.pivot[0].modules[1].pivot.slot==3 || ordersystem.pivot[0].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in dc4modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in dc4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==4))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==4 || ordersystem.pivot[0].modules[1].pivot.slot==4 || ordersystem.pivot[0].modules[2].pivot.slot==4 || ordersystem.pivot[0].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboarda][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in dc5modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboarda][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in dc5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[1].id==module.id && $parent.ordersystem.pivot[0].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[2].id==module.id && $parent.ordersystem.pivot[0].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[3].id==module.id && $parent.ordersystem.pivot[0].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[0].modules[0].id==module.id && $parent.ordersystem.pivot[0].modules[0].pivot.slot==5))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==5 || ordersystem.pivot[0].modules[1].pivot.slot==5 || ordersystem.pivot[0].modules[2].pivot.slot==5 || ordersystem.pivot[0].modules[3].pivot.slot==5 || ordersystem.pivot[0].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.price }}"
+                        @elseif(ordersystem.pivot[0].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[4].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -323,20 +671,42 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group">
-            <select name="systems[system-{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side B">
-              <option></option>
-              @each(mobo in mobos)
-              <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}"
-              @if($parent.ordersystem.pivot[1].mobo.id==mobo.id)
-               selected="selected"
-               @endif
-               >{{ mobo.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="systems[system-{{ $loop.index }}][motherboardb]" class="full-width motherboardb-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side B">
+                <option></option>
+                @each(mobo in mobos)
+                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}"
+                @if($parent.ordersystem.pivot[1].mobo.id==mobo.id)
+                 selected="selected"
+                 @endif
+                 >{{ mobo.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group motherboardb-price"
+            @if(ordersystem.pivot[1])
+            style=""
+            @else
+            style="display: none"
+            @endif
+            >
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="systems[system-{{ $loop.index }}][motherboardb]" class="form-control input-sm" placeholder="Custom Price" value="{{ ordersystem.pivot[1].price }}" />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-1 right motherboardbCollapse">
+        <div class="col-md-1 right motherboardbCollapse"
+        @if(ordersystem.pivot[1])
+        style=""
+        @else
+        style="display: none"
+        @endif
+        >
           <a href="#motherboardbCollapse" data-toggle="collapse" class="btn btn-xs btn-default collapseToggle"><i class="pg-arrow_right"></i></a>
         </div>
         <div class="col-md-5 motherboardbModules">
@@ -348,111 +718,259 @@
             >
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in ac1modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in ac1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @unless(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in ac2modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in ac2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==2 || ordersystem.pivot[1].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==1)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in ac3modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in ac3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==3 || ordersystem.pivot[1].modules[1].pivot.slot==3 || ordersystem.pivot[1].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in ac4modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in ac4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==4 || ordersystem.pivot[1].modules[1].pivot.slot==4 || ordersystem.pivot[1].modules[2].pivot.slot==4 || ordersystem.pivot[1].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in ac5modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in ac5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==5 || ordersystem.pivot[1].modules[1].pivot.slot==5 || ordersystem.pivot[1].modules[2].pivot.slot==5 || ordersystem.pivot[1].modules[3].pivot.slot==5 || ordersystem.pivot[1].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[4].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -464,111 +982,259 @@
             >
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in dc1modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in dc1modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==1) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==1))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @unless(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
-                      <option></option>
-                      @each(module in dc2modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 2">
+                        <option></option>
+                        @each(module in dc2modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==2) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==2))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==2 || ordersystem.pivot[1].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==1)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in dc3modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in dc3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==3) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==3))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==3 || ordersystem.pivot[1].modules[1].pivot.slot==3 || ordersystem.pivot[1].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
-                      <option></option>
-                      @each(module in dc4modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 4">
+                        <option></option>
+                        @each(module in dc4modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==4) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==4))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==4 || ordersystem.pivot[1].modules[1].pivot.slot==4 || ordersystem.pivot[1].modules[2].pivot.slot==4 || ordersystem.pivot[1].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select
-                    @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
-                    name="systems[system-{{ $loop.index }}][motherboardb][modules]"
-                    @else
-                    name="nothing"
-                    @endif
-                    class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
-                      <option></option>
-                      @each(module in dc5modules)
-                      <option value="{{ module.id }}"
-                      @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5))
-                      selected="selected"
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select
+                      @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                      name="systems[system-{{ $loop.index }}][motherboardb][modules]"
+                      @else
+                      name="nothing"
                       @endif
-                      >{{ module.name }}</option>
-                      @endeach
-                    </select>
+                      class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 5">
+                        <option></option>
+                        @each(module in dc5modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}"
+                        @if(($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[1].id==module.id && $parent.ordersystem.pivot[1].modules[1].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[2].id==module.id && $parent.ordersystem.pivot[1].modules[2].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[3].id==module.id && $parent.ordersystem.pivot[1].modules[3].pivot.slot==5) || ($parent.ordersystem.pivot[1].modules[0].id==module.id && $parent.ordersystem.pivot[1].modules[0].pivot.slot==5))
+                        selected="selected"
+                        @endif
+                        >{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==5 || ordersystem.pivot[1].modules[1].pivot.slot==5 || ordersystem.pivot[1].modules[2].pivot.slot==5 || ordersystem.pivot[1].modules[3].pivot.slot==5 || ordersystem.pivot[1].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                        </div>
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduleprices]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom Price"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.price }}"
+                        @elseif(ordersystem.pivot[1].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[4].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

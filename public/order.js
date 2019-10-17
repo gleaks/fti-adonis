@@ -20,6 +20,7 @@ $(document).ready(function() {
     var paneclass = 'active'
     if($('.tab-pane:last').attr('id') != 'system-example') {
       num = 1 + Number($('.tab-pane:last').attr('id').split('-')[1])
+      thisnum = num
       paneclass = ''
     }
     $('.tab-pane:last').after($('#system-example').prop('outerHTML'))
@@ -90,6 +91,7 @@ $(document).ready(function() {
       thismodules.show()
       thismodules.find('.module-dropdown').attr('name', 'systems[system-' + thisnum + '][motherboarda][modules]').select2()
       thismodules.find('.module-price input').attr('name', 'systems[system-' + thisnum + '][motherboarda][moduleprices]')
+      thismodules.find('.module-price').hide()
     })
     $('#workOrderForm').on('select2:selecting', '.motherboardb-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
@@ -146,6 +148,7 @@ $(document).ready(function() {
       pane.find('.motherboarda-price').hide()
       pane.find('.motherboarda-price input').val('').attr('name', 'nothing')
       pane.find('.motherboardb-dropdown').val('').attr('name', 'nothing')
+      pane.find('.motherboardb-price').hide()
       pane.find('.motherboardb-price input').val('').attr('name', 'nothing')
       pane.find('.module-dropdown').val('').attr('name', 'nothing')
       pane.find('.module-price').hide()

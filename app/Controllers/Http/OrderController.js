@@ -221,7 +221,7 @@ class OrderController {
         test = JSON.stringify(order.systems)
         // Attach all externals
         for (var external in order.systems[system]['externals']) {
-          if (external != '') {
+          if (order.systems[system]['externals'][external] != '') {
              await pivot.externals().attach(order.systems[system]['externals'][external], (row) => {
                row.price = order.systems[system]['externalprices'][external]
              })
@@ -281,37 +281,46 @@ class OrderController {
       payment: data.payment
     })
     var slot = 1
+    var test = ''
     await order.systems().detach()
     if((typeof data.systems) != 'undefined') {
       // Loop through each system
       for (var system in data.systems) {
         if (data.systems[system][0] != '') {
           // Attach a system
-          const postedsystem = await order.systems().attach(data.systems[system][0])
+          const postedsystem = await order.systems().attach(data.systems[system][0], (row) => {
+            row.price = data.systems[system][1]
+          })
           // Get the ID of the row from the order_system entry we just made
           const pivot = await OrderSystem.find(postedsystem[0].id)
           // Attach all externals
-          for (var external in data.systems[system][1]['externals']) {
-            if (external != '') {
-               await pivot.externals().attach(data.systems[system][1]['externals'][external])
+          for (var external in data.systems[system]['externals']) {
+            if (data.systems[system]['externals'][external] != '') {
+               await pivot.externals().attach(data.systems[system]['externals'][external], (row) => {
+                 row.price = data.systems[system]['externalprices'][external]
+               })
             }
           }
           // Loop through each level below system (motherboards then modules)
           for (var side in data.systems[system]) {
             if (side == 'motherboarda' || side == 'motherboardb') {
               // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
-              if(data.systems[system][side] != '') {
-                const postedmb = await pivot.mobos().attach(data.systems[system][side][0])
+              if (typeof(data.systems[system][side][0]) != 'undefined') {
+                test = test + 'AND ' + test
+                const postedmb = await pivot.mobos().attach(data.systems[system][side][0], (row) => {
+                  row.price = data.systems[system][side][1]
+                })
                 // Get the ID of the row just created in MoboOrderSystem
                 const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
                 slot = 1
                 if (data.systems[system][side] != undefined) {
                 // Loop over the motherboards modules
-                  for (var module in data.systems[system][side][1]['modules']) {
+                  for (var module in data.systems[system][side]['modules']) {
                     // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
-                    if (data.systems[system][side][1]['modules'][module] != '') {
-                      await pivotmb.modules().attach(data.systems[system][side][1]['modules'][module], (row) => {
-                        row.slot = slot
+                    if (data.systems[system][side]['modules'][module] != '') {
+                      await pivotmb.modules().attach(data.systems[system][side]['modules'][module], (row) => {
+                        row.slot = slot,
+                        row.price = data.systems[system][side]['moduleprices'][module]
                       })
                     }
                     slot++
@@ -326,7 +335,7 @@ class OrderController {
     await order.save()
 
     session.flash({
-      message: 'Your Work Order has been edited!'
+      message: 'Your Work Order has been edited!' + test
     })
     return response.redirect('/orders/' + order.id)
   }
