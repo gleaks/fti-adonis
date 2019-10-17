@@ -206,34 +206,41 @@ class OrderController {
       payment: order.payment
     })
     var slot = 1
+    var test = ''
+    var test2 = ''
     // If there are actually some systems attached to the order do this
     if((typeof order.systems) != 'undefined') {
       // Loop through each system
       for (var system in order.systems) {
         // Attach a system
-        const postedsystem = await posted.systems().attach(order.systems[system][0])
+        const postedsystem = await posted.systems().attach(order.systems[system][0], (row) => {
+          row.price = order.systems[system][1]
+        })
         // Get the ID of the row from the order_system entry we just made
         const pivot = await OrderSystem.find(postedsystem[0].id)
+        test = JSON.stringify(order.systems)
         // Attach all externals
-        for (var external in order.systems[system][1]['externals']) {
+        for (var external in order.systems[system]['externals']) {
           if (external != '') {
-             await pivot.externals().attach(order.systems[system][1]['externals'][external])
+             await pivot.externals().attach(order.systems[system]['externals'][external])
           }
         }
         // Loop through each level below system (motherboards then modules)
         for (var side in order.systems[system]) {
           if (side == 'motherboarda' || side == 'motherboardb') {
             // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
-            if(order.systems[system][side][0] != undefined) {
-              const postedmb = await pivot.mobos().attach(order.systems[system][side][0])
+            if (order.systems[system][side][0] != undefined) {
+              const postedmb = await pivot.mobos().attach(order.systems[system][side][0], (row) => {
+                row.price = order.systems[system][side][1]
+              })
               // Get the ID of the row just created in MoboOrderSystem
               const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
               slot = 1
               // Loop over the motherboards modules
-              for (var module in order.systems[system][side][1]['modules']) {
+              for (var module in order.systems[system][side]['modules']) {
                 // If the result isn't empty (from a blank dropdown) then attach the module to the MoboOrderSystem
-                if (order.systems[system][side][1]['modules'][module] != '') {
-                  await pivotmb.modules().attach(order.systems[system][side][1]['modules'][module], (row) => {
+                if (order.systems[system][side]['modules'][module] != '') {
+                  await pivotmb.modules().attach(order.systems[system][side]['modules'][module], (row) => {
                     row.slot = slot
                   })
                 }
@@ -245,7 +252,7 @@ class OrderController {
       }
     }
     session.flash({
-      message: 'Your Work Order has been created!'
+      message: 'yourorder' + test + ' - AND - ' + test2
     })
     return response.redirect('/orders/' + posted.id)
   }
@@ -316,7 +323,7 @@ class OrderController {
     await order.save()
 
     session.flash({
-      message: 'Your Work Order has been edited! - ' + JSON.stringify(data)
+      message: 'Your Work Order has been edited!'
     })
     return response.redirect('/orders/' + order.id)
   }

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-  Focused Test - Quote #{{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
+  Focused Test - Quote #{{ upperCase(order.customer.name.substring(0, 3)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
 @endsection
 
 @section('breadcrumb')
@@ -13,7 +13,7 @@
     <a href="/">Quotes</a>
   </li>
   <li class="breadcrumb-item active">
-    Quote #{{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
+    Quote #{{ upperCase(order.customer.name.substring(0, 3)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
   </li>
 @endsection
 
@@ -65,9 +65,9 @@
               </div>
               <div class="col-md-3">
                 <strong>Quotation Number</strong><br />
-                {{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
+                {{ upperCase(order.customer.name.substring(0, 3)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
                 <div id="quotenumber" style="display: none">
-                  {{ upperCase(order.customer.name.substring(0, 2)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
+                  {{ upperCase(order.customer.name.substring(0, 3)) }}{{ order.id }}{{ day }}{{ month }}{{ year }}
                 </div>
               </div>
             </div>
@@ -137,12 +137,16 @@
                   @endif
                 </td>
                 <td class="text-center right">
-                  @if(system.system.price)
+                  @if(system.price)
+                  {{ priceString(system.price) }}
+                  @elseif(system.system.price)
                   {{ priceString(system.system.price) }}
                   @endif
                 </td>
                 <td class="text-center extended">
-                  @if(system.system.price)
+                  @if(system.price)
+                  {{ priceString(system.price) }}
+                  @elseif(system.system.price)
                   {{ priceString(system.system.price) }}
                   @endif
                 </td>
@@ -168,12 +172,16 @@
                   @endif
                 </td>
                 <td class="text-center right moboprice-{{ thismobo }}">
-                  @if(mobo.mobo.price)
+                  @if(mobo.price)
+                  {{ priceString(mobo.price) }}
+                  @elseif(mobo.mobo.price)
                   {{ priceString(mobo.mobo.price) }}
                   @endif
                 </td>
                 <td class="text-center extended moboprice moboprice-{{ thismobo }}">
-                  @if(mobo.mobo.price)
+                  @if(mobo.price)
+                  {{ priceString(mobo.price) }}
+                  @elseif(mobo.mobo.price)
                   {{ priceString(mobo.mobo.price) }}
                   @endif
                 </td>

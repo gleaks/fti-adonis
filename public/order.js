@@ -28,6 +28,9 @@ $(document).ready(function() {
 
     $('#workOrderForm').on('select2:selecting', '.system-dropdown', function(e) {
       pane = $(e.target).closest('.tab-pane')
+      systemPrice = pane.find('.system-price')
+      systemPrice.show()
+      systemPrice.find('input').attr('name', 'systems[system-' + num + ']').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
       if($(this).val() == '') {
         newpane = 'system-' + (parseInt(num) + 1)
         pane.after($('#system-example').prop('outerHTML'))
@@ -70,6 +73,9 @@ $(document).ready(function() {
       pane = $(e.target).closest('.tab-pane')
       mobotype = e.params.args.data.element.getAttribute('data-mobotype').toLowerCase()
       thisnum = pane.attr('id').split('-')[1]
+      systemPrice = pane.find('.motherboarda-price')
+      systemPrice.show()
+      systemPrice.find('input').attr('name', 'systems[system-' + thisnum + '][motherboarda]').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
       modules = pane.find('.motherboardaModules')
       pane.find('.motherboardaCollapse').show()
       pane.find('#motherboardaCollapse').collapse('show')
@@ -86,17 +92,27 @@ $(document).ready(function() {
       pane = $(e.target).closest('.tab-pane')
       mobotype = e.params.args.data.element.getAttribute('data-mobotype').toLowerCase()
       thisnum = Number(pane.attr('id').split('-')[1])
+      systemPrice = pane.find('.motherboardb-price')
+      systemPrice.show()
+      systemPrice.find('input').attr('name', 'systems[system-' + thisnum + '][motherboardb]').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
       modules = pane.find('.motherboardbModules')
       pane.find('.motherboardbCollapse').show()
       pane.find('#motherboardbCollapse').collapse('show')
       modules.show()
-      modules.find('.module-dropdown').val('').trigger('change')
+      modules.find('.module-dropdown').attr('name', 'nothing').val('').trigger('change')
       modules.find('.acmodules').hide()
       modules.find('.dcmodules').hide()
       modules.find('.icmodules').hide()
       modules.find('.' + mobotype + 'modules').show()
       modules.find('.module-dropdown:visible').attr('name', 'systems[system-' + thisnum + '][motherboardb][modules]').select2()
     })
+    $('#workOrderForm').on('select2:selecting', '.module-dropdown', function(e) {
+      group = $(e.target).closest('.form-group-attached')
+      group.find('.module-price').show()
+      group.find('.module-price input').attr('name', 'systems[system-' + thisnum + '][moduleprices]').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
+    })
+
+
     $('#workOrderForm').on('select2:unselect', '.system-dropdown', function(e) {
       oldpane = $('.nav-tabs li:last a').attr('href')
       pane = $(e.target).closest('.tab-pane')

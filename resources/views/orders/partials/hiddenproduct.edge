@@ -3,13 +3,23 @@
     <div class="col-md-4 right">
       <div class="row system lightBottomRow">
         <div class="col-md-12">
-          <div class="form-group">
-            <select name="nothing" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
-              <option></option>
-              @each(system in systems)
-              <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}">{{ system.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="nothing" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
+                <option></option>
+                @each(system in systems)
+                <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}" data-price="{{ system.price }}">{{ system.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group system-price" style="display: none">
+              <div class="input-group transparent">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -32,13 +42,18 @@
     <div class="col-md-8 motherboards" style="display:none">
       <div class="row lightBottomRow motherboarda">
         <div class="col-md-6">
-          <div class="form-group">
-            <select name="nothing" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
-              <option></option>
-              @each(mobo in mobos)
-              <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="nothing" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
+                <option></option>
+                @each(mobo in mobos)
+                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}">{{ mobo.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group motherboarda-price" style="display: none">
+              <input type="text" name="nothing" class="form-control" placeholder="Custom Price" />
+            </div>
           </div>
         </div>
         <div class="col-md-1 motherboardaCollapse right" style="display: none">
@@ -273,13 +288,18 @@
       </div>
       <div class="row motherboardb">
         <div class="col-md-6">
-          <div class="form-group">
-            <select name="nothing" class="full-width motherboardb-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side B">
-              <option></option>
-              @each(mobo in mobos)
-              <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}">{{ mobo.name }}</option>
-              @endeach
-            </select>
+          <div class="form-group-attached">
+            <div class="form-group">
+              <select name="nothing" class="full-width motherboardb-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side B">
+                <option></option>
+                @each(mobo in mobos)
+                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}">{{ mobo.name }}</option>
+                @endeach
+              </select>
+            </div>
+            <div class="form-group motherboardb-price" style="display: none">
+              <input type="text" name="nothing" class="form-control" placeholder="Custom Price" />
+            </div>
           </div>
         </div>
         <div class="col-md-1 right motherboardbCollapse" style="display: none">
@@ -290,13 +310,18 @@
             <div class="acmodules">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
-                      <option></option>
-                      @each(module in ac1modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 1">
+                        <option></option>
+                        @each(module in ac1modules)
+                        <option value="{{ module.id }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <input type="text" name="nothing" class="form-control" placeholder="Custom Price" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -314,13 +339,18 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
-                    <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
-                      <option></option>
-                      @each(module in ac3modules)
-                      <option value="{{ module.id }}">{{ module.name }}</option>
-                      @endeach
-                    </select>
+                  <div class="form-group-attached m-b-10">
+                    <div class="form-group">
+                      <select name="nothing" class="full-width module-dropdown" data-allow-clear="true" data-placeholder="Module 3">
+                        <option></option>
+                        @each(module in ac3modules)
+                        <option value="{{ module.id }}" data-price="{{ module.price }}">{{ module.name }}</option>
+                        @endeach
+                      </select>
+                    </div>
+                    <div class="form-group module-price" style="display: none">
+                      <input type="text" name="nothing" class="form-control" placeholder="Custom Price" />
+                    </div>
                   </div>
                 </div>
               </div>
