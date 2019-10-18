@@ -281,7 +281,6 @@ class OrderController {
       payment: data.payment
     })
     var slot = 1
-    var test = ''
     await order.systems().detach()
     if((typeof data.systems) != 'undefined') {
       // Loop through each system
@@ -305,8 +304,7 @@ class OrderController {
           for (var side in data.systems[system]) {
             if (side == 'motherboarda' || side == 'motherboardb') {
               // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
-              if (typeof(data.systems[system][side][0]) != 'undefined') {
-                test = test + 'AND ' + test
+              if (typeof data.systems[system][side]['modules'] !== 'undefined') {
                 const postedmb = await pivot.mobos().attach(data.systems[system][side][0], (row) => {
                   row.price = data.systems[system][side][1]
                 })
@@ -335,7 +333,7 @@ class OrderController {
     await order.save()
 
     session.flash({
-      message: 'Your Work Order has been edited!' + test
+      message: 'Your Work Order has been edited!'
     })
     return response.redirect('/orders/' + order.id)
   }
