@@ -1,36 +1,51 @@
-@layout('layouts.main')
-
-@section('title')
-Focused Test - Login
-@endsection
+@layout('layouts.plain')
 
 @section('content')
-  <h1>Login now</h1>
+  <div class="login-wrapper">
+    <div class="bg-pic">
 
-  <div class="job-container">
-    @if(flashMessage('loginError'))
-        <span>{{ flashMessage('loginError') }}</span>
-    @endif
-      <form action="{{ route('UserController.login') }}" method="POST">
-        {{ csrfField() }}
-
-        <label for="email">Email</label>
-        <input type="email" name="email" value="{{ old('email', '') }}">
-        @if(hasErrorFor('email'))
-            <span>
-                {{ getErrorFor('email') }}
-            </span>
+    </div>
+    <div class="login-container bg-white">
+      <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+        <img src="{{ assetsUrl('images/FTI_LOGO.png')}}" alt="logo" height="22">
+        <p class="p-t-35">Sign in using your FTI e-mail.</p>
+        @if(flashMessage('loginError'))
+            <span>{{ flashMessage('loginError') }}</span>
         @endif
+        <form action="{{ route('UserController.login') }}" method="POST" class="p-t-15">
+          {{ csrfField() }}
+          <div class="form-group form-group-default">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="{{ old('email', '') }}" class="form-control">
+            @if(hasErrorFor('email'))
+                <span>
+                    {{ getErrorFor('email') }}
+                </span>
+            @endif
+          </div>
+          <div class="form-group form-group-default">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control">
+            @if(hasErrorFor('password'))
+                <span>
+                    {{ getErrorFor('password') }}
+                </span>
+            @endif
+          </div>
 
-        <label for="password">Password</label>
-        <input type="password" name="password">
-        @if(hasErrorFor('password'))
-            <span>
-                {{ getErrorFor('password') }}
-            </span>
-        @endif
+          <button type="submit" class="btn btn-primary btn-cons m-t-10">Login now</button>
+        </form>
 
-        <button type="submit">Login now</button>
-      </form>
+        <div class="pull-bottom sm-pull-bottom">
+          <div class="m-b-30 p-r-50">
+            <p>
+              <small>
+                Please contact gareth@focusedtest.com if your login credentials are not working or you do not have login credentials.
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 @endsection

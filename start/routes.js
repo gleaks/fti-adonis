@@ -16,9 +16,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-// Set root route
-Route.get('/', 'OrderController.home');
-
 // Routes for login, logout & user creation
 Route.on('/signup').render('auth.signup');
 Route.post('/signup', 'UserController.create').validator('CreateUser');
@@ -29,28 +26,30 @@ Route.get('/logout', async ({ auth, response }) => {
     return response.redirect('/');
 });
 
-// Orders routes
-Route.get('/orders/create', 'OrderController.new');
-Route.post('/orders/create', 'OrderController.create').validator('CreateOrder');
-Route.get('/orders/:id', 'OrderController.show');
-Route.get('/orders/edit/:id', 'OrderController.edit');
-Route.post('/orders/update/:id', 'OrderController.update').validator('CreateOrder');
-Route.get('/orders/delete/:id/:from', 'OrderController.delete');
-Route.get('/orders/workorder/:id', 'OrderController.workorder')
-
-// Customers routes
-Route.get('/customers', 'CustomerController.home');
-Route.get('/customers/create', 'CustomerController.new');
-Route.post('/customers/create', 'CustomerController.create').validator('CreateCustomer');
-Route.get('/customers/edit/:id', 'CustomerController.edit');
-Route.post('/customers/update/:id', 'CustomerController.update').validator('CreateCustomer');
-Route.get('/customers/delete/:id/:from', 'CustomerController.delete');
-Route.post('/customers/remote', 'CustomerController.remote').validator('CreateCustomer');
-
-// Products routes
-Route.get('/products', 'ProductController.home');
-Route.get('/products/create', 'ProductController.new');
-Route.post('/products/create', 'ProductController.create').validator('CreateProduct');
-Route.get('/products/edit/:table/:id', 'ProductController.edit');
-Route.post('/products/update/:table/:id', 'ProductController.update').validator('CreateProduct');
-Route.get('/products/delete/:table/:id/:from', 'ProductController.delete');
+Route.group('admin', () => {
+  Route.get('/', 'OrderController.home');
+  // Orders routes
+  Route.get('/orders/create', 'OrderController.new');
+  Route.post('/orders/create', 'OrderController.create').validator('CreateOrder');
+  Route.get('/orders/:id', 'OrderController.show');
+  Route.get('/orders/edit/:id', 'OrderController.edit');
+  Route.post('/orders/update/:id', 'OrderController.update').validator('CreateOrder');
+  Route.get('/orders/delete/:id/:from', 'OrderController.delete');
+  Route.get('/orders/workorder/:id', 'OrderController.workorder')
+  // Customers routes
+  Route.get('/customers', 'CustomerController.home');
+  Route.get('/customers/create', 'CustomerController.new');
+  Route.post('/customers/create', 'CustomerController.create').validator('CreateCustomer');
+  Route.get('/customers/edit/:id', 'CustomerController.edit');
+  Route.post('/customers/update/:id', 'CustomerController.update').validator('CreateCustomer');
+  Route.get('/customers/delete/:id/:from', 'CustomerController.delete');
+  Route.post('/customers/remote', 'CustomerController.remote').validator('CreateCustomer');
+  // Products routes
+  Route.get('/products', 'ProductController.home');
+  Route.get('/products/create', 'ProductController.new');
+  Route.post('/products/create', 'ProductController.create').validator('CreateProduct');
+  Route.get('/products/edit/:table/:id', 'ProductController.edit');
+  Route.post('/products/update/:table/:id', 'ProductController.update').validator('CreateProduct');
+  Route.get('/products/delete/:table/:id/:from', 'ProductController.delete');
+}).middleware('admin')
+// Set root route
