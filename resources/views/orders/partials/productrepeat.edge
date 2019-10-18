@@ -492,9 +492,9 @@
                         name="nothing"
                         @endif
                         class="form-control input-sm" placeholder="Custom Price"
-                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==2)
                         value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
-                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==1)
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==2)
                         value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
                         @endif
                         />
