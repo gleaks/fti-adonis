@@ -35,7 +35,7 @@ $(document).ready(function() {
     const filename  = $('#quotenumber').text().trim() + '-quote.pdf'
 
 		html2canvas(document.querySelector('#pdfpoint')).then(canvas => {
-			let pdf = new jsPDF('p', 'mm', 'a3', true)
+			let pdf = new jsPDF('p', 'mm', 'a3')
 			pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0)
 			pdf.save(filename)
 		})

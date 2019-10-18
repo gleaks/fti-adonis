@@ -31,8 +31,6 @@ $(document).ready(function() {
       pane = $(e.target).closest('.tab-pane')
       thisnum = pane.attr('id').split('-')[1]
       systemPrice = pane.find('.system-price')
-      systemPrice.show()
-      systemPrice.find('input').attr('name', 'systems[system-' + thisnum + ']').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
       if($(this).val() == '') {
         newpane = 'system-' + (parseInt(num) + 1)
         pane.after($('#system-example').prop('outerHTML'))
@@ -60,13 +58,17 @@ $(document).ready(function() {
           pane.find('.motherboardaCollapse').hide()
           pane.find('#motherboardbCollapse').collapse('hide')
           pane.find('.motherboardbCollapse').hide()
+          systemPrice.show()
+          systemPrice.find('input').attr('name', 'systems[system-' + thisnum + ']').val(e.params.args.data.element.getAttribute('data-price')).trigger('change')
           break
         case 'false':
           pane.find('.external').hide()
           pane.find('.motherboards').show()
           pane.find('.motherboardb').hide()
-          pane.find('.motherboarda-dropdown').attr('name', 'systems[system-' + thisnum + '][motherboarda]').attr('disabled', 'true').select2()
+          pane.find('.motherboarda-dropdown').attr('name', 'nothing').attr('disabled', 'true').select2()
           pane.find('.motherboardaCollapse').show()
+          systemPrice.hide()
+          systemPrice.find('input').attr('name', 'systems[system-' + thisnum + ']').val(0).trigger('change')
           break
       }
     num++
