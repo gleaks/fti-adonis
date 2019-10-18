@@ -21,10 +21,26 @@
 </div>
 
 <div class="row flex-center">
-  <div class="col-md-6">
+  <div class="col-md-5">
     @!component('components.textarea', { name: 'description', text: 'Order Description', placeholder: 'Include some details about the order', value: old('description', order.description || null), error: getErrorFor('description') })
   </div>
-  <div class="col-md-5">
+  <div class="col-md-2">
+    <div class="form-group form-group-default input-group">
+      <div class="form-input-group">
+        <label class="inline">Show Customer Contact?</label>
+      </div>
+      <div class="input-group-append h-c-50">
+        <span class="input-group-text transparent">
+          <input type="checkbox" name="showcontact" class="switchery" data-init-plugin="switchery" data-color="primary"
+          @if(order.showcontact == true)
+          checked="checked"
+          @endif
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
     <div class="form-group form-group-default required">
       <label for="customer">Customer</label>
       <select id="customerSelect" name="customer" class="full-width" data-init-plugin="select2" data-placeholder="Select a Customer" required>

@@ -195,6 +195,10 @@ class OrderController {
   }) {
     const order = request.all()
 
+    var showcontact = false
+    if (order.showcontact == 'on') {
+      showcontact = true
+    }
     const posted = await auth.user.orders().create({
       name: order.name,
       customer_id: order.customer,
@@ -203,7 +207,8 @@ class OrderController {
       status: order.status,
       delivery: order.delivery,
       shipping: order.shipping,
-      payment: order.payment
+      payment: order.payment,
+      showcontact: showcontact
     })
     var slot = 1
     // If there are actually some systems attached to the order do this
@@ -252,7 +257,7 @@ class OrderController {
       }
     }
     session.flash({
-      message: 'Your Quote has been created!'
+      message: 'Your Quote has been created!' + order.showcontact
     })
     return response.redirect('/orders/' + posted.id)
   }
@@ -267,6 +272,11 @@ class OrderController {
     const data = request.all()
     const order = await Order.find(params.id)
 
+    var showcontact = false
+    if (data.showcontact == 'on') {
+      showcontact = true
+    }
+
     const posted = await order.merge({
       name: data.name,
       customer_id: data.customer,
@@ -275,7 +285,8 @@ class OrderController {
       status: data.status,
       delivery: data.delivery,
       shipping: data.shipping,
-      payment: data.payment
+      payment: data.payment,
+      showcontact: showcontact
     })
     var slot = 1
     await order.systems().detach()
