@@ -187,6 +187,75 @@ class OrderController {
     })
   }
 
+  async copy({
+    response,
+    session,
+    params,
+    request,
+    auth
+  }) {
+    const old = await Order.query().with('user').with('customer').where('id', params.id).first()
+    const systems = await OrderSystem.query().with('system').with('externals').with('pivot.mobo').with('pivot.modules', (builder) => {
+      builder.orderBy('slot', 'asc')
+    }).where('order_id', params.id).fetch()
+
+    const oldorder = await old.toJSON()
+    const oldsystems = await systems.toJSON()
+
+    const d = new Date(Date.now())
+    const today = d.toLocaleDateString('en-US')
+
+    const neworder = await auth.user.orders().create({
+      name: oldorder.name + ' (Copy)',
+      customer_id: oldorder.customer.id,
+      description: oldorder.description,
+      date: d,
+      status: oldorder.status,
+      delivery: oldorder.delivery,
+      shipping: oldorder.shipping,
+      payment: oldorder.payment,
+      showcontact: oldorder.showcontact
+    })
+
+    if((typeof oldsystems) != 'undefined') {
+      for (var system in oldsystems) {
+        const newsystem = await neworder.systems().attach(oldsystems[system].system.id, (row) => {
+          row.price = oldsystems[system].price
+        })
+
+        const pivot = await OrderSystem.find(newsystem[0].id)
+
+        for (var external in oldsystems[system].externals) {
+          if (oldsystems[system].externals[external] != '') {
+             await pivot.externals().attach(oldsystems[system].externals[external].id, (row) => {
+               row.price = oldsystems[system].externals[external].pivot.price
+             })
+          }
+        }
+
+        for (var side in oldsystems[system].pivot) {
+          const postedmb = await pivot.mobos().attach(oldsystems[system].pivot[side].mobo.id, (row) => {
+            row.price = oldsystems[system].pivot[side].price
+          })
+          var pivotmb = await MoboOrderSystem.find(postedmb[0].id)
+          for (var module in oldsystems[system].pivot[side].modules) {
+            await pivotmb.modules().attach(oldsystems[system].pivot[side].modules[module].id, (row) => {
+              row.slot = oldsystems[system].pivot[side].modules[module].pivot.slot,
+              row.price = oldsystems[system].pivot[side].modules[module].pivot.price
+            })
+          }
+        }
+      }
+    }
+
+    const string = JSON.stringify(oldsystems[0].pivot[0].modules[0].pivot.price)
+
+    session.flash({
+      message: 'Quote #' + oldorder.id + ' was copied into this new quote!'
+    })
+    return response.redirect('/orders/edit/' + neworder.id)
+  }
+
   async create({
     request,
     response,
@@ -257,7 +326,7 @@ class OrderController {
       }
     }
     session.flash({
-      message: 'Your Quote has been created!' + order.showcontact
+      message: 'Your Quote has been created!'
     })
     return response.redirect('/orders/' + posted.id)
   }

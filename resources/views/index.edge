@@ -32,7 +32,7 @@
         <td class="text-right">
           <div class="btn-group btn-group-sm">
             <a class="btn btn-sm btn-default" href="{{ route('OrderController.edit', { id: order.id }) }}">Edit</a>
-            <a class="btn btn-sm btn-default">Copy</a>
+            <a class="btn btn-sm btn-default" href="{{ route('OrderController.copy', { id: order.id }) }}">Copy</a>
             <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this quote?')" href="/orders/delete/{{ order.id }}/index">Archive</a>
           </div>
         </td>

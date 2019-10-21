@@ -25,6 +25,7 @@
         <a class="btn btn-sm btn-info" href="/orders/workorder/{{ order.id }}">Work Order</a>
         <a class="btn btn-sm btn-info" href="#" onclick="window.print()">Print</a>
         <a class="btn btn-sm btn-info" href="#" id="printpdf">PDF</a>
+        <a class="btn btn-sm btn-info" href="{{ route('OrderController.copy', { id: order.id }) }}">Copy</a>
         <a class="btn btn-sm btn-info" href="{{ route('OrderController.edit', { id: order.id }) }}">Edit</a>
         <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to archive this quote?')" href="/orders/delete/{{ order.id }}/show">Archive</a>
       </div>

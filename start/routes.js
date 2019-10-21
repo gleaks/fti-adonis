@@ -36,6 +36,7 @@ Route.group('admin', () => {
   Route.post('/orders/update/:id', 'OrderController.update').validator('CreateOrder');
   Route.get('/orders/delete/:id/:from', 'OrderController.delete');
   Route.get('/orders/workorder/:id', 'OrderController.workorder')
+  Route.get('/orders/copy/:id', 'OrderController.copy')
   // Customers routes
   Route.get('/customers', 'CustomerController.home');
   Route.get('/customers/create', 'CustomerController.new');
