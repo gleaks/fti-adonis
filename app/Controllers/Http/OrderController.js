@@ -8,6 +8,7 @@ const External = use('App/Models/External')
 const Module = use('App/Models/Module')
 const OrderSystem = use('App/Models/OrderSystem')
 const MoboOrderSystem = use('App/Models/MoboOrderSystem')
+const Custom = use('App/Models/Custom')
 
 class OrderController {
   async home({
@@ -26,7 +27,7 @@ class OrderController {
   }) {
     // Fetch order with its user, customer & products relationships
     const order = await Order.query().with('user').with('customer').where('id', params.id).first()
-    const systems = await OrderSystem.query().with('system').with('externals').with('pivot.mobo').with('pivot.modules', (builder) => {
+    const systems = await OrderSystem.query().with('system').with('customs').with('externals').with('pivot.mobo').with('pivot.modules', (builder) => {
       builder.orderBy('slot', 'asc')
     }).where('order_id', params.id).fetch()
     // Cast date & break into multiple variables to make the Quote Number
@@ -133,7 +134,7 @@ class OrderController {
     view
   }) {
     const order = await Order.query().with('user').with('customer').where('id', params.id).first()
-    const ordersystems = await OrderSystem.query().with('system').with('externals').with('pivot.mobo').with('pivot.modules').where('order_id', params.id).fetch()
+    const ordersystems = await OrderSystem.query().with('system').with('customs').with('externals').with('pivot.mobo').with('pivot.modules').where('order_id', params.id).fetch()
     const customers = await Customer.query().orderBy('name', 'asc').fetch()
     const systems = await System.all()
     const mobos = await Mobo.all()
@@ -280,6 +281,8 @@ class OrderController {
       showcontact: showcontact
     })
     var slot = 1
+    var test = 'test'
+    var test2 = 'test'
     // If there are actually some systems attached to the order do this
     if((typeof order.systems) != 'undefined') {
       // Loop through each system
@@ -291,6 +294,17 @@ class OrderController {
         })
         // Get the ID of the row from the order_system entry we just made
         const pivot = await OrderSystem.find(postedsystem[0].id)
+        // Attach all custom products
+        for (var custom in order.systems[system]['customnames']) {
+          if(order.systems[system]['customnames'][custom] != '') {
+            await Custom.create({
+              order_system_id: postedsystem[0].id,
+              name: order.systems[system]['customnames'][custom],
+              price: order.systems[system]['customprices'][custom],
+              description: order.systems[system]['customdescriptions'][custom]
+            })
+          }
+        }
         // Attach all externals
         for (var external in order.systems[system]['externals']) {
           if (order.systems[system]['externals'][external] != '') {
@@ -381,6 +395,16 @@ class OrderController {
           })
           // Get the ID of the row from the order_system entry we just made
           const pivot = await OrderSystem.find(postedsystem[0].id)
+          for (var custom in data.systems[system]['customnames']) {
+            if(data.systems[system]['customnames'][custom] != '') {
+              await Custom.create({
+                order_system_id: postedsystem[0].id,
+                name: data.systems[system]['customnames'][custom],
+                price: data.systems[system]['customprices'][custom],
+                description: data.systems[system]['customdescriptions'][custom]
+              })
+            }
+          }
           // Attach all externals
           for (var external in data.systems[system]['externals']) {
             if (data.systems[system]['externals'][external] != '') {

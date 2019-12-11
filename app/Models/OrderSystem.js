@@ -16,6 +16,9 @@ class OrderSystem extends Model {
   externals() {
     return this.belongsToMany('App/Models/External').withPivot(['count', 'price', 'description'])
   }
+  customs() {
+    return this.hasMany('App/Models/Custom')
+  }
 }
 
 module.exports = OrderSystem

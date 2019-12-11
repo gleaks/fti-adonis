@@ -270,6 +270,35 @@
                 </td>
               </tr>
               @endeach
+              @each(custom in system.customs)
+              @set('loop', loop+1)
+              <tr>
+                <td>{{ loop.length }}</td>
+                <td>1</td>
+                <td>
+                  @if(custom.partnum)
+                  {{ custom.partnum }}
+                  @endif
+                </td>
+                <td class="text-black">{{ custom.name }}
+                  <p class="small hint-text">
+                    @if(custom.description)
+                    {{ custom.description }}
+                    @endif
+                  </p>
+                </td>
+                <td class="text-center right">
+                  @if(custom.price)
+                  {{ priceString(custom.price) }}
+                  @endif
+                </td>
+                <td class="text-center extended">
+                  @if(custom.price)
+                  {{ priceString(custom.price) }}
+                  @endif
+                </td>
+              </tr>
+              @endeach
               @endeach
             </tbody>
           </table>

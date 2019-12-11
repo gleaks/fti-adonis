@@ -109,6 +109,51 @@
         </div>
       </div>
       @endif
+      <a href="#" class="btn btn-xs btn-rounded btn-info addCustom"><i class="pg-plus_circle"></i> CUSTOM PRODUCT</a>
+      <div class="row lightBottomRow customp" style="display: none">
+        <div class="col-md-9">
+          <div class="form-group-attached">
+            <div class="input-group custom-name">
+              <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product name" />
+            </div>
+            <div class="input-group transparent custom-price">
+              <div class="input-group-prepend">
+                <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+              </div>
+              <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+            </div>
+            <div class="input-group custom-description">
+              <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <a href="#" class="btn btn-xs btn-rounded btn-danger removeCustom"><i class="pg-minus_circle"></i> DEL</a>
+        </div>
+      </div>
+      @each(custom in ordersystem.customs)
+        <div class="row lightBottomRow customp">
+          <div class="col-md-9">
+            <div class="form-group-attached">
+              <div class="input-group custom-name">
+                <input type="text" name="systems[system-{{ $parent.$loop.index }}][customnames][]" class="form-control input-sm" placeholder="Custom product name" value="{{ custom.name}}" />
+              </div>
+              <div class="input-group transparent custom-price">
+                <div class="input-group-prepend">
+                  <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
+                </div>
+                <input type="text" name="systems[system-{{ $parent.$loop.index }}][customprices][]" class="form-control input-sm" placeholder="Custom Price" value="{{ custom.price }}"/>
+              </div>
+              <div class="input-group custom-description">
+                <input type="text" name="systems[system-{{ $parent.$loop.index }}][customdescriptions][]" class="form-control input-sm" placeholder="Custom product description" value="{{ custom.description }}" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <a href="#" class="btn btn-xs btn-rounded btn-danger removeCustom"><i class="pg-minus_circle"></i> DEL</a>
+          </div>
+      </div>
+    @endeach
     </div>
     <div class="col-md-8 motherboards">
       <div class="row lightBottomRow">

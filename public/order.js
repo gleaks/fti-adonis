@@ -32,6 +32,9 @@ $(document).ready(function() {
       thisnum = pane.attr('id').split('-')[1]
       systemPrice = pane.find('.system-price')
       systemDescription = pane.find('.system-description')
+      systemDescription.show()
+      systemDescription.find('input').attr('name', 'systems[system-' + thisnum + ']').val(e.params.args.data.element.getAttribute('data-description')).trigger('change')
+      pane.find('.addCustom').show()
       if($(this).val() == '') {
         newpane = 'system-' + (parseInt(num) + 1)
         pane.after($('#system-example').prop('outerHTML'))
@@ -44,8 +47,6 @@ $(document).ready(function() {
         link = pane.attr('id')
         $('.nav-tabs a[href="#' + link + '"]').text(e.params.args.data.text.slice(0,25))
       }
-      systemDescription.show()
-      systemDescription.find('input').attr('name', 'systems[system-' + thisnum + ']').val(e.params.args.data.element.getAttribute('data-description')).trigger('change')
       switch(e.params.args.data.element.getAttribute('data-hasmobos')) {
         case 'true':
           pane.find('.motherboards').show()
@@ -245,6 +246,24 @@ $(document).ready(function() {
     $('#workOrderForm').on('click', '.removeExternal', function(e){
       e.preventDefault()
       proceed = confirm('Are you sure you want to remove this External Module from the order?')
+      if(proceed == true){
+        $(this).closest('.row').remove()
+      }
+    })
+
+    $('#workOrderForm').on('click', '.addCustom', function(e) {
+      e.preventDefault()
+      pane = $(e.target).closest('.tab-pane')
+      thisnum = Number(pane.attr('id').split('-')[1])
+      pane.find('.customp:last').after($('#system-example .customp').prop('outerHTML'))
+      pane.find('.customp:last').show()
+      pane.find('.custom-name:last input').attr('name', 'systems[system-' + thisnum + '][customnames][]')
+      pane.find('.custom-price:last input').attr('name', 'systems[system-' + thisnum + '][customprices][]')
+      pane.find('.custom-description:last input').attr('name', 'systems[system-' + thisnum + '][customdescriptions][]')
+    })
+    $('#workOrderForm').on('click', '.removeCustom', function(e){
+      e.preventDefault()
+      proceed = confirm('Are you sure you want to remove this Custom Product from the order?')
       if(proceed == true){
         $(this).closest('.row').remove()
       }
