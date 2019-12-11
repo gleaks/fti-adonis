@@ -337,7 +337,7 @@ class OrderController {
       }
     }
     session.flash({
-      message: 'Your Quote has been created!' + fuck
+      message: 'Your Quote has been created!'
     })
     return response.redirect('/orders/' + posted.id)
   }
