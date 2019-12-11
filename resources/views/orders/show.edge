@@ -133,9 +133,13 @@
                   @endif
                 </td>
                 <td class="text-black">{{ system.system.name }}
-                  @if(system.system.description)
-                    <p class="small hint-text">{{ system.system.description }}</p>
-                  @endif
+                  <p class="small hint-text">
+                    @if(system.description)
+                    {{ system.description }}
+                    @elseif(system.system.description)
+                    {{ system.system.description }}
+                    @endif
+                  </p>
                 </td>
                 <td class="text-center right">
                   @if(system.price)
@@ -168,9 +172,13 @@
                   @endif
                 </td>
                 <td class="text-black">{{ mobo.mobo.name }}
-                  @if(mobo.mobo.description)
-                    <p class="small hint-text">{{ mobo.mobo.description }}</p>
-                  @endif
+                  <p class="small hint-text">
+                    @if(mobo.description)
+                    {{ mobo.description }}
+                    @elseif(mobo.mobo.description)
+                    {{ mobo.mobo.description }}
+                    @endif
+                  </p>
                 </td>
                 <td class="text-center right moboprice-{{ thismobo }}">
                   @if(mobo.price)
@@ -204,9 +212,13 @@
                   @endif
                 </td>
                 <td class="text-black">Module {{ module.pivot.slot }} : {{ module.name }}
-                  @if(module.description)
-                    <p class="small hint-text">{{ module.description }}</p>
-                  @endif
+                  <p class="small hint-text">
+                    @if(module.pivot.description)
+                    {{ module.pivot.description }}
+                    @elseif(module.description)
+                    {{ module.description }}
+                    @endif
+                  </p>
                 </td>
                 <td class="text-center right">
                   Included
@@ -234,9 +246,13 @@
                   @endif
                 </td>
                 <td class="text-black">{{ external.name }}
-                  @if(external.description)
-                    <p class="small hint-text">{{ external.description }}</p>
-                  @endif
+                  <p class="small hint-text">
+                    @if(external.pivot.description)
+                    {{ external.pivot.description }}
+                    @elseif(external.description)
+                    {{ external.description }}
+                    @endif
+                  </p>
                 </td>
                 <td class="text-center right">
                   @if(external.pivot.price)

@@ -13,7 +13,7 @@
               <select name="systems[system-{{ $loop.index }}]" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
                 <option></option>
                 @each(system in systems)
-                <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}" data-price="{{ system.price }}"
+                <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}" data-price="{{ system.price }}" data-description="{{ system.description }}"
                 @if($parent.ordersystem.system.id==system.id)
                 selected="selected"
                 @endif
@@ -27,6 +27,11 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="systems[system-{{ $loop.index }}]" class="form-control input-sm" placeholder="Custom Price" value="{{ ordersystem.price }}" />
+              </div>
+            </div>
+            <div class="form-group system-description">
+              <div class="input-group">
+                <input type="text" name="systems[system-{{ $loop.index }}]" class="form-control input-sm" placeholder="Custom product description" value="{{ ordersystem.description }}" />
               </div>
             </div>
           </div>
@@ -54,6 +59,11 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="systems[system-{{ $parent.$loop.index }}][externalprices]" class="form-control input-sm" placeholder="Custom Price" value="{{ orderexternal.pivot.price }}" />
+              </div>
+            </div>
+            <div class="form-group external-description">
+              <div class="input-group">
+                <input type="text" name="systems[system-{{ $parent.$loop.index }}][externaldescriptions]" class="form-control input-sm" placeholder="Custom product description" value="{{ orderexternal.pivot.description }}" />
               </div>
             </div>
           </div>
@@ -87,6 +97,11 @@
                 <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
               </div>
             </div>
+            <div class="form-group external-description" style="display: none">
+              <div class="input-group">
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-3">
@@ -103,7 +118,7 @@
               <select name="systems[system-{{ $loop.index }}][motherboarda]" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
                 <option></option>
                 @each(mobo in mobos)
-                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}"
+                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}" data-description="{{ mobo.description }}"
                 @if($parent.ordersystem.pivot[0].mobo.id==mobo.id)
                  selected="selected"
                  @endif
@@ -123,6 +138,17 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="systems[system-{{ $loop.index }}][motherboarda]" class="form-control input-sm" placeholder="Custom Price" value="{{ ordersystem.pivot[0].price }}" />
+              </div>
+            </div>
+            <div class="form-group motherboarda-description"
+            @if(ordersystem.pivot[0])
+            style=""
+            @else
+            style="display: none"
+            @endif
+            >
+              <div class="input-group">
+                <input type="text" name="systems[system-{{ $loop.index }}][motherboarda]" class="form-control input-sm" placeholder="Custom product description" value="{{ ordersystem.pivot[0].description }}" />
               </div>
             </div>
           </div>
@@ -186,6 +212,25 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @unless(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -232,6 +277,29 @@
                         value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
                         @elseif(ordersystem.pivot[0].modules[1].pivot.slot==2)
                         value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==2 || ordersystem.pivot[0].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==2)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==2)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -288,6 +356,31 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==3 || ordersystem.pivot[0].modules[1].pivot.slot==3 || ordersystem.pivot[0].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -338,6 +431,33 @@
                         value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
                         @elseif(ordersystem.pivot[0].modules[3].pivot.slot==4)
                         value="{{ ordersystem.pivot[0].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==4 || ordersystem.pivot[0].modules[1].pivot.slot==4 || ordersystem.pivot[0].modules[2].pivot.slot==4 || ordersystem.pivot[0].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -398,6 +518,35 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==5 || ordersystem.pivot[0].modules[1].pivot.slot==5 || ordersystem.pivot[0].modules[2].pivot.slot==5 || ordersystem.pivot[0].modules[3].pivot.slot==5 || ordersystem.pivot[0].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[4].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -450,6 +599,25 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @unless(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -496,6 +664,29 @@
                         value="{{ ordersystem.pivot[0].modules[0].pivot.price }}"
                         @elseif(ordersystem.pivot[0].modules[1].pivot.slot==2)
                         value="{{ ordersystem.pivot[0].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==2 || ordersystem.pivot[0].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==2)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==2)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -552,6 +743,31 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==3 || ordersystem.pivot[0].modules[1].pivot.slot==3 || ordersystem.pivot[0].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -602,6 +818,33 @@
                         value="{{ ordersystem.pivot[0].modules[2].pivot.price }}"
                         @elseif(ordersystem.pivot[0].modules[3].pivot.slot==4)
                         value="{{ ordersystem.pivot[0].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==4 || ordersystem.pivot[0].modules[1].pivot.slot==4 || ordersystem.pivot[0].modules[2].pivot.slot==4 || ordersystem.pivot[0].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -662,6 +905,35 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[0].modules[0].pivot.slot==5 || ordersystem.pivot[0].modules[1].pivot.slot==5 || ordersystem.pivot[0].modules[2].pivot.slot==5 || ordersystem.pivot[0].modules[3].pivot.slot==5 || ordersystem.pivot[0].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[0].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboarda][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[0].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[3].pivot.description }}"
+                        @elseif(ordersystem.pivot[0].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[0].modules[4].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -696,6 +968,17 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="systems[system-{{ $loop.index }}][motherboardb]" class="form-control input-sm" placeholder="Custom Price" value="{{ ordersystem.pivot[1].price }}" />
+              </div>
+            </div>
+            <div class="form-group motherboardb-description"
+            @if(ordersystem.pivot[1])
+            style=""
+            @else
+            style="display: none"
+            @endif
+            >
+              <div class="input-group">
+                <input type="text" name="systems[system-{{ $loop.index }}][motherboardb]" class="form-control input-sm" placeholder="Custom product description" value="{{ ordersystem.pivot[1].description }}" />
               </div>
             </div>
           </div>
@@ -759,6 +1042,25 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @unless(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -805,6 +1107,29 @@
                         value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
                         @elseif(ordersystem.pivot[1].modules[1].pivot.slot==1)
                         value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==2 || ordersystem.pivot[1].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==2)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==2)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -861,6 +1186,31 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==3 || ordersystem.pivot[1].modules[1].pivot.slot==3 || ordersystem.pivot[1].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -911,6 +1261,33 @@
                         value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
                         @elseif(ordersystem.pivot[1].modules[3].pivot.slot==4)
                         value="{{ ordersystem.pivot[1].modules[3].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==4 || ordersystem.pivot[1].modules[1].pivot.slot==4 || ordersystem.pivot[1].modules[2].pivot.slot==4 || ordersystem.pivot[1].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -971,6 +1348,35 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==5 || ordersystem.pivot[1].modules[1].pivot.slot==5 || ordersystem.pivot[1].modules[2].pivot.slot==5 || ordersystem.pivot[1].modules[3].pivot.slot==5 || ordersystem.pivot[1].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'AC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[4].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1019,6 +1425,25 @@
                         class="form-control input-sm" placeholder="Custom Price"
                         @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
                         value="{{ ordersystem.pivot[1].modules[0].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @unless(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                    style="display: none"
+                    @endunless
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==1)
+                        value="{{ ordersystem.pivot[0].modules[0].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -1073,6 +1498,29 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==2 || ordersystem.pivot[1].modules[1].pivot.slot==2)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==2)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==2)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1121,6 +1569,31 @@
                         value="{{ ordersystem.pivot[1].modules[1].pivot.price }}"
                         @elseif(ordersystem.pivot[1].modules[2].pivot.slot==3)
                         value="{{ ordersystem.pivot[1].modules[2].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==3 || ordersystem.pivot[1].modules[1].pivot.slot==3 || ordersystem.pivot[1].modules[2].pivot.slot==3)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==3)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.description }}"
                         @endif
                         />
                       </div>
@@ -1179,6 +1652,33 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==4 || ordersystem.pivot[1].modules[1].pivot.slot==4 || ordersystem.pivot[1].modules[2].pivot.slot==4 || ordersystem.pivot[1].modules[3].pivot.slot==4)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==4)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.description }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1231,6 +1731,35 @@
                         value="{{ ordersystem.pivot[1].modules[3].pivot.price }}"
                         @elseif(ordersystem.pivot[1].modules[4].pivot.slot==5)
                         value="{{ ordersystem.pivot[1].modules[4].pivot.price }}"
+                        @endif
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group module-description"
+                    @if(ordersystem.pivot[1].modules[0].pivot.slot==5 || ordersystem.pivot[1].modules[1].pivot.slot==5 || ordersystem.pivot[1].modules[2].pivot.slot==5 || ordersystem.pivot[1].modules[3].pivot.slot==5 || ordersystem.pivot[1].modules[4].pivot.slot==5)
+                    style=""
+                    @else
+                    style="display: none"
+                    @endif
+                    >
+                      <div class="input-group transparent">
+                        <input type="text"
+                        @if(ordersystem.pivot[1].mobo.mobotype == 'DC')
+                        name="systems[system-{{ $loop.index }}][motherboardb][moduledescriptions]"
+                        @else
+                        name="nothing"
+                        @endif
+                        class="form-control input-sm" placeholder="Custom product description"
+                        @if(ordersystem.pivot[1].modules[0].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[0].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[1].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[1].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[2].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[2].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[3].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[3].pivot.description }}"
+                        @elseif(ordersystem.pivot[1].modules[4].pivot.slot==5)
+                        value="{{ ordersystem.pivot[1].modules[4].pivot.description }}"
                         @endif
                         />
                       </div>

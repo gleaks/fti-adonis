@@ -14,7 +14,7 @@ class OrderSystem extends Model {
     return this.hasMany('App/Models/MoboOrderSystem')
   }
   externals() {
-    return this.belongsToMany('App/Models/External').withPivot(['count', 'price'])
+    return this.belongsToMany('App/Models/External').withPivot(['count', 'price', 'description'])
   }
 }
 

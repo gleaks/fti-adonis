@@ -286,25 +286,35 @@ class OrderController {
       for (var system in order.systems) {
         // Attach a system
         const postedsystem = await posted.systems().attach(order.systems[system][0], (row) => {
-          row.price = order.systems[system][1].replace(/,/g, '')
+          row.price = order.systems[system][1].replace(/,/g, ''),
+          row.description = order.systems[system][2]
         })
         // Get the ID of the row from the order_system entry we just made
         const pivot = await OrderSystem.find(postedsystem[0].id)
         // Attach all externals
         for (var external in order.systems[system]['externals']) {
           if (order.systems[system]['externals'][external] != '') {
-             await pivot.externals().attach(order.systems[system]['externals'][external], (row) => {
-               row.price = order.systems[system]['externalprices'][external].replace(/,/g, '')
-             })
+            if(order.systems[system]['externals'].length <= 1) {
+              await pivot.externals().attach(order.systems[system]['externals'], (row) => {
+                row.price = order.systems[system]['externalprices'].replace(/,/g, ''),
+                row.description = order.systems[system]['externaldescriptions']
+              })
+            } else {
+              await pivot.externals().attach(order.systems[system]['externals'][external], (row) => {
+                row.price = order.systems[system]['externalprices'][external].replace(/,/g, ''),
+                row.description = order.systems[system]['externaldescriptions'][external]
+              })
+            }
           }
         }
         // Loop through each level below system (motherboards then modules)
         for (var side in order.systems[system]) {
           if (side == 'motherboarda' || side == 'motherboardb') {
-            // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
+            // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], price in [1], description in [2])
             if (order.systems[system][side][0] != undefined) {
               const postedmb = await pivot.mobos().attach(order.systems[system][side][0], (row) => {
-                row.price = order.systems[system][side][1].replace(/,/g, '')
+                row.price = order.systems[system][side][1].replace(/,/g, ''),
+                row.description = order.systems[system][side][2]
               })
               // Get the ID of the row just created in MoboOrderSystem
               const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
@@ -315,7 +325,8 @@ class OrderController {
                 if (order.systems[system][side]['modules'][module] != '') {
                   await pivotmb.modules().attach(order.systems[system][side]['modules'][module], (row) => {
                     row.slot = slot,
-                    row.price = order.systems[system][side]['moduleprices'][module].replace(/,/g, '')
+                    row.price = order.systems[system][side]['moduleprices'][module].replace(/,/g, ''),
+                    row.description = order.systems[system][side]['moduledescriptions'][module]
                   })
                 }
                 slot++
@@ -326,7 +337,7 @@ class OrderController {
       }
     }
     session.flash({
-      message: 'Your Quote has been created!'
+      message: 'Your Quote has been created!' + fuck
     })
     return response.redirect('/orders/' + posted.id)
   }
@@ -365,16 +376,25 @@ class OrderController {
         if (data.systems[system][0] != '') {
           // Attach a system
           const postedsystem = await order.systems().attach(data.systems[system][0], (row) => {
-            row.price = data.systems[system][1].replace(/,/g, '')
+            row.price = data.systems[system][1].replace(/,/g, ''),
+            row.description = data.systems[system][2]
           })
           // Get the ID of the row from the order_system entry we just made
           const pivot = await OrderSystem.find(postedsystem[0].id)
           // Attach all externals
           for (var external in data.systems[system]['externals']) {
             if (data.systems[system]['externals'][external] != '') {
-               await pivot.externals().attach(data.systems[system]['externals'][external], (row) => {
-                 row.price = data.systems[system]['externalprices'][external].replace(/,/g, '')
-               })
+              if(data.systems[system]['externals'].length <= 1) {
+                await pivot.externals().attach(data.systems[system]['externals'], (row) => {
+                  row.price = data.systems[system]['externalprices'].replace(/,/g, ''),
+                  row.description = data.systems[system]['externaldescriptions']
+                })
+              } else {
+                await pivot.externals().attach(data.systems[system]['externals'][external], (row) => {
+                  row.price = data.systems[system]['externalprices'][external].replace(/,/g, ''),
+                  row.description = data.systems[system]['externaldescriptions'][external]
+                })
+              }
             }
           }
           // Loop through each level below system (motherboards then modules)
@@ -383,7 +403,8 @@ class OrderController {
               // Attach the motherboard to the OrderSystem (the motherboard id is stored in [0], its modules stored in [1])
               if (typeof data.systems[system][side]['modules'] !== 'undefined') {
                 const postedmb = await pivot.mobos().attach(data.systems[system][side][0], (row) => {
-                  row.price = data.systems[system][side][1].replace(/,/g, '')
+                  row.price = data.systems[system][side][1].replace(/,/g, ''),
+                  row.description = data.systems[system][side][2]
                 })
                 // Get the ID of the row just created in MoboOrderSystem
                 const pivotmb = await MoboOrderSystem.find(postedmb[0].id)
@@ -395,7 +416,8 @@ class OrderController {
                     if (data.systems[system][side]['modules'][module] != '') {
                       await pivotmb.modules().attach(data.systems[system][side]['modules'][module], (row) => {
                         row.slot = slot,
-                        row.price = data.systems[system][side]['moduleprices'][module].replace(/,/g, '')
+                        row.price = data.systems[system][side]['moduleprices'][module].replace(/,/g, ''),
+                        row.description = data.systems[system][side]['moduledescriptions'][module]
                       })
                     }
                     slot++

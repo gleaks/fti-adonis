@@ -8,7 +8,18 @@
               <select name="nothing" class="full-width system-dropdown" data-allow-clear="true" data-placeholder="Select System Type">
                 <option></option>
                 @each(system in systems)
-                <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}" data-price="{{ system.price }}">{{ system.name }}</option>
+                <option value="{{ system.id }}" data-hasmobos="{{ system.hasmobos }}"
+                @if(system.price != null)
+                data-price="{{ system.price }}"
+                @else
+                data-price=""
+                @endif
+                @if(system.description != null)
+                data-description="{{ system.description }}"
+                @else
+                data-description=""
+                @endif
+                >{{ system.name }}</option>
                 @endeach
               </select>
             </div>
@@ -18,6 +29,11 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
+            <div class="form-group system-description" style="display: none">
+              <div class="input-group">
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
               </div>
             </div>
           </div>
@@ -30,7 +46,18 @@
               <select name="nothing" class="full-width external-dropdown" data-allow-clear="true" data-placeholder="External Module / Accessory">
                 <option></option>
                 @each(external in externals)
-                <option value="{{ external.id }}" data-price="{{ external.price }}">{{ external.name }}</option>
+                <option value="{{ external.id }}"
+                @if(external.price != null)
+                data-price="{{ external.price }}"
+                @else
+                data-price=""
+                @endif
+                @if(external.description != null)
+                data-description="{{ external.description }}"
+                @else
+                data-description=""
+                @endif
+                >{{ external.name }}</option>
                 @endeach
               </select>
             </div>
@@ -40,6 +67,11 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
+            <div class="form-group external-description" style="display: none">
+              <div class="input-group">
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
               </div>
             </div>
           </div>
@@ -57,7 +89,18 @@
               <select name="nothing" class="full-width motherboarda-dropdown" data-allow-clear="true" data-placeholder="Channel Board Side A">
                 <option></option>
                 @each(mobo in mobos)
-                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}" data-price="{{ mobo.price }}">{{ mobo.name }}</option>
+                <option value="{{ mobo.id }}" data-mobotype="{{ mobo.mobotype }}" data-slots="{{ mobo.slots }}"
+                @if(mobo.price != null)
+                data-price="{{ mobo.price }}"
+                @else
+                data-price=""
+                @endif
+                @if(mobo.description != null)
+                data-description="{{ mobo.description }}"
+                @else
+                data-description=""
+                @endif
+                >{{ mobo.name }}</option>
                 @endeach
               </select>
             </div>
@@ -67,6 +110,11 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
+            <div class="form-group motherboarda-description" style="display: none">
+              <div class="input-group">
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
               </div>
             </div>
           </div>
@@ -96,6 +144,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,6 +169,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -140,6 +198,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -162,6 +225,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -182,6 +250,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -208,6 +281,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -228,6 +306,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -252,6 +335,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -274,6 +362,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -294,6 +387,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -320,6 +418,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -340,6 +443,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -364,6 +472,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -386,6 +499,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -406,6 +524,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -432,6 +555,11 @@
                   <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                 </div>
                 <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+              </div>
+            </div>
+            <div class="form-group motherboardb-description" style="display: none">
+              <div class="input-group">
+                <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
               </div>
             </div>
           </div>
@@ -461,6 +589,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -481,6 +614,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -505,6 +643,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -527,6 +670,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -547,6 +695,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -573,6 +726,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -593,6 +751,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -617,6 +780,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -639,6 +807,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -659,6 +832,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -685,6 +863,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -705,6 +888,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>
@@ -729,6 +917,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -751,6 +944,11 @@
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
                       </div>
                     </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -771,6 +969,11 @@
                           <span class="input-group-text transparent"><i class="fa fa-dollar"></i></span>
                         </div>
                         <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom Price" />
+                      </div>
+                    </div>
+                    <div class="form-group module-description" style="display: none">
+                      <div class="input-group">
+                        <input type="text" name="nothing" class="form-control input-sm" placeholder="Custom product description" />
                       </div>
                     </div>
                   </div>

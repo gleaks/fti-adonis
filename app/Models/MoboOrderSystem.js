@@ -11,7 +11,7 @@ class MoboOrderSystem extends Model {
     return this.belongsTo('App/Models/Mobo')
   }
   modules() {
-    return this.belongsToMany('App/Models/Module').withPivot(['count', 'slot', 'price'])
+    return this.belongsToMany('App/Models/Module').withPivot(['count', 'slot', 'price', 'description'])
   }
 }
 
