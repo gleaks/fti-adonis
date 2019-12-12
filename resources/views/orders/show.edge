@@ -281,20 +281,20 @@
               </tr>
               @endeach
               @endeach
+              @if(order.notes)
               <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td class="text-black"><b>Notes:</b>
                   <p class="small hint-text">
-                    @if(order.notes)
                     {{ order.notes }}
-                    @endif
                   </p>
                 </td>
                 <td class="text-center right"></td>
                 <td class="text-center"></td>
               </tr>
+              @endif
             </tbody>
           </table>
         </div>
