@@ -38,7 +38,17 @@ $(document).ready(function() {
 			let pdf = new jsPDF('p', 'mm', 'letter')
       var ratio = canvas.width/canvas.height
       var width = pdf.internal.pageSize.getWidth()
+      var pageheight = pdf.internal.pageSize.getHeight()
       var height = width / ratio
+      if(height > pageheight) {
+        height = pageheight
+        width = height * ratio
+        console.log('CHANGED MAX HEIGHT')
+      }
+      console.log(ratio)
+      console.log(width)
+      console.log(height)
+      console.log(pageheight)
 			pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, width, height)
 			pdf.save(filename)
 		})
