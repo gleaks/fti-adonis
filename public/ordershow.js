@@ -13,10 +13,12 @@ $(document).ready(function() {
       }
     }
     mfinal = moprice + mtotalprice
-    $('.moboprice-' + mobonumber).text(mfinal.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }))
+    if(mfinal > 0) {
+      $('.moboprice-' + mobonumber).text(mfinal.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }))
+    }
     mtotalprice = 0
   }
   for (extended of $('.extended')) {
@@ -43,12 +45,7 @@ $(document).ready(function() {
       if(height > pageheight) {
         height = pageheight
         width = height * ratio
-        console.log('CHANGED MAX HEIGHT')
       }
-      console.log(ratio)
-      console.log(width)
-      console.log(height)
-      console.log(pageheight)
 			pdf.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, width, height)
 			pdf.save(filename)
 		})

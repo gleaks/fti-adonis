@@ -22,4 +22,56 @@
     <form id="workOrderForm" action="{{ route('OrderController.update', { id: order.id }) }}" method="POST">
       @include('orders.partials.form')
     </form>
+    <div class="modal fade stick-up" id="myModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header clearfix text-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="pg-close fs-14"></i>
+                    </button>
+                    <h5>Customer <span class="semi-bold">Information</span></h5>
+                </div>
+                <div class="modal-body">
+                    <form id="customerModalForm" action="{{ route('CustomerController.remote') }}" method="POST">
+                      {{ csrfField() }}
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          @!component('components.input', { name: 'name', text: 'Company Name', placeholder: 'The name of the company', value: old('name', customer.name || ''), error: getErrorFor('name'), required: true })
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          @!component('components.textarea', { name: 'address', text: 'Customer Address', placeholder: 'Address of the customer - line breaks are stored in the same format', value: old('address', customer.address || ''), error: getErrorFor('address') })
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          @!component('components.input', { name: 'contact', text: 'Contact Name', placeholder: 'A person in the company', value: old('contact', customer.contact || ''), error: getErrorFor('contact') })
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          @!component('components.input', { name: 'email', text: 'Contact E-mail Address', placeholder: 'example@example.com', value: old('email', customer.email || ''), error: getErrorFor('email'), type: 'email' })
+                        </div>
+                      </div>
+
+                      <div class="row m-b-20">
+                        <div class="col-md-12">
+                          @!component('components.input', { name: 'phone', text: 'Contact Phone Number', placeholder: '(555) 201-4389', value: old('phone', customer.phone || ''), error: getErrorFor('phone') })
+                        </div>
+                      </div>
+
+
+                      <button id="customerModalSubmit" class="btn btn-success" type="submit">Submit</button>
+                      <a class="btn btn-default" id="customerModalCancel" data-dismiss="modal"><i class="pg-close">Cancel</i></a>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
   @endsection
